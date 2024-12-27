@@ -30,15 +30,17 @@ function Header() {
 
   return (
     <div className="flex items-center  h-[118px] md:px-[62px] px-4 py-2 w-full bg-white bg-opacity-20 backdrop-blur-xl ">
-      {/* Mobile Menu Icon */}
-      <div className="md:hidden block">
-        <img src={menuIcon} alt="Menu" onClick={toggleSideMenu} />
-      </div>
-
-      {/* Logo */}
-      <div><NavLink to="/">
-        <img src={logo} className="" alt="Logo" />
-      </NavLink></div>
+   
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden block ">
+          <img src={menuIcon} alt="Menu" onClick={toggleSideMenu} />
+        </div>
+  
+        {/* Logo */}
+        <div><NavLink to="/">
+          <img src={logo} className="md:w-[241px] md:h-[51px] md:ml-0 ml-[154px] w-[182px] h-[41px]" alt="Logo" />
+        </NavLink></div>
+    
 
      
 
@@ -57,7 +59,7 @@ function Header() {
       {/* Side Menu (Mobile) */}
       {isSideMenuOpen && (
         <div className="fixed inset-0 bg-white bg-opacity-50 z-10">
-          <div className="fixed left-0 top-0 w-3/4 h-full bg-white p-5 shadow-lg z-20">
+          <div className="fixed left-0 top-0 w-[283px] h-screen bg-white p-5 shadow-lg z-20">
             <div className="flex justify-end items-center mb-4">
               <img src={closeIcon} alt="Close" onClick={toggleSideMenu} className="cursor-pointer" />
             </div>
