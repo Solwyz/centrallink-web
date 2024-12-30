@@ -9,6 +9,16 @@ module.exports = {
         milchella: ['Milchella', 'sans-serif'],
        nunito:['Nunito', 'sans-serif' ] 
       },
+      backgroundImage:{
+        'BannerImg':"url('/src/Assets/Home/Banner.png')",
+        'BannerImgMob':"url('/src/Assets/Home/BannerMob.png')",
+
+       
+
+
+
+
+      },
     },
   },
   plugins: [],
