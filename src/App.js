@@ -10,7 +10,7 @@ import ServicePage from './User/Pages/ServicePage/ServicePage';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App font-nunito">
     <Routes>
     <Route path="/" element={<User />}>
     <Route index element={<HomePage/>} />
