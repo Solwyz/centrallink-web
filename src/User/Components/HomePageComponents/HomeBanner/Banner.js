@@ -11,7 +11,7 @@ function Banner() {
           Innovative Designs for Inspired Living
         </h3>
      <Link to="contact">
-          <div className="w-[139px] h-[56px] flex justify-center mx-auto mt-[88px] md:mt-8 items-center bg-white rounded-lg text-base text-[#464138] font-medium">
+          <div className="w-[139px] h-[56px] flex justify-center mx-auto mt-[88px] md:mt-8 items-center bg-white hover:bg-[#FFC107] hover:text-white rounded-lg text-base text-[#464138] font-medium">
             Contact Now
           </div>
      </Link>

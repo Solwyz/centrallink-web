@@ -4,7 +4,7 @@ import HomeProjects from '../../Components/HomePageComponents/HomeProjects/HomeP
 import HomeServices from '../../Components/HomePageComponents/HomeServices/HomeServices'
 import HomeAbout from '../../Components/HomePageComponents/AboutHome/HomeAbout.'
 import ClientSays from '../../Components/HomePageComponents/ClientSays/ClientSays'
-import Contact from '../../Components/ContactPage.js/Contact'
+import Contact from '../../Components/ContactPage/Contact'
 import Location from '../../Components/LocateUs/Location'
 
 function HomePage() {
