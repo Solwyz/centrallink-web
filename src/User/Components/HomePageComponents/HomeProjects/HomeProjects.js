@@ -51,7 +51,7 @@ function HomeProjects() {
                 alt="Office Design"
                 className="w-[285px] h-[260px] object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-black bg-opacity-50 w-[285px] flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-white text-lg font-medium">
                   OFFICE DESIGN
                 </span>
@@ -63,7 +63,7 @@ function HomeProjects() {
                 alt="Building Design"
                 className="w-[285px] h-[260px] object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 w-[285px] bg-black bg-opacity-50 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-white text-lg font-medium">
                   BUILDING DESIGN
                 </span>
@@ -77,7 +77,7 @@ function HomeProjects() {
                 alt="Construction Design"
                 className="w-[285px] h-[260px] object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 w-[285px] bg-black bg-opacity-50 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-white text-lg font-medium">
                   CONSTRUCTION DESIGN
                 </span>
@@ -89,7 +89,7 @@ function HomeProjects() {
                 alt="Interior Design"
                 className="w-[285px] h-[260px] object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 w-[285px] bg-black bg-opacity-50 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-white text-lg font-medium">
                   INTERIOR DESIGN
                 </span>

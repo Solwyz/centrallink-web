@@ -5,8 +5,8 @@ import igIcon from "../../../Assets/icon/ig.svg";
 
 function Footer() {
   return (
-    <footer className="bg-white md:h-[472px] md:mt-[168px] mt-[120px] h-[393px] w-full  ">
-      <div className="container mx-auto text-center ">
+    <footer className="bg-[#FCFCFC] md:h-[472px] md:mt-[168px] mt-[120px] h-[393px] w-full  ">
+      <div className="container mx-auto text-center pt-8 md:pt-[54px] ">
         {/* Logo */}
         <div className="md:flex  justify-center items-center ">
           <div className="justify-center flex mt-8 md:mt-0">
