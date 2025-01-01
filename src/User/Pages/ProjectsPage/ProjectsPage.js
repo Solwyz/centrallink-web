@@ -2,8 +2,8 @@ import React from 'react'
 
 function ProjectsPage() {
   return (
-    <div>
-      
+    <div className='pt-[118px]'>
+      <div className=""></div>
     </div>
   )
 }

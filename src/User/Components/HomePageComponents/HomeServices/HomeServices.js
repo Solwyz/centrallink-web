@@ -23,7 +23,7 @@ const servicesData = [
       "Enhance productivity and aesthetics with tailored office interiors that maximize functionality and create a comfortable, professional environment for your business. ",
     icon: iconInt,
     image: interior,
-    link: "/services/office-interior", // Add link for each service
+    link: "/services/details", // Add link for each service
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const servicesData = [
       "Ensure seamless operations with our expert building maintenance solutions, addressing repairs, upgrades, and preventive care for a durable and efficient property. ",
     icon: iconMaint,
     image: Maintenance,
-    link: "/services/building-maintenance",
+    link: "/services/details",
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const servicesData = [
       "Efficient, safe, and controlled demolition services designed to clear spaces while prioritizing safety and environmental standards for your next project. ",
     icon: iconDemol,
     image: Demolition,
-    link: "/services/demolition",
+    link: "/services/details",
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const servicesData = [
       "Reliable electrical installations, repairs, and maintenance ensure safety, energy efficiency, and uninterrupted power for residential, commercial, and industrial spaces. ",
     icon: iconEc,
     image: Electrical,
-    link: "/services/electrical-work",
+    link: "/services/details",
   },
   {
     id: 5,
@@ -59,7 +59,7 @@ const servicesData = [
       "Comprehensive plumbing solutions addressing installations, maintenance, and emergency repairs to keep your systems running smoothly and leak-free. ",
     icon: iconPlumb,
     image: Plumbing,
-    link: "/services/plumbing-work",
+    link: "/services/details",
   },
   {
     id: 6,
@@ -68,7 +68,7 @@ const servicesData = [
       "Upgrade your communication systems with reliable voice and data infrastructure. Our advanced solutions ensure seamless connectivity for homes, offices, and industries.",
     icon: iconVoice,
     image: Voice,
-    link: "/services/voice-and-data-work",
+    link: "/services/details",
   },
   {
     id: 7,
@@ -77,7 +77,7 @@ const servicesData = [
       "Stay comfortable with our AC services. From expert installations to maintenance and repairs, we provide efficient cooling solutions customized for residential and commercial spaces. ",
     icon: iconAc,
     image: Ac,
-    link: "/services/ac-service-installation",
+    link: "/services/details",
   },
   {
     id: 8,
@@ -86,7 +86,7 @@ const servicesData = [
       "Stay comfortable with our AC services. From expert installations to maintenance and repairs, we provide efficient cooling solutions customized for residential and commercial spaces. ",
     icon: iconAc,
     image: Ac,
-    link: "/services/ac-service-installation",
+    link: "/services/details",
   },
 ];
 
