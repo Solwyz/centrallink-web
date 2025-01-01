@@ -5,7 +5,7 @@ import igIcon from "../../../Assets/icon/ig.svg";
 
 function Footer() {
   return (
-    <footer className="bg-[#FCFCFC] md:h-[472px] md:mt-[168px] mt-[120px] h-[393px] w-full  ">
+    <footer className="bg-[#FCFCFC] md:h-[472px] md:mt-[168px] mt-[120px] h-[750px] w-full  ">
       <div className="container mx-auto text-center pt-8 md:pt-[54px] ">
         {/* Logo */}
         <div className="md:flex  justify-center items-center ">
@@ -42,7 +42,7 @@ function Footer() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex hidden font-nunito md:block justify-center space-x-6 text-[#726E62] font-medium text-base mt-[56px]">
+        <nav className="md:flex hidden font-nunito  justify-center space-x-6 text-[#726E62] font-medium text-base mt-[56px]">
           <a href="/" className="hover:text-[#FFC107]">
             Home
           </a>
