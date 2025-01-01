@@ -8,30 +8,35 @@ import people from "../../../../Assets/Home/clientSays/people.png";
 function ClientSays() {
   const settings = {
     dots: true,
-   infinite: true,
+    infinite: true,
     speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    
   };
 
   const testimonials = [
     {
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      name: "Robert Ali",
+      text: "Central Link transformed my workspace into a modern, functional environment. Their attention to detail and professionalism exceeded my expectations. Highly recommend their services",
+      name: "John Davis",
       position: "TSC Hospitals",
-      image: people, 
+      image: people,
     },
     {
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      name: "Robert Ali",
+      text: "The team at Central Link delivered exceptional quality on our home renovation project. They were efficient, friendly, and truly cared about our vision. Fantastic experience!",
+      name: "Sophia Carter ",
       position: "TSC Hospitals",
       image: people, // Replace with actual image URLs
     },
     {
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      name: "Robert Ali",
+      text: "I’m impressed by Central Link’s commitment to excellence. Their innovative designs and expert craftsmanship made our office redesign seamless and stunning. Thank you!",
+      name: "Michael Thompson ",
+      position: "TSC Hospitals",
+      image: people, // Replace with actual image URLs
+    },
+    {
+      text: "From start to finish, Central Link ensured our project was stress-free and completed on time. Their expertise and dedication to client satisfaction were outstanding!",
+      name: "Emily Richards ",
       position: "TSC Hospitals",
       image: people, // Replace with actual image URLs
     },
@@ -82,7 +87,6 @@ function ClientSays() {
           </Slider>
         </div>
 
-
         <div className=" bg-[#FAFAFA] md:hidden block w-full h-[591px] py-8 px-4">
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
@@ -90,8 +94,6 @@ function ClientSays() {
                 key={index}
                 className="text-center w-[361px] h-[495px] px-4 py-10 bg-white"
               >
-              
-
                 <div className="flex justify-center ">
                   <img
                     src={testimonial.image}

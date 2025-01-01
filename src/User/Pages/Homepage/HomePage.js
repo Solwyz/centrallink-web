@@ -9,7 +9,7 @@ import Location from '../../Components/LocateUs/Location'
 
 function HomePage() {
   return (
-    <div className='md:pt-[120px]'>
+    <div className='pt-[120px]'>
       <Banner/>
       <HomeAbout/>
       <HomeProjects/>
