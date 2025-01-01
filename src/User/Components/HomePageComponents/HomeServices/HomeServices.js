@@ -8,13 +8,19 @@ import Plumbing from "../../../../Assets/Home/services/plumbing.png";
 import Voice from "../../../../Assets/Home/services/voiceandData.png";
 import Ac from "../../../../Assets/Home/services/Ac.png";
 import iconInt from "../../../../Assets/Home/services/interiorIcon.png";
+import iconDemol from "../../../../Assets/Home/services/demolIco.svg";
+import iconMaint from "../../../../Assets/Home/services/maintIco.svg";
+import iconEc from "../../../../Assets/Home/services/electricalIco.svg";
+import iconPlumb from "../../../../Assets/Home/services/plumbIco.svg";
+import iconVoice from "../../../../Assets/Home/services/voiceIco.svg";
+import iconAc from "../../../../Assets/Home/services/AcIco.svg";
 
 const servicesData = [
   {
     id: 1,
     title: "Office Interior",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
+      "Enhance productivity and aesthetics with tailored office interiors that maximize functionality and create a comfortable, professional environment for your business. ",
     icon: iconInt,
     image: interior,
     link: "/services/office-interior", // Add link for each service
@@ -23,8 +29,8 @@ const servicesData = [
     id: 2,
     title: "Building Maintenance",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
-    icon: iconInt,
+      "Ensure seamless operations with our expert building maintenance solutions, addressing repairs, upgrades, and preventive care for a durable and efficient property. ",
+    icon: iconMaint,
     image: Maintenance,
     link: "/services/building-maintenance",
   },
@@ -32,8 +38,8 @@ const servicesData = [
     id: 3,
     title: "Demolition",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
-    icon: iconInt,
+      "Efficient, safe, and controlled demolition services designed to clear spaces while prioritizing safety and environmental standards for your next project. ",
+    icon: iconDemol,
     image: Demolition,
     link: "/services/demolition",
   },
@@ -41,8 +47,8 @@ const servicesData = [
     id: 4,
     title: "Electrical Work",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
-    icon: iconInt,
+      "Reliable electrical installations, repairs, and maintenance ensure safety, energy efficiency, and uninterrupted power for residential, commercial, and industrial spaces. ",
+    icon: iconEc,
     image: Electrical,
     link: "/services/electrical-work",
   },
@@ -50,8 +56,8 @@ const servicesData = [
     id: 5,
     title: "Plumbing Work",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
-    icon: iconInt,
+      "Comprehensive plumbing solutions addressing installations, maintenance, and emergency repairs to keep your systems running smoothly and leak-free. ",
+    icon: iconPlumb,
     image: Plumbing,
     link: "/services/plumbing-work",
   },
@@ -59,8 +65,8 @@ const servicesData = [
     id: 6,
     title: "Voice and Data Work",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
-    icon: iconInt,
+      "Upgrade your communication systems with reliable voice and data infrastructure. Our advanced solutions ensure seamless connectivity for homes, offices, and industries.",
+    icon: iconVoice,
     image: Voice,
     link: "/services/voice-and-data-work",
   },
@@ -68,8 +74,8 @@ const servicesData = [
     id: 7,
     title: "AC Service and Installation",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
-    icon: iconInt,
+      "Stay comfortable with our AC services. From expert installations to maintenance and repairs, we provide efficient cooling solutions customized for residential and commercial spaces. ",
+    icon: iconAc,
     image: Ac,
     link: "/services/ac-service-installation",
   },
@@ -77,8 +83,8 @@ const servicesData = [
     id: 8,
     title: "AC Service and Installation",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, typesetting industry.",
-    icon: iconInt,
+      "Stay comfortable with our AC services. From expert installations to maintenance and repairs, we provide efficient cooling solutions customized for residential and commercial spaces. ",
+    icon: iconAc,
     image: Ac,
     link: "/services/ac-service-installation",
   },
@@ -96,7 +102,7 @@ function HomeServices() {
         {servicesData.map((service) => (
           <div
             key={service.id}
-            className="bg-white shadow-lg overflow-hidden cursor-pointer"
+            className="bg-white min-h-[500px] shadow-lg overflow-hidden cursor-pointer transform transition-all hover:shadow-[0px_21px_21px_0px_rgba(0,0,0,0.16)] "
             onClick={() => navigate(service.link)} // Redirect on click
           >
             {/* Service Image */}
@@ -117,10 +123,10 @@ function HomeServices() {
                   />
                 </div>
               </div>
-              <div className="text-lg font-bold mt-[-48px] text-[#947F41] text-start">
+              <div className="text-lg font-bold mt-[-48px] px-4 text-[#947F41] text-start">
                 {service.title}
               </div>
-              <p className="text-sm font-medium text-[#947F41] text-justify mt-3">
+              <p className="text-sm font-medium text-[#947F41] p-4 text-pretty leading-[23px] ">
                 {service.description}
               </p>
             </div>

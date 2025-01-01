@@ -22,7 +22,7 @@ function ContactPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
+    <div className="pt-[118px]">
       <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1420px] px-4 pt-[56px]  w-full md:h-[900px] md:px-[120px] md:pt-[64px]  md:flex">
         {/* Left Section */}
         <div className="text-white md:w-1/2 md:pt-[120px]">

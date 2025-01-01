@@ -26,12 +26,13 @@ function HomeProjects() {
           Our Leading Projects
         </h2>
         <p className="text-[#252012] text-justify md:w-[511px] md:mt-[38px] mt-8 font-normal text-base">
-          "We are a leading interior construction company dedicated to
-          transforming spaces into functional, aesthetic masterpieces. With a
-          blend of innovation, craftsmanship, and attention to detail, we create
-          tailored solutions for residential, commercial, and industrial
-          projects. Our commitment to quality and client satisfaction drives
-          every project from concept to completion."
+          Central Link excels in delivering remarkable interior construction
+          projects tailored to residential, commercial, and industrial needs.
+          With innovation, superior craftsmanship, and meticulous attention to
+          detail, we transform spaces into functional and aesthetic
+          masterpieces. Our unwavering commitment to quality and client
+          satisfaction ensures excellence from initial concept to final
+          execution.
         </p>
         <div className="hidden md:flex justify-center mt-8 md:mt-[38px] md:justify-start">
           <div className="w-[183px] h-[56px] text-[#736B5B] font-medium text-base border border-[#726E62] focus:outline-none rounded-lg flex items-center justify-center text-center hover:shadow-[0px_7px_7px_0px_#00000026] transition-shadow">
