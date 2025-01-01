@@ -42,7 +42,7 @@ function Footer() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex hidden font-nunito md:block justify-center space-x-6 text-[#726E62] font-medium text-base mt-[56px]">
+        <nav className="md:flex hidden font-nunito  justify-center space-x-6 text-[#726E62] font-medium text-base mt-[56px]">
           <a href="/" className="hover:text-[#FFC107]">
             Home
           </a>

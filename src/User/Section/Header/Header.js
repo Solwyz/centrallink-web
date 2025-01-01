@@ -29,7 +29,7 @@ function Header() {
   }, []);
 
   return (
-    <div className="flex items-center  h-[118px] md:px-[62px] px-4 py-2 w-full bg-white bg-opacity-20 backdrop-blur-xl ">
+    <div className="flex items-center fixed z-50 h-[118px] md:px-[62px] px-4 py-2 w-full bg-white bg-opacity-20 backdrop-blur-xl ">
    
         {/* Mobile Menu Icon */}
         <div className="md:hidden block ">
