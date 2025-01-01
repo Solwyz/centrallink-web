@@ -15,6 +15,11 @@ module.exports = {
         'contactBg':"url('/src/Assets/contact/ContactBg.png')",
         'contactBgMob':"url('/src/Assets/contact/contactMob.png')",
 
+        'aboutBgmob':"url('/src/Assets/About/bgMob.png')",
+        'aboutBanner':"url('/src/Assets/About/banner.png')",
+        'aboutBannerMob':"url('/src/Assets/About/bannerMob.png')",
+
+
        
 
 
