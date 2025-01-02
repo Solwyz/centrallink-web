@@ -102,7 +102,6 @@ const BlogPage = () => {
       </div>
 
       {/* Blog Cards */}
-      {/* Blog Cards */}
       <div className="grid grid-cols-1  md:grid-cols-2 gap-[20px] mt-[72px]">
         {filteredBlogs.map((blog) => (
           <div
