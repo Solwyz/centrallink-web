@@ -1,11 +1,81 @@
-import React from 'react'
+import React, { useState } from "react";
+import interior1 from "../../../Assets/projects/interior1.png";
+import interior2 from "../../../Assets/projects/interior2.png";
+import interior3 from "../../../Assets/projects/interior3.png";
+import interior4 from "../../../Assets/projects/interior4.png";
+import office1 from "../../../Assets/projects/office1.png";
+import office2 from "../../../Assets/projects/office2.png";
+import office3 from "../../../Assets/projects/office3.png";
+import office4 from "../../../Assets/projects/office4.png";
+import Location from "../../Components/LocateUs/Location";
 
-function ProjectsPage() {
+const ProjectsPage = () => {
+  const [filter, setFilter] = useState("All");
+
+  const projects = [
+    { id: 1, category: "Offices", image: office1 },
+    { id: 2, category: "Interior", image: interior1 },
+    { id: 3, category: "Interior", image: interior2 },
+    { id: 4, category: "Offices", image: office2 },
+    { id: 5, category: "Interior", image: interior3 },
+    { id: 6, category: "Interior", image: interior4 },
+    { id: 7, category: "Offices", image: office3 },
+    { id: 8, category: "Offices", image: office4 },
+  ];
+
+  const filteredProjects =
+    filter === "All"
+      ? projects
+      : projects.filter((project) => project.category === filter);
+
   return (
-    <div className='pt-[118px]'>
-      <div className=""></div>
-    </div>
-  )
-}
+   <div>
+      <div className="pt-[118px] px-4 md:px-[120px]">
+        <div className="md:flex mt-4 md:mt-[71px]">
+          {/* Section Header */}
+          <h2 className="text-[#817140] font-normal text-center md:text-start font-milchella text-[32px] md:text-[40px] ">
+            Our Leading Projects
+          </h2>
+  
+          {/* Filter Tabs */}
+          <div className="flex justify-center items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px] gap-4">
+            {["All", "Interior", "Offices"].map((category) => (
+              <button
+                key={category}
+                onClick={() => setFilter(category)}
+                className={`px-4 py-[6px] h-[36px] item-center rounded-[18px] ${
+                  filter === category
+                    ? "bg-[#947F41] text-white"
+                    : "bg-white text-[#947F41]"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+  
+        {/* Gallery */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6  md:mt-[48px] mt-10">
+          {filteredProjects.map((project) => (
+            <div
+              key={project.id}
+              className="overflow-hidden w-[173px] h-[173px] md:w-[285px] md:h-[285px]"
+            >
+              <img
+                src={project.image}
+                alt={`Project ${project.id}`}
+                className="w-full h-full object-cover transform transition-transform duration-500 ease-in-out hover:scale-105"
+              />
+            </div>
+          ))}
+        </div>
+       
+      </div>
+        
+       <Location/>
+   </div>
+  );
+};
 
-export default ProjectsPage
+export default ProjectsPage;
