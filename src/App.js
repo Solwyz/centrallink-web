@@ -10,6 +10,7 @@ import ServicePage from "./User/Pages/ServicePage/ServicePage";
 import ServiceDetail from "./User/Pages/ServicePage/ServiceDetail";
 import BlogDetails from "./User/Pages/BlogPage/BlogDetails";
 import ScrollToTop from "./ScrollToTop";
+import WhatsAppPopup from "./User/Section/WhatsAppPopup";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
         </Route>
       </Routes>
+      <WhatsAppPopup/>
     </div>
   );
 }
