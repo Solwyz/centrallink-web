@@ -34,7 +34,7 @@ function Header() {
       </div>
 
       {/* Logo */}
-      <div className="flex-1 flex justify-end ">
+      <div className="flex-1 flex md:justify-start justify-end ">
         <NavLink to="/">
           <img
             src={logo}
