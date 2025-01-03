@@ -6,6 +6,7 @@ import upArrow from "../../../Assets/contact/upArrow.svg";
 import instaIcon from "../../../Assets/contact/insta.svg";
 import mailicon from "../../../Assets/contact/mail.svg";
 import callIcon from "../../../Assets/contact/call.svg";
+import Swal from "sweetalert2";
 
 function Contact() {
   const {
@@ -16,7 +17,13 @@ function Contact() {
 
   const onSubmit = (data) => {
     console.log("Form Submitted: ", data);
- 
+
+    Swal.fire({
+      icon: "success",
+      title: " Submitted",
+      text: "Thank you for reaching out. We will get back to you soon!",
+      confirmButtonColor: "#FFC107",
+    });
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +48,9 @@ function Contact() {
             <img src={mailicon} alt="Mail Icon" className="w-5 h-5 mr-2" />
             <a
               className="text-base font-semibold"
-              href="mailto:centrallinkinfo@gmail.com"
+              href="mailto:Hr@centralllc.com"
             >
-              centrallinkinfo@gmail.com
+              Hr@centralllc.com
             </a>
           </div>
           <div className="flex items-center mt-6">
@@ -52,9 +59,24 @@ function Contact() {
           </div>
         </div>
         <div className="flex mt-6 md:mt-8 space-x-4">
-          <img src={fbicon} alt="Facebook Icon" className="w-5 h-5" />
-          <img src={instaIcon} alt="Instagram Icon" className="w-5 h-5" />
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-5 h-5"
+          >
+            <img src={fbicon} alt="Facebook Icon" className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-5 h-5"
+          >
+            <img src={instaIcon} alt="Instagram Icon" className="w-5 h-5" />
+          </a>
         </div>
+
         <div className="mt-[88px] md:mt-[96px]">
           <p className="text-sm font-semibold leading-[24px]">
             Address: <br />
@@ -79,10 +101,7 @@ function Contact() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Name Field */}
             <div>
-              <label
-                htmlFor="Name"
-                className="text-white font-medium text-sm"
-              >
+              <label htmlFor="Name" className="text-white font-medium text-sm">
                 Name
               </label>
               <input
@@ -101,17 +120,12 @@ function Contact() {
 
             {/* Email Field */}
             <div>
-              <label
-                className="text-white font-medium text-sm"
-              >
-                Email
-              </label>
+              <label className="text-white font-medium text-sm">Email</label>
               <input
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value:
-                      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                     message: "Enter a valid email address",
                   },
                 })}
@@ -127,38 +141,40 @@ function Contact() {
               </div>
             </div>
 
-          {/* Select Service */}
-<div>
-  <label className="block text-white font-medium text-sm">Select Service</label>
-  <div className="relative">
-    <select
-      name="service"
-      className={`w-full text-gray-600 text-sm  mt-2   h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${
-        errors.service ? "border-red-500" : ""
-      }`}
-     
-      onClick={() => setIsOpen(!isOpen)}
-      onBlur={() => setIsOpen(false)}
-    >
-      <option value="">Select Service</option>
-      <option value="Construction">Construction</option>
-      <option value="Interior Design">Interior Design</option>
-      <option value="Demolition">Demolition</option>
-    </select>
-    <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-      <img
-        src={isOpen ? upArrow : downArrow}
-        alt="Dropdown Arrow"
-      />
-    </div>
-  </div>
-  <div className="h-4">
-    {errors.service && (
-      <p className="text-red-500 text-sm">{errors.service.message}</p>
-    )}
-  </div>
-</div>
-
+            {/* Select Service */}
+            <div>
+              <label className="block text-white font-medium text-sm">
+                Select Service
+              </label>
+              <div className="relative">
+                <select
+                  name="service"
+                  className={`w-full text-gray-600 text-sm  mt-2   h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${
+                    errors.service ? "border-red-500" : ""
+                  }`}
+                  onClick={() => setIsOpen(!isOpen)}
+                  onBlur={() => setIsOpen(false)}
+                >
+                  <option value="">Select Service</option>
+                  <option value="Construction">Construction</option>
+                  <option value="Interior Design">Interior Design</option>
+                  <option value="Demolition">Demolition</option>
+                </select>
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <img
+                    src={isOpen ? upArrow : downArrow}
+                    alt="Dropdown Arrow"
+                  />
+                </div>
+              </div>
+              <div className="h-4">
+                {errors.service && (
+                  <p className="text-red-500 text-sm">
+                    {errors.service.message}
+                  </p>
+                )}
+              </div>
+            </div>
 
             {/* Message Field */}
             <div>
@@ -178,13 +194,15 @@ function Contact() {
               ></textarea>
               <div className="h-4">
                 {errors.message && (
-                  <p className="text-red-500 text-sm">{errors.message.message}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.message.message}
+                  </p>
                 )}
               </div>
             </div>
 
-           {/* Submit Button */}
-           <div>
+            {/* Submit Button */}
+            <div>
               <button
                 type="submit"
                 disabled={!isValid}
