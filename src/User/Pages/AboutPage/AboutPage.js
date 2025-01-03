@@ -48,7 +48,7 @@ function AboutPage() {
           </div>
         </div>
 
-        <div className="px-6 md:px-0 mt-[120px]">
+        <div className="px-6 md:px-0 mt-[120px] md:mt-[40px]">
           <h1 className="text-[#252012] text-[24px] font-semibold">
             Our Company
           </h1>
@@ -130,7 +130,7 @@ function AboutPage() {
         </div>
       </div>
 
-      <div className="relative mt-[120px]">
+      <div className="relative mt-[100px]">
         {/* Video Background */}
         <video
           src={videoSrc}
@@ -149,28 +149,28 @@ function AboutPage() {
         ></div>
 
         {/* Content Overlay */}
-        <div className="absolute inset-0 flex flex-col mt-[64px] md:mt-[184px] py-[10px] text-white ">
+        <div className="absolute inset-0 flex flex-col pt-[64px] md:pt-[180px] py-[10px] text-white ">
           <h1 className="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px]  font-milchella px-4 md:px-0 font-normal text-center">
             Redefining the art of interior design
           </h1>
-          <div className="flex flex-col md:flex-row gap-10 md:px-[120px] px-4 justify-between mt-[109px] md:mt-[104px] ">
+          <div className="flex flex-col md:flex-row gap-10 md:px-[120px] px-4 justify-between mt-[80px] md:mt-[104px] ">
             {/* Mission */}
-            <div className="flex md:w-[492px] w-[361px]">
+            <div className="flex md:w-[492px] w-full">
               <img src={mission} alt="" />
               <div className="text-start ml-4">
                 <h2 className="text-[24px] font-semibold ">Our Mission</h2>
-                <p className="text-base mt-3">
+                <p className="text-base leading-[24px] text-start font-normal mt-3">
                   "To design inspiring interiors that balance sustainability,
                   functionality, and timeless beauty."
                 </p>
               </div>
             </div>
             {/* Vision */}
-            <div className="flex md:w-[492px] w-[361px]mt-[64px] md:mt-0 md:ml-[216px]">
+            <div className="flex md:w-[492px] w-full mt-[54px] md:mt-0 md:ml-[216px]">
               <img src={vision} alt="" />
               <div className="text-start ml-4">
-                <h2 className="text-[24px] font-semibold ">Our Vision</h2>
-                <p className="text-base leading-[24px] font-normal mt-3">
+                <h2 className="text-[24px]  font-semibold ">Our Vision</h2>
+                <p className="text-base leading-[24px] font-normal text-start  mt-3">
                   "To lead the industry in creating sustainable, innovative, and
                   people-centered interior solutions."
                 </p>

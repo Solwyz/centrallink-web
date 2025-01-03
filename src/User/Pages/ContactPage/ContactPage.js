@@ -7,6 +7,7 @@ import instaIcon from "../../../Assets/contact/insta.svg";
 import mailicon from "../../../Assets/contact/mail.svg";
 import callIcon from "../../../Assets/contact/call.svg";
 import Location from "../../Components/LocateUs/Location";
+import Swal from "sweetalert2";
 
 function ContactPage() {
   const {
@@ -15,10 +16,17 @@ function ContactPage() {
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const onSubmit = (data) => {
-    console.log("Form Submitted: ", data);
-  };
-
+ const onSubmit = (data) => {
+     console.log("Form Submitted: ", data);
+ 
+     Swal.fire({
+       icon: "success",
+       title: " Submitted",
+       text: "Thank you for reaching out. We will get back to you soon!",
+       confirmButtonColor: "#FFC107",
+     });
+   };
+ 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -42,9 +50,9 @@ function ContactPage() {
               <img src={mailicon} alt="Mail Icon" className="w-5 h-5 mr-2" />
               <a
                 className="text-base font-semibold"
-                href="mailto:centrallinkinfo@gmail.com"
+                href="mailto:Hr@centralllc.com "
               >
-                centrallinkinfo@gmail.com
+                Hr@centralllc.com
               </a>
             </div>
             <div className="flex items-center mt-6">
@@ -53,9 +61,24 @@ function ContactPage() {
             </div>
           </div>
           <div className="flex mt-6 md:mt-8 space-x-4">
-            <img src={fbicon} alt="Facebook Icon" className="w-5 h-5" />
-            <img src={instaIcon} alt="Instagram Icon" className="w-5 h-5" />
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-5 h-5"
+            >
+              <img src={fbicon} alt="Facebook Icon" className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-5 h-5"
+            >
+              <img src={instaIcon} alt="Instagram Icon" className="w-5 h-5" />
+            </a>
           </div>
+
           <div className="mt-[88px] md:mt-[96px]">
             <p className="text-sm font-semibold leading-[24px]">
               Address: <br />

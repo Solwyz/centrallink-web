@@ -2,15 +2,20 @@ import React from "react";
 import logo from "../../../Assets/Logo.svg";
 import fbIcon from "../../../Assets/icon/fb.svg";
 import igIcon from "../../../Assets/icon/ig.svg";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-[#FCFCFC] md:h-[472px] md:mt-[168px] mt-[120px] h-[750px] w-full  ">
+    <footer className="bg-[#FCFCFC] md:h-[472px]  mt-[120px] h-[750px] w-full  ">
       <div className="container mx-auto text-center pt-8 md:pt-[54px] ">
         {/* Logo */}
         <div className="md:flex  justify-center items-center ">
           <div className="justify-center flex mt-8 md:mt-0">
-            <img src={logo} alt="Central Link Logo" className=" item-center  h-[42px] w-[187px] md:pr-4" />
+            <img
+              src={logo}
+              alt="Central Link Logo"
+              className=" item-center  h-[42px] w-[187px] md:pr-4"
+            />
           </div>
           <div className="border-l hidden md:block ml-[17px] border-black h-[40px]"></div>
 
@@ -43,29 +48,29 @@ function Footer() {
 
         {/* Navigation Links */}
         <nav className="md:flex hidden font-nunito  justify-center space-x-6 text-[#726E62] font-medium text-base mt-[56px]">
-          <a href="/" className="hover:text-[#FFC107]">
+          <Link to="/" className="hover:text-[#FFC107]">
             Home
-          </a>
-          <span className="border-l border-[#636363] h-[24px]" ></span>
-          <a href="about" className="hover:text-[#FFC107] ">
+          </Link>
+          <span className="border-l border-[#636363] h-[24px]"></span>
+          <Link to="/about" className="hover:text-[#FFC107]">
             About
-          </a>
-          <span className="border-l border-[#636363] h-[24px]" ></span>
-          <a href="services" className="hover:text-[#FFC107]">
+          </Link>
+          <span className="border-l border-[#636363] h-[24px]"></span>
+          <Link to="/services" className="hover:text-[#FFC107]">
             Services
-          </a>
-          <span className="border-l border-[#636363] h-[24px]" ></span>
-          <a href="projects" className="hover:text-[#FFC107]">
+          </Link>
+          <span className="border-l border-[#636363] h-[24px]"></span>
+          <Link to="/projects" className="hover:text-[#FFC107]">
             Projects
-          </a>
-          <span className="border-l border-[#636363] h-[24px]" ></span>
-          <a href="blogs" className="hover:text-[#FFC107]">
+          </Link>
+          <span className="border-l border-[#636363] h-[24px]"></span>
+          <Link to="/blogs" className="hover:text-[#FFC107]">
             Blog
-          </a>
-          <span className="border-l border-[#636363] h-[24px]" ></span>
-          <a href="contact" className="hover:text-[#FFC107]">
+          </Link>
+          <span className="border-l border-[#636363] h-[24px]"></span>
+          <Link to="/contact" className="hover:text-[#FFC107]">
             Contact
-          </a>
+          </Link>
         </nav>
 
         {/* Description */}
@@ -75,24 +80,24 @@ function Footer() {
           blend of innovation, craftsmanship, and attention to detail."
         </p>
         <div className=" md:hidden px-6 md:px-0  grid items-start text-left text-[#726E62] space-y-6 font-medium text-base mt-[56px]">
-          <a href="/" className="hover:text-[#FFC107]">
+          <Link to="/" className="hover:text-[#FFC107]">
             Home
-          </a>
-          <a href="about" className="hover:text-[#FFC107] ">
+          </Link>
+          <Link to="/about" className="hover:text-[#FFC107]">
             About
-          </a>
-          <a href="services" className="hover:text-[#FFC107]">
+          </Link>
+          <Link to="/services" className="hover:text-[#FFC107]">
             Services
-          </a>
-          <a href="projects" className="hover:text-[#FFC107]">
+          </Link>
+          <Link to="/projects" className="hover:text-[#FFC107]">
             Projects
-          </a>
-          <a href="blogs" className="hover:text-[#FFC107]">
+          </Link>
+          <Link to="/blogs" className="hover:text-[#FFC107]">
             Blog
-          </a>
-          <a href="contact" className="hover:text-[#FFC107]">
+          </Link>
+          <Link to="/contact" className="hover:text-[#FFC107]">
             Contact
-          </a>
+          </Link>
         </div>
 
         {/* Copyright */}
