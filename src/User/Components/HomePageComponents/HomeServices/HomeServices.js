@@ -79,31 +79,28 @@ const servicesData = [
     image: Ac,
     link: "/services/details",
   },
-  {
-    id: 8,
-    title: "AC Service and Installation",
-    description:
-      "Stay comfortable with our AC services. From expert installations to maintenance and repairs, we provide efficient cooling solutions customized for residential and commercial spaces. ",
-    icon: iconAc,
-    image: Ac,
-    link: "/services/details",
-  },
+
 ];
 
 function HomeServices() {
-  const navigate = useNavigate(); // Initialize useNavigate for navigation
+  const navigate = useNavigate(); 
+  // Split the data into two groups
+  const firstRow = servicesData.slice(0, 4); // First 4 services
+  const secondRow = servicesData.slice(4);  // Remaining services
 
   return (
     <div className="md:mt-[168px] mt-[120px] px-4 md:px-[120px]">
       <h2 className="text-center text-[32px] font-milchella font-normal md:text-[40px] text-[#817140]">
         Our Best Services
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 mt-[40px] md:mt-[56px] gap-y-[48px] gap-x-5 place-items-center">
-        {servicesData.map((service) => (
+
+      {/* First Row - 4 Services */}
+      <div className="grid grid-cols-1 md:grid-cols-4 mt-[40px] md:mt-[56px] gap-y-[48px] gap-x-5">
+        {firstRow.map((service) => (
           <div
             key={service.id}
-            className="bg-white min-h-[500px] shadow-lg overflow-hidden cursor-pointer transform transition-all hover:shadow-[0px_21px_21px_0px_rgba(0,0,0,0.16)] "
-            onClick={() => navigate(service.link)} // Redirect on click
+            className="bg-white min-h-[500px] shadow-lg overflow-hidden cursor-pointer transform transition-all hover:shadow-[0px_21px_21px_0px_rgba(0,0,0,0.16)]"
+            onClick={() => navigate(service.link)}
           >
             {/* Service Image */}
             <img
@@ -119,20 +116,59 @@ function HomeServices() {
                   <img
                     src={service.icon}
                     alt={`${service.title} Icon`}
-                    className="h-[32px] w-[32px]"
+                    className="h-[64px] w-[64px]"
                   />
                 </div>
               </div>
               <div className="text-lg font-bold mt-[-48px] px-4 text-[#947F41] text-start">
                 {service.title}
               </div>
-              <p className="text-sm font-medium text-[#947F41] p-4 text-pretty leading-[23px] ">
+              <p className="text-sm font-medium text-[#947F41] p-4 text-pretty leading-[23px]">
                 {service.description}
               </p>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Second Row - Remaining Services */}
+      {secondRow.length > 0 && (
+        <div className="grid grid-cols-1 md:px-[150px] md:grid-cols-3 mt-[40px] gap-y-[48px] gap-x-5 justify-center">
+          {secondRow.map((service) => (
+            <div
+              key={service.id}
+              className="bg-white min-h-[500px] shadow-lg overflow-hidden cursor-pointer transform transition-all hover:shadow-[0px_21px_21px_0px_rgba(0,0,0,0.16)]"
+              onClick={() => navigate(service.link)}
+            >
+              {/* Service Image */}
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-[231px]"
+              />
+
+              {/* Icon + Content */}
+              <div className="p-4">
+                <div className="flex justify-end translate-y-[-50px]">
+                  <div className="bg-[#F3F4F6] rounded-full h-[64px] w-[64px] flex items-center justify-center shadow-md">
+                    <img
+                      src={service.icon}
+                      alt={`${service.title} Icon`}
+                      className="h-[64px] w-[64px]"
+                    />
+                  </div>
+                </div>
+                <div className="text-lg font-bold mt-[-48px] px-4 text-[#947F41] text-start">
+                  {service.title}
+                </div>
+                <p className="text-sm font-medium text-[#947F41] p-4 text-pretty leading-[23px]">
+                  {service.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
