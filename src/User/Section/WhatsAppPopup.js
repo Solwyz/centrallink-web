@@ -4,7 +4,7 @@ import whatsapp from "../../Assets/whatsapp.svg"
 
 const WhatsAppPopup = () => {
   const phoneNumber = "+1234567890"; // Replace with your WhatsApp number
-  const message = "Hi, I need some help!"; // Default message for WhatsApp link
+  const message = "Hi, "; // Default message for WhatsApp link
 
   return (
     <StyledWrapper>

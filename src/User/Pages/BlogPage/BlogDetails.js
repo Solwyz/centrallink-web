@@ -196,7 +196,7 @@ export default function BlogDetails() {
                 <div
                   key={blog.id}
                   className="bg-white flex w-[361px] md:w-[590px] h-[136px] md:h-[190px] group cursor-pointer"
-                  onClick={() => handleBlogClick(blog.id)}
+                
                 >
                   <div className="">
                     <img

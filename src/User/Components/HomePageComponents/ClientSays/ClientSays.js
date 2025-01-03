@@ -25,19 +25,19 @@ function ClientSays() {
     {
       text: "The team at Central Link delivered exceptional quality on our home renovation project. They were efficient, friendly, and truly cared about our vision. Fantastic experience!",
       name: "Sophia Carter ",
-      position: "TSC Hospitals",
+      position: "Telsa Corp",
       image: people, // Replace with actual image URLs
     },
     {
       text: "I’m impressed by Central Link’s commitment to excellence. Their innovative designs and expert craftsmanship made our office redesign seamless and stunning. Thank you!",
       name: "Michael Thompson ",
-      position: "TSC Hospitals",
+      position: "Olicka Real Tech",
       image: people, // Replace with actual image URLs
     },
     {
       text: "From start to finish, Central Link ensured our project was stress-free and completed on time. Their expertise and dedication to client satisfaction were outstanding!",
       name: "Emily Richards ",
-      position: "TSC Hospitals",
+      position: "Boby Homes ",
       image: people, // Replace with actual image URLs
     },
   ];
