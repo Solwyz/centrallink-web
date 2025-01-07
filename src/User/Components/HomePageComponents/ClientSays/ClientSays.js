@@ -5,6 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion"; // Import motion from framer-motion
 import quoteIcon from "../../../../Assets/Home/clientSays/quoteIcon.svg";
 import people from "../../../../Assets/Home/clientSays/people.png";
+import sophia from "../../../../Assets/Home/clientSays/sophia.png";
+import emily from "../../../../Assets/Home/clientSays/emily.png";
+import male from "../../../../Assets/Home/clientSays/male.png";
 
 function ClientSays() {
   const settings = {
@@ -27,19 +30,19 @@ function ClientSays() {
       text: "The team at Central Link delivered exceptional quality on our home renovation project. They were efficient, friendly, and truly cared about our vision. Fantastic experience!",
       name: "Sophia Carter",
       position: "Telsa Corp",
-      image: people,
+      image: sophia,
     },
     {
       text: "I’m impressed by Central Link’s commitment to excellence. Their innovative designs and expert craftsmanship made our office redesign seamless and stunning. Thank you!",
       name: "Michael Thompson",
       position: "Olicka Real Tech",
-      image: people,
+      image: male,
     },
     {
       text: "From start to finish, Central Link ensured our project was stress-free and completed on time. Their expertise and dedication to client satisfaction were outstanding!",
       name: "Emily Richards",
       position: "Boby Homes",
-      image: people,
+      image: emily,
     },
   ];
 
