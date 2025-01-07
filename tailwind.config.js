@@ -20,6 +20,10 @@ module.exports = {
         'aboutBannerMob':"url('/src/Assets/About/bannerMob.png')",
 
 
+
+        'bannerLogin':"url('/src/Assets/Admin/bannerLogin.png')",
+
+
        
 
 

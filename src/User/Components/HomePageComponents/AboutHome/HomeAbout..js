@@ -7,16 +7,16 @@ function HomeAbout() {
     <div>
       <div className="flex flex-col md:flex-row items-center md:mt-[168px]  mt-[64px] px-4 md:px-[120px]">
         {/* Image Section */}
-        <div className=" ">
+        <div className="w-full ">
           <img
             src={aboutHome}
             alt="About Home"
-            className=" object-cover w-[361px] h-[260px] md:h-[436px] md:w-[607px]"
+            className=" object-cover w-full h-[260px] md:h-[436px] md:w-[607px]"
           />
         </div>
 
         {/* Text Section */}
-        <div className="w-[319px]  h-[468px] md:w-[688px] md:h-[356px] md:absolute  translate-y-[-40px] md:translate-y-0  md:left-[626px] bg-[#FBFBFB] md:p-8 p-4">
+        <div className="w-[320px]  h-[468px] md:w-[688px] md:h-[356px] md:absolute  translate-y-[-40px] md:translate-y-0  md:left-[626px] bg-[#FBFBFB] md:p-8 p-4">
           <h2 className="font-normal text-[#817140] leading-10  md:text-[40px] text-[32px] font-milchella text-start md:text-left">
             Our Core, Our Commitment.
           </h2>

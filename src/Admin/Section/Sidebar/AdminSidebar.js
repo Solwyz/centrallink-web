@@ -10,7 +10,7 @@ function AdminSidebar() {
   const location = useLocation();
 
   const menuItems = [
-    { name: 'Projects', path: '/admin', icon: project },
+    { name: 'Projects', path: '/admin/project', icon: project },
     { name: 'Services', path: '/admin/services', icon: service },
     { name: 'Blogs', path: '/admin/blogs', icon: blogs },
     { name: 'Enquires', path: '/admin/enquiry', icon: enquiry },

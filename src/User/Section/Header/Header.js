@@ -27,10 +27,10 @@ function Header() {
   }, []);
 
   return (
-    <div className="flex items-center fixed z-50 h-[118px] md:px-[62px] px-4 py-2 w-full bg-white bg-opacity-20 backdrop-blur-xl ">
+    <div className="flex items-center fixed z-50 h-[118px] md:px-[62px] px-4 py-2 w-full bg-white  ">
       {/* Mobile Menu Icon */}
-      <div className="md:hidden block ">
-        <img src={menuIcon} alt="Menu" onClick={toggleSideMenu} />
+      <div className="md:hidden block w-fit ">
+        <img className="w-fit" src={menuIcon} alt="Menu" onClick={toggleSideMenu} />
       </div>
 
       {/* Logo */}
@@ -46,62 +46,62 @@ function Header() {
 
       {/* Navigation Links (Desktop) */}
       <div className="hidden md:flex flex-1 justify-end md:px-[28px]">
-        <ul className="flex gap-8 text-[14px] font-medium text-[#5F5F5F]">
-          <li className="hover:text-[#C39F33] hover:font-bold hover:underline ">
+        <ul className="flex gap-8 text-[16px] font-medium text-[#5F5F5F]">
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline ">
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? "text-[#C39F33] font-bold" : ""
+                isActive ? "text-[#C39F33] font-medium" : ""
               }
             >
               Home
             </NavLink>
           </li>
-          <li className="hover:text-[#C39F33] hover:font-bold hover:underline">
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                isActive ? "text-[#C39F33] font-bold" : ""
+                isActive ? "text-[#C39F33] font-medium" : ""
               }
             >
               About
             </NavLink>
           </li>
-          <li className="hover:text-[#C39F33] hover:font-bold hover:underline">
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
             <NavLink
               to="/services"
               className={({ isActive }) =>
-                isActive ? "text-[#C39F33] font-bold" : ""
+                isActive ? "text-[#C39F33] font-medium" : ""
               }
             >
               Services
             </NavLink>
           </li>
-          <li className="hover:text-[#C39F33] hover:font-bold hover:underline">
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
             <NavLink
               to="/projects"
               className={({ isActive }) =>
-                isActive ? "text-[#C39F33] font-bold" : ""
+                isActive ? "text-[#C39F33] font-medium" : ""
               }
             >
               Projects
             </NavLink>
           </li>
-          <li className="hover:text-[#C39F33] hover:font-bold hover:underline">
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
             <NavLink
               to="/blogs"
               className={({ isActive }) =>
-                isActive ? "text-[#C39F33] font-bold" : ""
+                isActive ? "text-[#C39F33] font-medium" : ""
               }
             >
               Blogs
             </NavLink>
           </li>
-          <li className="hover:text-[#C39F33] hover:font-bold hover:underline">
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                isActive ? "text-[#C39F33] font-bold" : ""
+                isActive ? "text-[#C39F33] font-medium" : ""
               }
             >
               Contact

@@ -15,7 +15,7 @@ const WhatsAppPopup = () => {
         className="whatsapp-button"
       >
         <img src={whatsapp} alt="" />
-        <span className="tooltip">Chat on whatspp</span>
+        <span className="tooltip hidden md:block">Chat on whatspp</span>
       </a>
     </StyledWrapper>
   );
@@ -40,7 +40,7 @@ const StyledWrapper = styled.div`
 @media (max-width: 768px) { 
   /* For mobile screens (width 768px or smaller) */
   .whatsapp-button {
-    right: 54px; /* Adjust to 16px on mobile */
+    right: 16px; /* Adjust to 16px on mobile */
   }
 }
 

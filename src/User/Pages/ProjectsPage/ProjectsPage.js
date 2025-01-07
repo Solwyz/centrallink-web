@@ -29,24 +29,24 @@ const ProjectsPage = () => {
       : projects.filter((project) => project.category === filter);
 
   return (
-   <div>
+    <div>
       <div className="pt-[118px] px-4 md:px-[120px]">
+        {/* Header Section */}
         <div className="md:flex mt-4 md:mt-[71px]">
-          {/* Section Header */}
-          <h2 className="text-[#817140] font-normal text-center md:text-start font-milchella text-[32px] md:text-[40px] ">
+          <h2 className="text-[#817140] font-normal text-center md:text-start font-milchella text-[32px] md:text-[40px]">
             Our Leading Projects
           </h2>
-  
+
           {/* Filter Tabs */}
           <div className="flex justify-center items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px] gap-4">
             {["All", "Interior", "Offices"].map((category) => (
               <button
                 key={category}
                 onClick={() => setFilter(category)}
-                className={`px-4 py-[6px] h-[36px] item-center rounded-[18px] ${
+                className={`px-4 py-[6px] h-[36px] items-center rounded-[18px] transition-all ${
                   filter === category
-                    ? "bg-[#947F41] text-white"
-                    : "bg-white text-[#947F41]"
+                    ? "bg-[#947F41] text-white shadow-md"
+                    : "bg-white text-[#947F41] border border-[#947F41] hover:bg-[#f7e6c2]"
                 }`}
               >
                 {category}
@@ -54,27 +54,27 @@ const ProjectsPage = () => {
             ))}
           </div>
         </div>
-  
-        {/* Gallery */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6  md:mt-[48px] mt-10">
+
+        {/* Gallery Section */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 md:mt-[48px] mt-10">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="overflow-hidden w-[173px] h-[173px] md:w-[285px] md:h-[285px]"
+              className="overflow-hidden  shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <img
                 src={project.image}
                 alt={`Project ${project.id}`}
-                className="w-full h-full object-cover transform transition-transform duration-500 ease-in-out hover:scale-105"
+                className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
               />
             </div>
           ))}
         </div>
-       
       </div>
-        
-       <Location/>
-   </div>
+
+      {/* Location Section */}
+      <Location />
+    </div>
   );
 };
 

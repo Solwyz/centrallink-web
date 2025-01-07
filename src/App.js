@@ -41,11 +41,11 @@ function App() {
 
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminProject />} />
+          <Route path="project" element={<AdminProject />} />
           <Route path="services" element={<AdminService />} />
           <Route path="blogs" element={<AdminBlogs />} />
           <Route path="enquiry" element={<AdminEnquiry />} />
           <Route path="general" element={<AdminGeneral />} />
-
         </Route>
       </Routes>
 
