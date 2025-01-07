@@ -49,15 +49,15 @@ function ContactPage() {
             <div className="flex items-center">
               <img src={mailicon} alt="Mail Icon" className="w-5 h-5 mr-2" />
               <a
-                className="text-base font-semibold"
-                href="mailto:Hr@centralllc.com "
+                className="text-base font-semibold hover:text-[#FFC107]"
+                href="mailto:hr@centralllc.com "
               >
-                Hr@centralllc.com
+                hr@centralllc.com
               </a>
             </div>
             <div className="flex items-center mt-6">
-              <img src={callIcon} alt="Call Icon" className="w-5 h-5 mr-2" />
-              <p className="text-sm font-semibold">+1 456 6985 6532 45</p>
+              <img src={callIcon} alt="Call Icon" className="w-5 h-5 mr-2 " />
+              <p className="text-sm font-semibold hover:text-[#FFC107]">+1 456 6985 6532 45</p>
             </div>
           </div>
           <div className="flex mt-6 md:mt-8 space-x-4">
@@ -73,7 +73,7 @@ function ContactPage() {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-5 h-5"
+              className="w-5 h-5 "
             >
               <img src={instaIcon} alt="Instagram Icon" className="w-5 h-5" />
             </a>

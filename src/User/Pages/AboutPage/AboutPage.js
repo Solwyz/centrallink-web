@@ -79,8 +79,7 @@ function AboutPage() {
             spaceBetween={20}
             slidesPerView={1}
             autoplay={{
-              delay: 3000, // Time between slides in milliseconds
-              disableOnInteraction: false, // Continue autoplay after user interaction
+              delay: 300, // Time between slides in milliseconds
             }}
             breakpoints={{
               640: {
