@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 import interiors from "../../../../Assets/Home/interiors.png";
 import construction from "../../../../Assets/Home/construction.png";
 import building from "../../../../Assets/Home/building.png";
@@ -10,19 +11,35 @@ import { Link } from "react-router-dom";
 
 function HomeProjects() {
   const settings = {
-    dots: true, // Enable dots for navigation
-    infinite: true, // Infinite scrolling
-    speed: 300, // Transition speed
-    slidesToShow: 1, // Show one slide at a time
-    slidesToScroll: 1, // Scroll one slide at a time
-    arrows: false, // Hide arrows for smaller screens
-    adaptiveHeight: true, // Adjust height based on content
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    adaptiveHeight: true,
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 2 } },
+  };
+
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 2 } },
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between px-6 md:px-[120px] md:mt-[168px]">
+    <div className="flex flex-col md:flex-row justify-between px-6 md:px-[120px] mt-[120px] md:mt-[168px]">
       {/* Left Section */}
-      <div className="md:w-1/2">
+      <motion.div
+        className="md:w-1/2"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeInUp}
+      >
         <h2 className="md:text-[40px] text-[32px] text-start font-milchella font-normal text-[#817140]">
           Our Leading Projects
         </h2>
@@ -36,22 +53,33 @@ function HomeProjects() {
           execution.
         </p>
         <div className="hidden md:flex justify-center mt-8 md:mt-[38px] md:justify-start">
-
-
           <Link to="projects">
-            <div className="w-[183px] h-[56px] text-[#736B5B] font-medium text-base border border-[#726E62] focus:outline-none rounded-lg flex items-center justify-center text-center hover:shadow-[0px_7px_7px_0px_#00000026] transition-shadow">
+            <motion.div
+              className="w-[183px] h-[56px] text-[#736B5B] font-medium text-base border border-[#726E62] focus:outline-none rounded-lg flex items-center justify-center text-center hover:shadow-[0px_7px_7px_0px_#00000026] transition-shadow"
+              whileHover={{ scale: 1.05 }}
+            >
               View All
-            </div>
+            </motion.div>
           </Link>
-
         </div>
-      </div>
+      </motion.div>
 
       {/* Right Section */}
-      <div className="md:w-1/2">
+      <motion.div
+        className="md:w-1/2"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeIn}
+      >
         {/* Grid for Larger Screens */}
         <div className="hidden md:grid grid-cols-2 gap-5">
-          <div>
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="relative overflow-hidden group">
               <img
                 src={office}
@@ -76,8 +104,14 @@ function HomeProjects() {
                 </span>
               </div>
             </div>
-          </div>
-          <div className="mt-[77px]">
+          </motion.div>
+          <motion.div
+            className="mt-[77px]"
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="relative overflow-hidden group">
               <img
                 src={construction}
@@ -102,13 +136,19 @@ function HomeProjects() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Slider for Smaller Screens */}
         <div className="md:hidden mt-8">
           <Slider {...settings}>
-            <div className="relative overflow-hidden">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="relative overflow-hidden"
+            >
               <img
                 src={office}
                 alt="Office Design"
@@ -119,8 +159,14 @@ function HomeProjects() {
                   OFFICE DESIGN
                 </span>
               </div>
-            </div>
-            <div className="relative overflow-hidden">
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="relative overflow-hidden"
+            >
               <img
                 src={building}
                 alt="Building Design"
@@ -131,8 +177,14 @@ function HomeProjects() {
                   BUILDING DESIGN
                 </span>
               </div>
-            </div>
-            <div className="relative overflow-hidden">
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="relative overflow-hidden"
+            >
               <img
                 src={construction}
                 alt="Construction Design"
@@ -143,8 +195,14 @@ function HomeProjects() {
                   CONSTRUCTION DESIGN
                 </span>
               </div>
-            </div>
-            <div className="relative overflow-hidden">
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="relative overflow-hidden"
+            >
               <img
                 src={interiors}
                 alt="Interior Design"
@@ -155,10 +213,10 @@ function HomeProjects() {
                   INTERIOR DESIGN
                 </span>
               </div>
-            </div>
+            </motion.div>
           </Slider>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

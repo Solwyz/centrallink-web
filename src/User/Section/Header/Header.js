@@ -11,13 +11,11 @@ function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const dropdownRef = useRef(null);
 
-  // Toggle side menu (mobile)
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
   };
 
   useEffect(() => {
-    // Close dropdown when clicking outside
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
@@ -73,21 +71,66 @@ function Header() {
       {/* Navigation Links (Desktop) */}
       <div className="hidden md:flex flex-1 justify-end md:px-[28px]">
         <ul className="flex gap-8 text-[16px] font-medium text-[#5F5F5F]">
-          {["Home", "About", "Services", "Projects", "Blogs", "Contact"].map((item) => (
-            <li
-              key={item}
-              className="hover:text-[#C39F33] hover:font-medium hover:underline"
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-[#C39F33] font-medium" : ""
+              }
             >
-              <NavLink
-                to={`/${item.toLowerCase()}`}
-                className={({ isActive }) =>
-                  isActive ? "text-[#C39F33] font-medium" : ""
-                }
-              >
-                {item}
-              </NavLink>
-            </li>
-          ))}
+              Home
+            </NavLink>
+          </li>
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "text-[#C39F33] font-medium" : ""
+              }
+            >
+              About
+            </NavLink>
+          </li>
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
+            <NavLink
+              to="/services"
+              className={({ isActive }) =>
+                isActive ? "text-[#C39F33] font-medium" : ""
+              }
+            >
+              Services
+            </NavLink>
+          </li>
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
+            <NavLink
+              to="/projects"
+              className={({ isActive }) =>
+                isActive ? "text-[#C39F33] font-medium" : ""
+              }
+            >
+              Projects
+            </NavLink>
+          </li>
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
+            <NavLink
+              to="/blogs"
+              className={({ isActive }) =>
+                isActive ? "text-[#C39F33] font-medium" : ""
+              }
+            >
+              Blogs
+            </NavLink>
+          </li>
+          <li className="hover:text-[#C39F33] hover:font-medium hover:underline">
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? "text-[#C39F33] font-medium" : ""
+              }
+            >
+              Contact
+            </NavLink>
+          </li>
         </ul>
       </div>
 
@@ -104,21 +147,72 @@ function Header() {
               />
             </div>
             <ul className="flex flex-col gap-6 pt-4 font-medium text-[#5F5F5F]">
-              {["Home", "About", "Services", "Projects", "Blogs", "Contact"].map(
-                (item) => (
-                  <li key={item} className="hover:text-[#C39F33]">
-                    <NavLink
-                      to={`/${item.toLowerCase()}`}
-                      onClick={() => {
-                        toggleSideMenu();
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                    >
-                      {item}
-                    </NavLink>
-                  </li>
-                )
-              )}
+              <li className="hover:text-[#C39F33]">
+                <NavLink
+                  to="/"
+                  onClick={() => {
+                    toggleSideMenu();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li className="hover:text-[#C39F33]">
+                <NavLink
+                  to="/about"
+                  onClick={() => {
+                    toggleSideMenu();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  About
+                </NavLink>
+              </li>
+              <li className="hover:text-[#C39F33]">
+                <NavLink
+                  to="/services"
+                  onClick={() => {
+                    toggleSideMenu();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  Services
+                </NavLink>
+              </li>
+              <li className="hover:text-[#C39F33]">
+                <NavLink
+                  to="/projects"
+                  onClick={() => {
+                    toggleSideMenu();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  Projects
+                </NavLink>
+              </li>
+              <li className="hover:text-[#C39F33]">
+                <NavLink
+                  to="/blogs"
+                  onClick={() => {
+                    toggleSideMenu();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  Blogs
+                </NavLink>
+              </li>
+              <li className="hover:text-[#C39F33]">
+                <NavLink
+                  to="/contact"
+                  onClick={() => {
+                    toggleSideMenu();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  Contact
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>

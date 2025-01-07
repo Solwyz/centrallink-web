@@ -1,5 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom"; 
+import { motion } from "framer-motion"; // Import motion for animation
+import { useInView } from "react-intersection-observer"; // For detecting visibility in viewport
 import interior from "../../../../Assets/Home/services/officeInterior.png";
 import Maintenance from "../../../../Assets/Home/services/buildingMaint.png";
 import Demolition from "../../../../Assets/Home/services/demolition.png";
@@ -23,7 +25,7 @@ const servicesData = [
       "Enhance productivity and aesthetics with tailored office interiors that maximize functionality and create a comfortable, professional environment for your business. ",
     icon: iconInt,
     image: interior,
-    link: "/services/details", // Add link for each service
+    link: "/services/details",
   },
   {
     id: 2,
@@ -84,6 +86,9 @@ const servicesData = [
 
 function HomeServices() {
   const navigate = useNavigate(); 
+  const { ref: firstRowRef, inView: firstRowInView } = useInView({ triggerOnce: true });
+  const { ref: secondRowRef, inView: secondRowInView } = useInView({ triggerOnce: true });
+
   // Split the data into two groups
   const firstRow = servicesData.slice(0, 4); // First 4 services
   const secondRow = servicesData.slice(4);  // Remaining services
@@ -95,7 +100,13 @@ function HomeServices() {
       </h2>
 
       {/* First Row - 4 Services */}
-      <div className="grid grid-cols-1 md:grid-cols-4 mt-[40px] md:mt-[56px] gap-y-[48px] gap-x-5">
+      <motion.div
+        ref={firstRowRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: firstRowInView ? 1 : 0, y: firstRowInView ? 0 : 50 }}
+        transition={{ duration: 0.7 }}
+        className="grid grid-cols-1 md:grid-cols-4 mt-[40px] md:mt-[56px] gap-y-[48px] gap-x-5"
+      >
         {firstRow.map((service) => (
           <div
             key={service.id}
@@ -103,10 +114,13 @@ function HomeServices() {
             onClick={() => navigate(service.link)}
           >
             {/* Service Image */}
-            <img
+            <motion.img
               src={service.image}
               alt={service.title}
               className="w-full h-[231px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: firstRowInView ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
             />
 
             {/* Icon + Content */}
@@ -129,11 +143,17 @@ function HomeServices() {
             </div>
           </div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Second Row - Remaining Services */}
       {secondRow.length > 0 && (
-        <div className="grid grid-cols-1 md:px-[150px] md:grid-cols-3 mt-[40px] gap-y-[48px] gap-x-5 justify-center">
+        <motion.div
+          ref={secondRowRef}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: secondRowInView ? 1 : 0, y: secondRowInView ? 0 : 50 }}
+          transition={{ duration: 0.7 }}
+          className="grid grid-cols-1 md:px-[150px] md:grid-cols-3 mt-[40px] gap-y-[48px] gap-x-5 justify-center"
+        >
           {secondRow.map((service) => (
             <div
               key={service.id}
@@ -141,10 +161,13 @@ function HomeServices() {
               onClick={() => navigate(service.link)}
             >
               {/* Service Image */}
-              <img
+              <motion.img
                 src={service.image}
                 alt={service.title}
                 className="w-full h-[231px]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: secondRowInView ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
               />
 
               {/* Icon + Content */}
@@ -167,7 +190,7 @@ function HomeServices() {
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );
