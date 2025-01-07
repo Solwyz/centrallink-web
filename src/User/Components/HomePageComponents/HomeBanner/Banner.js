@@ -10,8 +10,10 @@ function Banner() {
       opacity: 1, 
       transition: { 
         duration: 2,  // Increase duration for smoother fade-in
-        delay: 0.5,   // Add delay before the fade-in starts
+        delay: 0.5,  
+         // Add delay before the fade-in starts
       }, 
+      
     },
   };
   const slideUp = {
@@ -35,8 +37,11 @@ function Banner() {
         <motion.h1
           className="md:pt-[274px] md:text-[120px] font-milchella pt-[230px] text-[40px] md:leading-[120px] font-normal text-white items-center"
           variants={fadeIn}
+          whileInView="visible"
           initial="hidden"
           animate="visible"
+          viewport={{ once: true, amount: 0.5 }}
+
         >
           Transform Your Space
         </motion.h1>
@@ -47,6 +52,9 @@ function Banner() {
           variants={slideUp}
           initial="hidden"
           animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+
         >
           Innovative Designs for Inspired Living
         </motion.h3>

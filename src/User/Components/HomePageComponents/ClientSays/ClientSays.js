@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 import quoteIcon from "../../../../Assets/Home/clientSays/quoteIcon.svg";
 import people from "../../../../Assets/Home/clientSays/people.png";
 
@@ -24,47 +25,50 @@ function ClientSays() {
     },
     {
       text: "The team at Central Link delivered exceptional quality on our home renovation project. They were efficient, friendly, and truly cared about our vision. Fantastic experience!",
-      name: "Sophia Carter ",
+      name: "Sophia Carter",
       position: "Telsa Corp",
-      image: people, // Replace with actual image URLs
+      image: people,
     },
     {
       text: "I’m impressed by Central Link’s commitment to excellence. Their innovative designs and expert craftsmanship made our office redesign seamless and stunning. Thank you!",
-      name: "Michael Thompson ",
+      name: "Michael Thompson",
       position: "Olicka Real Tech",
-      image: people, // Replace with actual image URLs
+      image: people,
     },
     {
       text: "From start to finish, Central Link ensured our project was stress-free and completed on time. Their expertise and dedication to client satisfaction were outstanding!",
-      name: "Emily Richards ",
-      position: "Boby Homes ",
-      image: people, // Replace with actual image URLs
+      name: "Emily Richards",
+      position: "Boby Homes",
+      image: people,
     },
   ];
 
   return (
-    <div className="md:px-[120px]  md:mt-[168px] mt-[120px] ">
-      <div className="grid grid-cols-1 md:grid-cols-2 md:h-[552px] ">
+    <div className="md:px-[120px] md:mt-[168px] mt-[120px] ">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:h-[552px]">
         {/* Left Section */}
         <div className="bg-[#C8BD9C] hidden md:flex md:px-[72px]">
-          <h2 className="text-[32px] md:text-[48px] md:mt-[136px] leading-[48px] font-milchella  text-start">
+          {/* Animation for "What Do Our Clients Say" */}
+          <motion.h2
+            className="text-[32px] md:text-[48px] md:mt-[136px] leading-[48px] font-milchella text-start"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
             What Do Our <br /> Clients Say
-          </h2>
+          </motion.h2>
         </div>
-        <div className="bg-[#C8BD9C] w-full h-[304px] items-center justify-center md:hidden flex ">
-          <h2 className="text-[32px]  text-center leading-[48px] font-milchella ">
+        <div className="bg-[#C8BD9C] w-full h-[304px] items-center justify-center md:hidden flex">
+          <h2 className="text-[32px] text-center leading-[48px] font-milchella ">
             What Do Our <br /> Clients Say
           </h2>
         </div>
         {/* Right Section */}
-        <div className=" bg-[#FAFAFA] hidden md:block md:px-[72px] md:py-[82px] ">
+        <div className="bg-[#FAFAFA] hidden md:block md:px-[72px] md:py-[82px]">
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="text-center  md:w-[466px] md:p-8 md:h-[369px] bg-white"
-              >
-                <img src={quoteIcon} className=""></img>
+              <div key={index} className="text-center md:w-[466px] md:p-8 md:h-[369px] bg-white">
+                <img src={quoteIcon} className="" alt="Quote Icon" />
 
                 <div className="flex justify-center ">
                   <img
@@ -87,13 +91,11 @@ function ClientSays() {
           </Slider>
         </div>
 
-        <div className=" bg-[#FAFAFA] md:hidden block w-full h-[591px] py-8 px-4">
+        {/* Mobile Version */}
+        <div className="bg-[#FAFAFA] md:hidden block w-full h-[591px] py-8 px-4">
           <Slider {...settings}>
             {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="text-center w-[361px] h-[495px] px-4 py-10 bg-white"
-              >
+              <div key={index} className="text-center w-[361px] h-[495px] px-4 py-10 bg-white">
                 <div className="flex justify-center ">
                   <img
                     src={testimonial.image}
@@ -101,7 +103,7 @@ function ClientSays() {
                     className="w-[100px] h-[100px] rounded-full"
                   />
                 </div>
-                <img src={quoteIcon} className="mt-10"></img>
+                <img src={quoteIcon} className="mt-10" alt="Quote Icon" />
                 <p className="text-[#252012] mt-6 text-start text-sm font-normal leading-[20px]">
                   "{testimonial.text}"
                 </p>
