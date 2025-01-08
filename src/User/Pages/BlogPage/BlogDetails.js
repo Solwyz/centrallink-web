@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import interiorDetail from "../../../Assets/blogs/blogDetail.png";
 import shareIcon from "../../../Assets/blogs/shareIcon.svg";
 import building from "../../../Assets/blogs/building.png";
 import demolition from "../../../Assets/blogs/demoliton.png";
 import { Navigate } from "react-router-dom";
+import { FaCopy, FaWhatsapp, FaFacebook, FaTwitter } from "react-icons/fa";
 
 export default function BlogDetails() {
   const blogData = [
@@ -15,29 +16,57 @@ export default function BlogDetails() {
     },
   ];
 
-  const blogs=[
+  const blogs = [
     {
-        id: 2,
-        title: "Essential Building Maintenance Checklist",
-        description: "Tips to keep buildings functional and efficient always.",
-        category: "Offices",
-        tag: "Building Maintenance",
-        image: building,
-      },
-      {
-        id: 3,
-        title: "Safe and Efficient Demolition Practices",
-        description: "Learn demolition techniques ensuring safety and precision.",
-        category: "Interior",
-        tag: "Demolition Services",
-        image: demolition,
-      },
-  ]
+      id: 2,
+      title: "Essential Building Maintenance Checklist",
+      description: "Tips to keep buildings functional and efficient always.",
+      category: "Offices",
+      tag: "Building Maintenance",
+      image: building,
+    },
+    {
+      id: 3,
+      title: "Safe and Efficient Demolition Practices",
+      description: "Learn demolition techniques ensuring safety and precision.",
+      category: "Interior",
+      tag: "Demolition Services",
+      image: demolition,
+    },
+  ];
   const handleBlogClick = (id) => {
     // navigate(`/blogs/details/${id}`);
     Navigate("/blogs/details");
   };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const handleShare = (platform) => {
+    const url = window.location.href; // Use the current page URL
+    switch (platform) {
+      case "copy":
+        navigator.clipboard.writeText(url);
+        break;
+      case "whatsapp":
+        window.open(`https://wa.me/?text=${encodeURIComponent(url)}`, "_blank");
+        break;
+      case "facebook":
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+            url
+          )}`,
+          "_blank"
+        );
+        break;
+      case "twitter":
+        window.open(
+          `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`,
+          "_blank"
+        );
+        break;
+      default:
+        break;
+    }
+    setIsOpen(false); // Close dropdown after action
+  };
   return (
     <div className="pt-[118px] md:px-[120px] px-4">
       <div className="grid grid-cols-1 md:mt-[72px]  ">
@@ -67,9 +96,44 @@ export default function BlogDetails() {
             </div>
             {/* Share Now Button */}
             <div className="absolute md:top-8 md:right-8 top-4 right-4">
-              <button className="border border-white flex font-bold leading-[18px] text-white text-base px-2 py-1 rounded">
-                Share now <img src={shareIcon} className="ml-2" alt="" />
+              <button
+                className="border border-white flex items-center font-bold leading-[18px] text-white text-base px-2 py-1 rounded"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                Share now{" "}
+                <img src={shareIcon} className="ml-2" alt="Share Icon" />
               </button>
+
+              {isOpen && (
+                <div className="absolute top-full mt-2 right-0 w-auto bg-white text-black rounded-lg shadow-lg z-10">
+                  <ul className="flex space-x-4 py-2 px-4">
+                    <li
+                      className="flex items-center px-4 py-3 rounded-md cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-125"
+                      onClick={() => handleShare("copy")}
+                    >
+                      <FaCopy />
+                    </li>
+                    <li
+                      className="flex items-center px-4 py-3 rounded-md cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-125"
+                      onClick={() => handleShare("whatsapp")}
+                    >
+                      <FaWhatsapp />
+                    </li>
+                    <li
+                      className="flex items-center px-4 py-3 rounded-md cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-125"
+                      onClick={() => handleShare("facebook")}
+                    >
+                      <FaFacebook />
+                    </li>
+                    <li
+                      className="flex items-center px-4 py-3 rounded-md cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-125"
+                      onClick={() => handleShare("twitter")}
+                    >
+                      <FaTwitter />
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
             {/* Category Tag */}
             <div className="absolute bottom-4 right-4  md:bottom-8 md:right-8">
@@ -189,38 +253,37 @@ export default function BlogDetails() {
           </div>
         </div>
         {/* Blog Cards */}
-      <div className="md:mt-[108px] hidden md:block ">
-      <h1 className="font-semibold text-base">More related blogs</h1>
-            <div className="grid grid-cols-1  md:grid-cols-2 gap-[20px] mt-8 ">
-              {blogs.map((blog) => (
-                <div
-                  key={blog.id}
-                  className="bg-white flex w-[361px] md:w-[590px] h-[136px] md:h-[190px] group cursor-pointer"
-                
-                >
-                  <div className="">
-                    <img
-                      src={blog.image}
-                      alt={blog.title}
-                      className=" w-[173px] md:w-[285px] h-[136px] md:h-[190px] md:object-cover object-fit group-hover:rounded-lg"
-                    />
-                  </div>
-    
-                  <div className="ml-[22px] w-[172px] md:w-[283px]">
-                    <h2 className="md:text-[24px] text-sm leading-[16px] md:leading-[32px] font-semibold group-hover:text-[#968A66] text-[#252012]">
-                      {blog.title}
-                    </h2>
-                    <p className="text-[#6C6B67] text-sm md:text-base leading-[16px] mt-4 font-medium md:leading-[24px] group-hover:text-[#968A66]">
-                      {blog.description}
-                    </p>
-                    <span className="inline-block font-medium mt-4 md:mt-[30px] px-2 py-1 text-[10px] md:text-xs text-[#252012] border border-black rounded-full">
-                      {blog.tag}
-                    </span>
-                  </div>
+        <div className="md:mt-[108px] hidden md:block ">
+          <h1 className="font-semibold text-base">More related blogs</h1>
+          <div className="grid grid-cols-1  md:grid-cols-2 gap-[20px] mt-8 ">
+            {blogs.map((blog) => (
+              <div
+                key={blog.id}
+                className="bg-white flex w-[361px] md:w-[590px] h-[136px] md:h-[190px] group cursor-pointer"
+              >
+                <div className="">
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className=" w-[173px] md:w-[285px] h-[136px] md:h-[190px] md:object-cover object-fit group-hover:rounded-lg"
+                  />
                 </div>
-              ))}
-            </div>
-      </div>
+
+                <div className="ml-[22px] w-[172px] md:w-[283px]">
+                  <h2 className="md:text-[24px] text-sm leading-[16px] md:leading-[32px] font-semibold group-hover:text-[#968A66] text-[#252012]">
+                    {blog.title}
+                  </h2>
+                  <p className="text-[#6C6B67] text-sm md:text-base leading-[16px] mt-4 font-medium md:leading-[24px] group-hover:text-[#968A66]">
+                    {blog.description}
+                  </p>
+                  <span className="inline-block font-medium mt-4 md:mt-[30px] px-2 py-1 text-[10px] md:text-xs text-[#252012] border border-black rounded-full">
+                    {blog.tag}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
