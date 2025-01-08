@@ -3,7 +3,7 @@ import styled from "styled-components";
 import whatsapp from "../../Assets/whatsapp.svg"
 
 const WhatsAppPopup = () => {
-  const phoneNumber = "+1234567890"; // Replace with your WhatsApp number
+  const phoneNumber = "+971566977258"; // Replace with your WhatsApp number
   const message = "Hi, "; // Default message for WhatsApp link
 
   return (
