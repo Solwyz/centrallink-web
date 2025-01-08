@@ -27,13 +27,18 @@ function Location() {
             transition={{ duration: 1, delay: 0.2 }} // slight delay to stagger the animation
             viewport={{ once: true }} // Animates only once when in view
           >
-            1234 Sheikh Zayed Road, Business Bay, <br />
-            Dubai, UAE, <br />
-            P.O. Box 12345
+            Khalifa city A, street number 35,<br /> building number,23 flat number 202
           </motion.p>
         </div>
         <div>
-          <img src={location} className="w-[770px] h-[441px]" alt="Location map" />
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d6629.174868609207!2d54.575180701561145!3d24.401365435871586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDI0JzE0LjciTiA1NMKwMzQnNDQuMCJF!5e0!3m2!1sen!2sin!4v1736315646431!5m2!1sen!2sin"
+            className="w-[770px] h-[441px] border-2"
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Location Map"
+          ></iframe>
         </div>
       </div>
 
@@ -51,7 +56,15 @@ function Location() {
             Locate Us
           </motion.h3>
           <div className="mt-8">
-            <img src={mapMob} className="w-full h-[290px]" alt="Location map" />
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d6629.174868609207!2d54.575180701561145!3d24.401365435871586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDI0JzE0LjciTiA1NMKwMzQnNDQuMCJF!5e0!3m2!1sen!2sin!4v1736315646431!5m2!1sen!2sin"
+    className="w-full h-[290px] border-2"
+    allowFullScreen=""
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    title="Location Map"
+  ></iframe>
+
           </div>
           {/* Animate address text when in view */}
           <motion.p
@@ -61,9 +74,8 @@ function Location() {
             transition={{ duration: 1, delay: 0.2 }} // slight delay for stagger effect
             viewport={{ once: true }} // Animates only once when in view
           >
-            1234 Sheikh Zayed Road, Business Bay, <br />
-            Dubai, UAE, <br />
-            P.O. Box 12345
+            Khalifa city A, street number 35, <br />
+            building number,23 flat number 202
           </motion.p>
         </div>
       </div>

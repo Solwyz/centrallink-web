@@ -10,15 +10,56 @@ import elegant from "../../../Assets/About/elegant.png";
 import videoSrc from "../../../Assets/About/video.mp4";
 import mission from "../../../Assets/About/Mission.svg";
 import vision from "../../../Assets/About/Vision.svg";
+import { motion } from "framer-motion";
 
 function AboutPage() {
+  // Animation Variants
+  const fadeInFromLeft = {
+    hidden: { opacity: 0, x: -50 }, // Start off-screen to the left
+    visible: { opacity: 1, x: 0 }, // Fade in and move to the center
+  };
+
+  const parentVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 1.5, // Delay between child animations (1.5 seconds)
+      },
+    },
+  };
+  const fadeIn = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const slideIn = {
+    hidden: { opacity: 0, y: -100 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
     <div>
       <div className="md:px-[120px] md:pt-0 pt-[118px]">
-        <div className="hidden md:flex items-center justify-center">
+        <motion.div
+          className="hidden md:flex items-center justify-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1 }}
+          variants={fadeIn}
+        >
           <img src={bgImg} className="h-[572px]" alt="" />
-        </div>
-        <div className="hidden px-[152px] py-[56px] md:block mx-auto translate-y-[-90px] w-[895px] h-[316px] bg-[#F6F6F6]">
+        </motion.div>
+        <motion.div
+          className="hidden px-[152px] py-[56px] md:block mx-auto translate-y-[-90px] w-[895px] h-[316px] bg-[#F6F6F6]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          variants={slideIn}
+        >
+          {" "}
           <h2 className="font-milchella font-normal text-[40px] text-center text-[#817140]">
             Our Core, Our Commitment.
           </h2>
@@ -30,10 +71,17 @@ function AboutPage() {
             commercial, and industrial interiors, transforming visions into
             reality with precision and dedication.
           </p>
-        </div>
+        </motion.div>
 
         <div className="md:hidden bg-aboutBgmob w-full bg-cover px-4 py-[88px] h-[584px]">
-          <div className="px-[16px] py-[48px] w-full h-[408px] bg-[#F6F6F6]">
+          <motion.div
+            className="px-[16px] py-[48px] w-full h-[408px] bg-[#F6F6F6]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            variants={fadeIn}
+          >
             <h2 className="font-milchella font-normal text-[32px] leading-[32px] text-center text-[#817140]">
               Our Core, <br /> Our Commitment.
             </h2>
@@ -45,10 +93,18 @@ function AboutPage() {
               commercial, and industrial interiors, transforming visions into
               reality with precision and dedication.
             </p>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="px-6 md:px-0 mt-[120px] md:mt-[40px]">
+        <motion.div
+          className="px-6 md:px-0 mt-[120px] md:mt-[40px]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1 }}
+          variants={fadeIn}
+        >
+          {" "}
           <h1 className="text-[#252012] text-[24px] font-semibold">
             Our Company
           </h1>
@@ -72,7 +128,7 @@ function AboutPage() {
             that goes beyond expectations. Together, let’s create spaces that
             are not only beautiful but also purposeful and enduring.
           </p>
-        </div>
+        </motion.div>
 
         <div className="mt-[48px]">
           <Swiper
@@ -94,36 +150,58 @@ function AboutPage() {
             }}
           >
             <SwiperSlide>
-              <div className="flex flex-col items-center  ">
+              <motion.div
+                className="flex flex-col items-center"
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 1 }}
+                variants={fadeIn}
+              >
                 <img src={luxe} className="w-[387px] h-[517px]" alt="Luxe" />
-                <h3 className="px-[22px]  translate-y-[-48px] text-white font-semibold text-[24px]">
+                <h3 className="px-[22px] translate-y-[-48px] text-white font-semibold text-[24px]">
                   Luxe
                 </h3>
-              </div>
+              </motion.div>
             </SwiperSlide>
+
+            {/* Slide 2 */}
             <SwiperSlide>
-              <div className="flex flex-col items-center">
+              <motion.div
+                className="flex flex-col items-center"
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 1 }}
+                variants={fadeIn}
+              >
                 <img
                   src={elegant}
                   className="w-[387px] h-[517px]"
                   alt="Elegant"
                 />
-                <h3 className="px-[22px] translate-y-[-48px]  text-white font-semibold text-[24px]">
+                <h3 className="px-[22px] translate-y-[-48px] text-white font-semibold text-[24px]">
                   Elegant
                 </h3>
-              </div>
+              </motion.div>
             </SwiperSlide>
+
+            {/* Slide 3 */}
             <SwiperSlide>
-              <div className="flex flex-col items-center ">
+              <motion.div
+                className="flex flex-col items-center"
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 1 }}
+                variants={fadeIn}
+              >
                 <img
                   src={ambience}
                   className="w-[388px] h-[517px]"
                   alt="Ambiance"
                 />
-                <h3 className="px-[22px]  translate-y-[-48px] text-white font-semibold text-[24px]">
+                <h3 className="px-[22px] translate-y-[-48px] text-white font-semibold text-[24px]">
                   Ambiance
                 </h3>
-              </div>
+              </motion.div>
             </SwiperSlide>
           </Swiper>
         </div>

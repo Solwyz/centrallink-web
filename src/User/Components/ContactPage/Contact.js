@@ -55,7 +55,7 @@ function Contact() {
           </div>
           <div className="flex items-center mt-6">
             <img src={callIcon} alt="Call Icon" className="w-5 h-5 mr-2" />
-            <p className="text-sm font-semibold hover:text-[#FFC107]">+1 456 6985 6532 45</p>
+            <p className="text-sm font-semibold hover:text-[#FFC107]">+971 566977258</p>
           </div>
         </div>
         <div className="flex mt-6 md:mt-8 space-x-4">
@@ -80,9 +80,7 @@ function Contact() {
         <div className="mt-[88px] md:mt-[96px]">
           <p className="text-sm font-semibold leading-[24px]">
             Address: <br />
-            1234 Sheikh Zayed Road, Business Bay,
-            <br />
-            Dubai, UAE. <br /> P.O. Box 12345
+            Khalifa city A, street number 35, <br /> building number,23 flat number 202
           </p>
         </div>
       </div>
