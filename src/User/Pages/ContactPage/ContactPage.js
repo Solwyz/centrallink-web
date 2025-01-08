@@ -7,6 +7,7 @@ import instaIcon from "../../../Assets/contact/insta.svg";
 import mailicon from "../../../Assets/contact/mail.svg";
 import callIcon from "../../../Assets/contact/call.svg";
 import Location from "../../Components/LocateUs/Location";
+import teleIcon from "../../../Assets/contact/telephone.svg"
 import Swal from "sweetalert2";
 
 function ContactPage() {
@@ -31,7 +32,7 @@ function ContactPage() {
 
   return (
     <div className="pt-[118px]">
-      <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1420px] px-4 pt-[56px]  w-full md:h-[900px] md:px-[120px] md:pt-[64px]  md:flex">
+      <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1460px] px-4 pt-[56px]  w-full md:h-[900px] md:px-[120px] md:pt-[64px]  md:flex">
         {/* Left Section */}
         <div className="text-white md:w-1/2 md:pt-[120px]">
           <h2 className="text-[40px] font-milchella md:text-start text-center font-normal">
@@ -59,6 +60,11 @@ function ContactPage() {
               <img src={callIcon} alt="Call Icon" className="w-5 h-5 mr-2 " />
               <p className="text-sm font-semibold hover:text-[#FFC107]">+971 566977258</p>
             </div>
+            <div className="mt-6 flex items-center">
+                <img src={teleIcon} alt="" className="w-5 h-5 mr-2" />
+                <p className="text-sm font-semibold hover:text-[#FFC107]">0543792474</p>
+
+              </div>
           </div>
           <div className="flex mt-6 md:mt-8 space-x-4">
             <a
