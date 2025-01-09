@@ -25,7 +25,7 @@ function AdminLayout() {
           <div className="pt-10 flex bg-[#FCFCFC]">
             <AdminHeader />
             <AdminSidebar />
-            <div className="pt-[120px]">
+            <div className="pt-[88px] w-full">
               <Outlet />
             </div>
           </div>
