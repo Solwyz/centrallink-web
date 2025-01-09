@@ -43,13 +43,13 @@ function AdminProject() {
   };
 
   return (
-    <div className="pt-6 pr-[72px] w-full">
+    <div className=" mt-6  pr-[72px]">
       {!selectedCategory && (
-        <div className="flex items-center justify-between w-full ">
+        <div className="flex items-center justify-between  ">
           <div className="font-normal text-[16px]">All Product Categories</div>
           <button
             onClick={() => setCategoryModalOpen(true)}
-            className="px-6 py-[11px] rounded-lg bg-[#6C5C2B] text-sm hover:bg-[#947F41]  text-white font-normal text-[16px]"
+            className="px-6 h-[36px] rounded bg-[#6C5C2B] text-sm hover:bg-[#947F41]  text-white font-normal text-[16px]"
           >
             Create New
           </button>
@@ -61,12 +61,12 @@ function AdminProject() {
             {categories.map((category) => (
               <div
                 key={category}
-                className="flex w-full  py-[17px] pl-6 pr-12 justify-between text-[#947F41] font-medium text-sm   items-center  border border-[#D6D6D6] p-4 rounded-lg  hover:border-[#928C8C] transition"
+                className="flex w-full  py-[17px] pl-6 pr-12 justify-between text-[#947F41] font-medium text-sm shadow-lg  items-center  border border-[#D6D6D6] p-4 rounded-lg  hover:border-[#928C8C] transition"
                 onClick={() => setSelectedCategory(category)}
               >
                 <span className="cursor-pointer  font-medium">{category}</span>
                 <button
-                  className="text-red-600  font-semibold hover:text-red-800"
+                  className="text-[#C30303] mr-2 text-sm flex font-normal "
                   onClick={(e) => {
                     e.stopPropagation();
                     setCategoryToDelete(category);
@@ -74,13 +74,14 @@ function AdminProject() {
                   }}
                 >
                   Delete
+                  <img src={deleteIcon} alt="" />
                 </button>
               </div>
             ))}
           </div>
         </div>
       ) : (
-        <div className="mt-8">
+        <div className="">
           {/* <h2 className="text-xl font-bold mb-6">{selectedCategory}</h2> */}
 
           <div className="flex justify-between items-center">
@@ -93,13 +94,13 @@ function AdminProject() {
               </button>
 
               <h2 className="font-normal text-[16px] flex items-center ml-2">
-              <img src={rightArrow} className="mr-2" alt="" />
+                <img src={rightArrow} className="mr-2" alt="" />
                 {selectedCategory}
               </h2>
             </div>
             <div className="">
               <button
-                className="bg-[#6C5C2B] text-white  items-center py-2 px-4 rounded shadow-md hover:shadow-lg transition"
+                className="bg-[#6C5C2B] text-white text-center  h-[36px] text-sm items-center px-4 rounded hover:bg-[#947F41] transition"
                 onClick={() => setImageModalOpen(true)}
               >
                 Add Photo
@@ -107,16 +108,16 @@ function AdminProject() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid mt-[48px] grid-cols-5 gap-6">
             {(images[selectedCategory] || []).map((image, index) => (
               <div key={index} className="relative">
                 <img
                   src={URL.createObjectURL(image)}
                   alt="Category Image"
-                  className="w-full h-auto rounded-lg object-cover"
+                  className="w-[196px] h-[196px]  object-cover"
                 />
                 <button
-                  className="absolute top-2 right-2 bg-red-600 text-white py-1 px-2 rounded text-sm hover:bg-red-700"
+                  className="absolute bottom-2 justify-center ml-[59px] bg-white text-[#EE1717] h-[35px] px-5 rounded text-sm "
                   onClick={() => {
                     const updatedImages = images[selectedCategory].filter(
                       (_, i) => i !== index
@@ -134,7 +135,7 @@ function AdminProject() {
 
       {isCategoryModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-10  w-[507px] ">
+          <div className="bg-white p-10 rounded-2xl  w-[507px] ">
             <h2 className="text-sm  font-medium">Add Category name</h2>
             <input
               type="text"
@@ -151,7 +152,7 @@ function AdminProject() {
                 Cancel
               </button>
               <button
-                className="bg-[#947F41] w-[99px] h-[47px] text-base font-medium text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition"
+                className="bg-[#947F41] w-[99px] h-[47px] text-base font-medium text-white py-2 px-4 rounded-lg  transition"
                 onClick={addCategory}
               >
                 Save
@@ -163,20 +164,23 @@ function AdminProject() {
 
       {isDeleteModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h2 className="text-lg font-bold mb-6">Confirm Deletion</h2>
-            <p className="mb-6">
+          <div className="bg-white p-10 w-[428px] rounded-2xl ">
+            <img src={deleteWarning} alt="" />
+            <h2 className="text-base font-medium text-[#947F41] mt-6">
+              Delete Category ?
+            </h2>
+            <p className="mt-2 text-[#818180] text-sm font-normal">
               Are you sure you want to delete the category "{categoryToDelete}"?
             </p>
-            <div className="flex justify-end">
+            <div className="flex justify-center gap-4 mt-8">
               <button
-                className="bg-gray-300 py-2 px-4 rounded mr-2 hover:bg-gray-400 transition"
+                className="  w-[165px] rounded-lg h-[56px] text-center border font-medium text-base text-[#947F41] border-[#947F41] transition"
                 onClick={() => setDeleteModalOpen(false)}
               >
                 Cancel
               </button>
               <button
-                className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition"
+                className="bg-[#947F41] rounded-lg w-[165px] text-white h-[56px] text-center font-medium text-base transition"
                 onClick={confirmDeleteCategory}
               >
                 Delete
@@ -188,29 +192,43 @@ function AdminProject() {
 
       {isImageModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h2 className="text-lg font-bold mb-6">Add New Photo</h2>
-            <input
-              type="file"
-              onChange={(e) => setNewImage(e.target.files[0])}
-              className="border p-2 w-full mb-6 rounded focus:outline-none focus:ring-2 focus:ring-gold"
-            />
-            {newImage && (
-              <img
-                src={URL.createObjectURL(newImage)}
-                alt="Preview"
-                className="w-full h-auto mb-6 rounded-lg object-cover"
+          <div className="bg-white p-10 rounded-2xl w-[506px]">
+            <h2 className="text-base font-medium  text-[#947F41] ">
+              Add Photo
+            </h2>
+            <div className="relative mt-6">
+              {newImage && (
+                <img
+                  src={URL.createObjectURL(newImage)}
+                  alt="Preview"
+                  className="w-[196px] h-[196px] rounded-lg object-cover mx-auto shadow-md"
+                />
+              )}
+              <input
+                type="file"
+                id="fileInput"
+                onChange={(e) => setNewImage(e.target.files[0])}
+                className="hidden"
               />
-            )}
-            <div className="flex justify-end">
+              <div className="flex item-center ml-[163px] mt-2">
+                <label
+                  htmlFor="fileInput"
+                  className="cursor-pointer  py-2 px-4 text-center justify-center text-sm  text-[#947F41] rounded-lg border-2 border-[#6C5C2B]"
+                >
+                  Choose file
+                </label>
+              </div>
+            </div>
+
+            <div className="flex justify-center mt-[48px] space-x-2">
               <button
-                className="bg-gray-300 py-2 px-4 rounded mr-2 hover:bg-gray-400 transition"
+                className="py-2 px-4 rounded-lg mr-2 w-[99px] text-base font-medium h-[47px] border-[#947F41] text-[#947F41] border transition"
                 onClick={() => setImageModalOpen(false)}
               >
                 Cancel
               </button>
               <button
-                className="bg-slate-950 text-white py-2 px-4 rounded hover:bg-opacity-90 transition"
+                className="bg-[#947F41] w-[99px] h-[47px] text-base font-medium text-white py-2 px-4 rounded-lg  transition"
                 onClick={addImage}
               >
                 Save
