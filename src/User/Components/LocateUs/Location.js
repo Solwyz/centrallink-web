@@ -27,7 +27,7 @@ function Location() {
             transition={{ duration: 1, delay: 0.2 }} // slight delay to stagger the animation
             viewport={{ once: true }} // Animates only once when in view
           >
-            Khalifa city A, street number 35,<br /> building number,23 flat number 202
+            Khalifa city A, street number 35,<br /> building number,23 flat number 202 <br />Abudhabi, UAE
           </motion.p>
         </div>
         <div>
@@ -75,7 +75,8 @@ function Location() {
             viewport={{ once: true }} // Animates only once when in view
           >
             Khalifa city A, street number 35, <br />
-            building number,23 flat number 202
+            building number,23 flat number 202 <br />
+            Abudhabi, UAE
           </motion.p>
         </div>
       </div>

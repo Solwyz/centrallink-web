@@ -91,8 +91,8 @@ function Contact() {
           <p className="text-sm font-semibold leading-[24px]">
             Address: <br />
             Khalifa city A, street number 35, <br /> building number,23 flat
-            number 202
-          </p>
+            number 202 <br />Abudhabi, UAE
+          </p> 
         </div>
       </div>
 
