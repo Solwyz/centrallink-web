@@ -32,7 +32,7 @@ function ContactPage() {
 
   return (
     <div className="pt-[118px]">
-      <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1460px] px-4 pt-[56px]  w-full md:h-[900px] md:px-[120px] md:pt-[64px]  md:flex">
+      <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1465px] px-4 pt-[56px]  w-full md:h-[900px] md:px-[120px] md:pt-[64px]  md:flex">
         {/* Left Section */}
         <div className="text-white md:w-1/2 md:pt-[120px]">
           <h2 className="text-[40px] font-milchella md:text-start text-center font-normal">
@@ -88,7 +88,7 @@ function ContactPage() {
           <div className="mt-[88px] md:mt-[96px]">
             <p className="text-sm font-semibold leading-[24px]">
               Address: <br />
-              Khalifa city A, street number 35, <br /> building number,23 flat number 202
+              Khalifa city A, street number 35, <br /> building number,23 flat number 202 <br />Abudhabi, UAE
             </p>
           </div>
         </div>
