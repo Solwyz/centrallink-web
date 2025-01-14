@@ -4,11 +4,13 @@ import rightArrow from "../../../Assets/Admin/projects/right Arrow.svg";
 import uploadIcon from "../../../Assets/Admin/image add.svg";
 import deleteIcon from "../../../Assets/Admin/projects/delete.svg";
 import editIcon from "../../../Assets/Admin/edit.svg";
+import deleteWarn from "../../../Assets/Admin/projects/deleteWarning.svg"
+import saveInfo from "../../../Assets/Admin/projects/saveIcon.svg"
 
 function AdminService() {
   const [showForm, setShowForm] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [services, setServices] = useState([]);
   const [currentService, setCurrentService] = useState(null);
   const [formData, setFormData] = useState({
@@ -36,19 +38,26 @@ function AdminService() {
     setPreviewImage(service?.image || null);
     setPreviewIcon(service?.icon || null);
   };
+
   const resetSelectedService = () => {
     setShowForm(false);
     setCurrentService(null);
   };
 
-  const openModal = (type) => {
-    setModalType(type);
-    setShowModal(true);
+  const openSaveModal = () => {
+    setShowSaveModal(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    setModalType("");
+  const closeSaveModal = () => {
+    setShowSaveModal(false);
+  };
+
+  const openDeleteModal = () => {
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
   };
 
   const handleInputChange = (e) => {
@@ -66,20 +75,21 @@ function AdminService() {
           setFormData((prev) => ({
             ...prev,
             image: reader.result,
-            imageName: file.name, // Set the image name
+            imageName: file.name,
           }));
         } else if (type === "icon") {
           setPreviewIcon(reader.result);
           setFormData((prev) => ({
             ...prev,
             icon: reader.result,
-            iconName: file.name, // Set the icon name
+            iconName: file.name,
           }));
         }
       };
       reader.readAsDataURL(file);
     }
   };
+
   const handleSave = () => {
     if (currentService) {
       setServices((prev) =>
@@ -91,8 +101,13 @@ function AdminService() {
       setServices((prev) => [{ ...formData }, ...prev]);
     }
     toggleForm();
-    closeModal();
+    closeSaveModal();
     resetSelectedService();
+  };
+
+  const handleDelete = () => {
+    setServices((prev) => prev.filter((service) => service !== currentService));
+    closeDeleteModal();
   };
 
   const isComplete =
@@ -134,13 +149,13 @@ function AdminService() {
                 className="border w-[196px] h-[254px] bg-white shadow relative"
               >
                 {/* Image Section */}
-               <div className="p-2">
+                <div className="p-2">
                   <img
                     src={service.image}
                     alt="Service"
                     className="h-[134px] w-full  object-cover rounded-t"
                   />
-               </div>
+                </div>
 
                 {/* Icon Section */}
                 {service.icon && (
@@ -162,7 +177,7 @@ function AdminService() {
                 <div className="flex w-full mt-[22px]">
                   <button
                     className="text-[#EE1717] flex items-center justify-center px-2 w-full h-[35px] bg-[#ECECEC] text-sm"
-                    onClick={() => openModal("delete")}
+                    onClick={() => openDeleteModal()}
                   >
                     Delete
                     <img
@@ -207,9 +222,9 @@ function AdminService() {
 
             <div className=" ">
               <button
-                onClick={() => handleSave(formData)}
+                onClick={() => isComplete && isModified && openSaveModal  ()}
                 disabled={!isComplete || !isModified}
-                className={` flex items-center h-[36px] px-4 font-normal text-sm rounded-md text-white  ${
+                className={`flex items-center h-[36px] px-4 font-normal text-sm rounded-md text-white ${
                   isComplete && isModified
                     ? "bg-[#947F41] cursor-pointer"
                     : "bg-[#D0D0D0] cursor-default"
@@ -325,32 +340,49 @@ function AdminService() {
       )}
 
       {/* Modal */}
-      {showModal && (
+      {showSaveModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded shadow">
-            <h3 className="text-xl font-bold">
-              {modalType === "save" ? "Confirm Save" : "Confirm Delete"}
-            </h3>
-            <p className="mt-4">
-              {modalType === "save"
-                ? "Are you sure you want to save the changes?"
-                : "Are you sure you want to delete this item?"}
-            </p>
-            <div className="flex justify-end mt-6">
+          <div className="bg-white p-10 rounded-2xl w-[428px] shadow">
+          <img src={saveInfo} alt="" />
+            <h3 className="mt-4 text-[#947F41] font-medium text-base ">Confirm Save?</h3>
+            <p className="mt-2 font-normal text-sm text-[#818180]">Are you sure you want to confirm save now?</p>
+            <div className="flex justify-between mt-8">
               <button
-                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 mr-2"
-                onClick={closeModal}
+                className="w-[166px] h-[56px] rounded-lg border border-[#B3B3B3] text-[#947F41] text-base font-medium"
+                onClick={closeSaveModal}
               >
                 Cancel
               </button>
               <button
-                className={`$
-                  {modalType === "save" ? "bg-green-500" : "bg-red-500"}
-                text-white px-4 py-2 rounded hover:$
-                  {modalType === "save" ? "bg-green-600" : "bg-red-600"}`}
-                onClick={modalType === "save" ? handleSave : closeModal}
+                className="w-[166px] h-[56px] rounded-lg text-white  bg-[#947F41] text-base font-medium"
+                onClick={handleSave}
               >
                 Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-10 rounded-2xl w-[428px] shadow">
+          <img src={deleteWarn} alt="" />
+            <h3 className="mt-4 text-[#947F41] font-medium text-base ">Confirm Delete?</h3>
+            <p className="mt-2 font-normal text-sm text-[#818180]">Are you sure you want to delete the service now?</p>
+            <div className="flex justify-between mt-8">
+              <button
+                className="w-[166px] h-[56px] rounded-lg border border-[#B3B3B3] text-[#947F41] text-base font-medium"
+                onClick={closeDeleteModal}
+              >
+                Cancel
+              </button>
+              <button
+                className="w-[166px] h-[56px] rounded-lg text-white  bg-[#947F41] text-base font-medium"
+                onClick={handleDelete}
+              >
+                Delete
               </button>
             </div>
           </div>
