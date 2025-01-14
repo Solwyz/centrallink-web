@@ -3,8 +3,7 @@ import saveIcom from "../../../Assets/Admin/save.svg";
 import rightArrow from "../../../Assets/Admin/projects/right Arrow.svg";
 import uploadIcon from "../../../Assets/Admin/image add.svg";
 import deleteIcon from "../../../Assets/Admin/projects/delete.svg";
-import editIcon from "../../../Assets/Admin/edit.svg"
-
+import editIcon from "../../../Assets/Admin/edit.svg";
 
 function AdminService() {
   const [showForm, setShowForm] = useState(false);
@@ -132,40 +131,57 @@ function AdminService() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="border   w-[196px] h-[254px]  bg-white shadow"
+                className="border w-[196px] h-[254px] bg-white shadow relative"
               >
-                <img
-                  src={service.image }
-                  alt="Service"
-                  className="h-[134px] p-2 w-full object-cover rounded"
-                />
+                {/* Image Section */}
+               <div className="p-2">
+                  <img
+                    src={service.image}
+                    alt="Service"
+                    className="h-[134px] w-full  object-cover rounded-t"
+                  />
+               </div>
 
+                {/* Icon Section */}
                 {service.icon && (
-                 <div className=" item-center ml-[58px] h-[64px] w-[64px] rounded-full bg-[#F6F6F6] absolute translate-y-[-34px]">
+                  <div className="flex items-center justify-center ml-[66px] h-[64px] w-[64px] rounded-full bg-[#F6F6F6] absolute top-[105px]">
                     <img
                       src={service.icon}
                       alt="Icon"
-                      className="h-[64px] w-[64px] rounded-full object-cover"
+                      className="h-[32px] w-[32px] object-contain"
                     />
-                 </div>
+                  </div>
                 )}
-                <h2 className="text-base font-medium text-center mt-[40px] ">{service.title}</h2>
-                <div className="flex w-full ">
-                <button
-                    className="text-[#EE1717] flex items-center px-4 w-[95px] h-[35px] bg-[#ECECEC] "
+
+                {/* Title */}
+                <h2 className="text-base font-medium text-center mt-[22px]">
+                  {service.title}
+                </h2>
+
+                {/* Action Buttons */}
+                <div className="flex w-full mt-[22px]">
+                  <button
+                    className="text-[#EE1717] flex items-center justify-center px-2 w-full h-[35px] bg-[#ECECEC] text-sm"
                     onClick={() => openModal("delete")}
                   >
                     Delete
-                    <img src={deleteIcon} className="ml-2" alt="" />
+                    <img
+                      src={deleteIcon}
+                      className="ml-1 h-4 w-4"
+                      alt="Delete Icon"
+                    />
                   </button>
                   <button
-                    className="flex w-[95px] items-center bg-[#F6F6F6] px-4 h-[35px]"
+                    className="flex items-center justify-center w-full h-[35px] bg-[#F6F6F6] text-sm"
                     onClick={() => toggleForm(service)}
                   >
-                   Edit 
-                    <img src={editIcon} className="ml-2" alt="" />
+                    Edit
+                    <img
+                      src={editIcon}
+                      className="ml-1 h-4 w-4"
+                      alt="Edit Icon"
+                    />
                   </button>
-                 
                 </div>
               </div>
             ))}
