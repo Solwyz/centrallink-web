@@ -61,7 +61,7 @@ function AdminProject() {
             {categories.map((category) => (
               <div
                 key={category}
-                className="flex w-full  py-[17px] pl-6 pr-12 justify-between text-[#947F41] font-medium text-sm shadow-lg  items-center  border border-[#D6D6D6] p-4 rounded-lg  hover:border-[#928C8C] transition"
+                className="flex w-full  py-[17px] pl-6 pr-12 justify-between text-[#947F41] font-medium text-sm  items-center  border border-[#D6D6D6] p-4 rounded-lg  hover:border-[#928C8C] transition"
                 onClick={() => setSelectedCategory(category)}
               >
                 <span className="cursor-pointer  font-medium">{category}</span>
