@@ -11,6 +11,7 @@ import videoSrc from "../../../Assets/About/video.mp4";
 import mission from "../../../Assets/About/Mission.svg";
 import vision from "../../../Assets/About/Vision.svg";
 import { motion } from "framer-motion";
+import People from "../../Components/OurPeople/People";
 
 function AboutPage() {
   // Animation Variants
@@ -256,6 +257,8 @@ function AboutPage() {
           </div>
         </div>
       </div>
+
+<People/>
     </div>
   );
 }

@@ -8,20 +8,7 @@ function AdminEnquiry() {
   const enquiriesPerPage = 5;
 
   const enquiriesData = [
-  {
-      "date": "07-June-2024",
-      "company": "Sam Consultancy",
-      "email": "sam@gmail.com",
-      "service": "Exporting service",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      "date": "08-June-2024",
-      "company": "XYZ Corporation",
-      "email": "xyz@example.com",
-      "service": "Consulting",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
+ 
     {
       "date": "09-June-2024",
       "company": "ABC Corporation",
@@ -50,48 +37,8 @@ function AdminEnquiry() {
       "service": "Consulting",
       "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     },
-    {
-      "date": "07-June-2024",
-      "company": "Sam Consultancy",
-      "email": "sam@gmail.com",
-      "service": "Exporting service",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      "date": "08-June-2024",
-      "company": "XYZ Corporation",
-      "email": "xyz@example.com",
-      "service": "Consulting",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      "date": "09-June-2024",
-      "company": "ABC Corporation",
-      "email": "abc@example.com",
-      "service": "Consulting",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      "date": "07-June-2024",
-      "company": "Sam Consultancy",
-      "email": "sam@gmail.com",
-      "service": "Exporting service",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      "date": "08-June-2024",
-      "company": "XYZ Corporation",
-      "email": "xyz@example.com",
-      "service": "Consulting",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    },
-    {
-      "date": "09-June-2024",
-      "company": "ABC Corporation",
-      "email": "abc@example.com",
-      "service": "Consulting",
-      "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    }
+  
+
   ]
 
 
