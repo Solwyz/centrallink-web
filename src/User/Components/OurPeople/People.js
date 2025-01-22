@@ -1,8 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
-import people1 from "../../../Assets/About/Peopls/Rectangle 9303.png";
-import people2 from "../../../Assets/About/Peopls/Rectangle 9304.png";
-import people3 from "../../../Assets/About/Peopls/Rectangle 9305.png";
+import people1 from "../../../Assets/About/Peopls/noufal.png";
+import people2 from "../../../Assets/About/Peopls/basheer.png";
+import people3 from "../../../Assets/About/Peopls/nishad.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -19,18 +19,18 @@ function People() {
 
   const teamMembers = [
     {
-      name: "John Samuel",
-      position: "Founder",
+      name: "Noufal Khan",
+      position: "Project Manager",
       img: people1,
     },
     {
-      name: "Sarah Williams",
-      position: "Co-Founder",
+      name: "Basheer",
+      position: "Project Supervisor",
       img: people2,
     },
     {
-      name: "Michael Johnson",
-      position: "Lead Architect",
+      name: "Nishad Abdul Rahim",
+      position: "Project Engineer",
       img: people3,
     },
   ];
@@ -41,7 +41,7 @@ function People() {
       <div className="rounded-full hidden md:block bg-[#FFFCF5] md:w-[537px] md:h-[537px] bg-cover md:ml-[-103px]">
         <div className="flex-1 ml-[295px] items-center justify-center md:w-[354px] text-center md:text-left md:mt-[129px]">
           <h2 className="text-[48px] font-normal font-milchella">Meet our Team</h2>
-          <p className="text-justify text-base font-normal leading-[24px] mt-8">
+          <p className="text-start text-base font-normal leading-[24px] mt-8">
             Meet Our Experts: A dedicated team of interior designers and
             construction professionals committed to delivering exceptional spaces
             tailored to your vision and needs.
@@ -65,7 +65,7 @@ function People() {
           {teamMembers.map((member, index) => (
             <div key={index} className="group text-end cursor-pointer transform hover:scale-101 transition-transform">
               <div className="relative overflow-hidden">
-                <img src={member.img} alt={member.name} className="w-[224px] h-[279px]" />
+                <img src={member.img} alt={member.name} className="w-[224px] object-fill h-[279px]" />
               </div>
              <div className="mr-10">
                   <h3 className="mt-4 font-bold text-[#252012] text-base">{member.name}</h3>
