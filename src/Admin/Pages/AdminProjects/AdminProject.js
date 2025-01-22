@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import deleteIcon from "../../../Assets/Admin/projects/delete.svg";
 import deleteWarning from "../../../Assets/Admin/projects/deleteWarning.svg";
 import rightArrow from "../../../Assets/Admin/projects/right Arrow.svg";
+import {
+  getAllProjects,
+  createProject,
+  deleteProject,
+  addImageToProject,
+} from "../../Services/Services";
+
 
 function AdminProject() {
   const [categories, setCategories] = useState([]);
@@ -13,34 +20,76 @@ function AdminProject() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [newImage, setNewImage] = useState(null);
   const [categoryToDelete, setCategoryToDelete] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const addCategory = () => {
-    setCategories([...categories, newCategoryName]);
-    setNewCategoryName("");
-    setCategoryModalOpen(false);
+  // Fetch categories on component mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const data = await getAllProjects();
+        setCategories(data.projects); // Assume API returns an array of projects
+        const imageMap = data.projects.reduce((acc, project) => {
+          acc[project.name] = project.images || [];
+          return acc;
+        }, {});
+        setImages(imageMap);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  const addCategory = async () => {
+    try {
+      const newCategory = { name: newCategoryName, images: [] };
+      const createdCategory = await createProject(newCategory);
+      setCategories([...categories, createdCategory.name]);
+      setImages({ ...images, [createdCategory.name]: [] });
+      setNewCategoryName("");
+      setCategoryModalOpen(false);
+    } catch (error) {
+      console.error("Error creating category:", error);
+    }
   };
 
-  const confirmDeleteCategory = () => {
-    setCategories(categories.filter((cat) => cat !== categoryToDelete));
-    const updatedImages = { ...images };
-    delete updatedImages[categoryToDelete];
-    setImages(updatedImages);
-    setDeleteModalOpen(false);
+  const confirmDeleteCategory = async () => {
+    try {
+      await deleteProject(categoryToDelete);
+      setCategories(categories.filter((cat) => cat !== categoryToDelete));
+      const updatedImages = { ...images };
+      delete updatedImages[categoryToDelete];
+      setImages(updatedImages);
+      setDeleteModalOpen(false);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
   };
 
-  const addImage = () => {
+  const addImage = async () => {
     if (!newImage || !selectedCategory) return;
-    setImages({
-      ...images,
-      [selectedCategory]: [...(images[selectedCategory] || []), newImage],
-    });
-    setNewImage(null);
-    setImageModalOpen(false);
+    try {
+      const formData = new FormData();
+      formData.append("image", newImage);
+      const updatedImages = await addImageToProject(selectedCategory, formData);
+      setImages({ ...images, [selectedCategory]: updatedImages });
+      setNewImage(null);
+      setImageModalOpen(false);
+    } catch (error) {
+      console.error("Error adding image:", error);
+    }
   };
 
   const resetSelectedCategory = () => {
     setSelectedCategory("");
   };
+
+  if (loading) {
+    return <div className="mt-6 text-center">Loading...</div>;
+  }
 
   return (
     <div className=" mt-6  pr-[72px]">
