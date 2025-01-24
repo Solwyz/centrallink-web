@@ -1,35 +1,15 @@
-import React, { createContext, useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import React, { createContext, useState } from "react";
+import { Outlet } from "react-router-dom"; 
 import AdminLogin from "../Pages/LoginPage/AdminLogin";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 import AdminHeader from "./Header/AdminHeader";
-import { validateAdminToken } from "../Services/Services";
-
 
 export const adminContext = createContext();
 
 function AdminLayout() {
-  const [token, setToken] = useState(() => localStorage.getItem("adminToken"));
+  const [token, setToken] = useState(localStorage.getItem("adminAuthToken"));
 
-  useEffect(() => {
-    const validateToken = async () => {
-      if (token) {
-        try {
-          // Assume an API call to validate the token
-          const isValid = await validateAdminToken(token); // Implement this API
-          if (!isValid) {
-            setToken(null);
-          }
-        } catch (error) {
-          console.error("Token validation failed:", error);
-          setToken(null);
-        }
-      }
-    };
-    validateToken();
-  }, [token]);
-  
-
+  // If there's a token, show the layout, otherwise show login page
   return (
     <adminContext.Provider value={{ token, setToken }}>
       <div>
@@ -42,7 +22,7 @@ function AdminLayout() {
             </div>
           </div>
         ) : (
-          <AdminLogin />
+          <AdminLogin /> // If no token, show the login page
         )}
       </div>
     </adminContext.Provider>

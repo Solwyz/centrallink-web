@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { loginAdmin } from "../../../Admin/Services/Services"; // Import login function
+import { loginAdmin } from "../../../Admin/Services/Services";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import logo from "../../../Assets/Logo.svg";
 import ResetPassword from "./ResetPassword";
-import axios, { Axios } from "axios";
 
 function AdminLogin() {
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
@@ -12,61 +12,42 @@ function AdminLogin() {
     password: "",
   });
   const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const [loading, setLoading] = useState(false); // To track API call status
-  const [apiError, setApiError] = useState(""); // To handle API errors
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
-const handleSignIn = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setApiError("");
-
-  try {
-    const response = await axios.post(
-      'https://solwyz.medocpharmacy.com/admin/api/auth/authenticate',
-      {
-        username: "superadmin",
-        password: "123456"
-      },
-      {
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    console.log('API Response:', response);
-  } catch (err) {
-    console.error('Errorttt:', err);
-    setApiError(err.response?.data?.message || 'Login failed. Please try again.');
-  } finally {
-    setLoading(false);
-  }
-
-  if (!phoneOrEmail || !password) {
-    setApiError("Please fill in all fields.");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    const data = await loginAdmin(phoneOrEmail, password);
-    console.log("API Response:", data);
-
-    if (data?.token) {
-      localStorage.setItem("adminAuthToken", data.token);
-      alert("Login successful!");
-    } else {
-      setApiError("Unexpected response from the server.");
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setApiError(""); // Clear previous error messages
+  
+    // Validation: Ensure all fields are filled
+    if (!phoneOrEmail || !password) {
+      setApiError("Please fill in all fields.");
+      setLoading(false);
+      return;
     }
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message || "Login failed. Please try again.";
-    setApiError(errorMessage);
-  } finally {
-    setLoading(false);
-  }
-};
-
+  
+    try {
+      const data = await loginAdmin(phoneOrEmail, password); // Using the imported `loginAdmin` function
+      console.log("API Response:", data);  // Log the entire response
+  
+      // Check for the token in the API response
+      if (data && data.jwt) {
+        localStorage.setItem("adminAuthToken", data.jwt); // Store token
+        alert("Login successful!"); // Optional: You can remove this alert
+        navigate("/admin"); // Redirect to /admin after login success
+      } else {
+        setApiError("Unexpected response from the server.");
+      }
+    } catch (error) {
+      console.error("Login Error:", error);
+      setApiError(error.message || "Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -79,14 +60,7 @@ const handleSignIn = async (e) => {
           ...prev,
           phoneOrEmail: "This field is required.",
         }));
-      }
-      //  else if (!/^\S+@\S+\.\S+$/.test(value) && !/^\d+$/.test(value)) {
-      //   setErrors((prev) => ({
-      //     ...prev,
-      //     phoneOrEmail: "Enter a valid email or phone number.",
-      //   }));
-      // }
-       else {
+      } else {
         setErrors((prev) => ({ ...prev, phoneOrEmail: "" }));
       }
     }
@@ -111,29 +85,22 @@ const handleSignIn = async (e) => {
     phoneOrEmail && password && !errors.phoneOrEmail && !errors.password;
 
   return (
-    <div className="flex flex-col min-h-screen bg-bannerLogin bg-cover ">
-      {/* Logo at Top Left */}
+    <div className="flex flex-col min-h-screen bg-bannerLogin bg-cover">
       <div className="absolute top-[60px] right-[72px]">
         <img src={logo} alt="Logo" className="h-[36px] w-[161px]" />
       </div>
 
-      {/* Centered Login Section */}
       <div className="flex flex-1 justify-center items-center">
         {!isForgotPassword ? (
           <div className="bg-white p-12 max-w-[474px] rounded-lg drop-shadow-lg border">
-            <div className="text-[24px] font-medium text-[#0C1421]">
-              Welcome Back
-            </div>
+            <div className="text-[24px] font-medium text-[#0C1421]">Welcome Back</div>
             <div className="text-[14px] font-normal text-[#947F41] tracking-wide max-w-[330px] mt-6">
-              Today is a new day. It's your day. You shape it. Sign in to start
-              managing your projects.
+              Today is a new day. It's your day. You shape it. Sign in to start managing your projects.
             </div>
 
             <form onSubmit={handleSignIn}>
               <div className="mt-[48px]">
-                <label className="text-sm font-normal text-[#1C2532]">
-                  Email/Phone Number
-                </label>
+                <label className="text-sm font-normal text-[#1C2532]">Email/Phone Number</label>
                 <input
                   type="text"
                   name="phoneOrEmail"
@@ -143,15 +110,11 @@ const handleSignIn = async (e) => {
                   placeholder="Enter your phone number or email"
                 />
                 {errors.phoneOrEmail && (
-                  <p className="text-red-500 text-[12px]">
-                    {errors.phoneOrEmail}
-                  </p>
+                  <p className="text-red-500 text-[12px]">{errors.phoneOrEmail}</p>
                 )}
               </div>
               <div className="mt-6">
-                <label className="text-sm font-normal text-[#1C2532]">
-                  Password
-                </label>
+                <label className="text-sm font-normal text-[#1C2532]">Password</label>
                 <input
                   type="password"
                   name="password"
@@ -170,9 +133,7 @@ const handleSignIn = async (e) => {
               >
                 Forgot Password?
               </div>
-              {apiError && (
-                <p className="text-red-500 text-[12px] mt-4">{apiError}</p>
-              )}
+              {apiError && <p className="text-red-500 text-[12px] mt-4">{apiError}</p>}
               <button
                 type="submit"
                 className={`w-full py-2 px-2 rounded-lg mt-6 font-normal text-white ${
