@@ -17,7 +17,7 @@ function AdminHeader() {
 
   const handleLogout = () => {
     setToken(null);
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem("adminAuthToken");
     window.location.href = '/admin'; 
   };
 

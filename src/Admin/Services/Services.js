@@ -1,49 +1,40 @@
 import axios from "axios";
 
+
 // Create an Axios instance
 const apiClient = axios.create({
-  baseURL: "https://solwyz.medocpharmacy.com/admin/api", // Directly set the base URL
+  baseURL: process.env.REACT_APP_API_BASE_URL || "https://solwyz.medocpharmacy.com/hrms/api",
   headers: {
     "Content-Type": "application/json",
-    "Accept": "application/json"
+    "accept": "application/json",
   },
 });
 
 // Token Validation
-export const validateAdminToken = async (token) => {
-  try {
-    const response = await apiClient.post("/validate-token", { token });
-    return response.data?.isValid ?? false; // Use optional chaining and default value
-  } catch (error) {
-    console.error("Token validation failed:", error.message);
-    return false;
-  }
-};
+// export const validateAdminToken = async (token) => {
+//   try {
+//     const response = await apiClient.post("/validate-token", { token });
+//     return response.data?.isValid ?? false; // Use optional chaining and default value
+//   } catch (error) {
+//     console.error("Token validation failed:", error.message);
+//     return false;
+//   }
+// };
 
 // Admin Login
-export const loginAdmin = async (username, password) => {
+export const loginAdmin = async (phoneOrEmail, password) => {
   try {
-    console.log("Attempting to login with Username:", username);
-
     const response = await apiClient.post("/auth/authenticate", {
-      username,
+      username: phoneOrEmail, // Use phoneOrEmail instead of username
       password,
     });
-
-    console.log("API Response:", response);
-
-    return response.data;
+    return response.data; // Return the data directly
   } catch (error) {
     console.error("Error in loginAdmin:", error.message);
-
-    if (error.response) {
-      console.error("Error Response:", error.response);
-      throw new Error(error.response?.data?.message || "Login failed. Please try again.");
-    } else {
-      throw new Error("Login failed. Network or server error.");
-    }
+    throw new Error(error.response?.data?.message || "Login failed.");
   }
 };
+
 
 // Logout API
 export const logoutAdmin = async (userId) => {

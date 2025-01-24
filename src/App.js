@@ -26,19 +26,20 @@ function App() {
     <div className="App font-nunito">
       <ScrollToTop />
       <Routes>
+        {/* User Routes */}
         <Route path="/" element={<User />}>
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="services" element={<ServicePage />} />
           <Route path="services/details" element={<ServiceDetail />} />
-
           <Route path="blogs" element={<BlogPage />} />
           <Route path="blogs/details" element={<BlogDetails />} />
-
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="contact" element={<ContactPage />} />
         </Route>
 
+        {/* Admin Routes */}
+        <Route path="/admin/login" element={<AdminLogin />} /> {/* Admin login route */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminProject />} />
           <Route path="project" element={<AdminProject />} />
@@ -49,7 +50,7 @@ function App() {
         </Route>
       </Routes>
 
-      {/* Only show WhatsAppPopup if not in the admin section */}
+      {/* WhatsApp Popup - Show only for user routes */}
       {!location.pathname.startsWith("/admin") && <WhatsAppPopup />}
     </div>
   );
