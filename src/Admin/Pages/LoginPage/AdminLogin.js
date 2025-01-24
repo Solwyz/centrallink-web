@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { loginAdmin } from "../../../Admin/Services/Services"; // Import login function
 import logo from "../../../Assets/Logo.svg";
 import ResetPassword from "./ResetPassword";
+import axios, { Axios } from "axios";
 
 function AdminLogin() {
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
@@ -14,28 +15,58 @@ function AdminLogin() {
   const [loading, setLoading] = useState(false); // To track API call status
   const [apiError, setApiError] = useState(""); // To handle API errors
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setApiError("");
+const handleSignIn = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setApiError("");
 
-    try {
-      // Call the login service
-      const data = await loginAdmin(phoneOrEmail, password);
-
-      // Assuming a token is returned in the response
-      if (data && data.token) {
-        localStorage.setItem("adminToken", data.token);
-        alert("Login successful!");
-      } else {
-        setApiError("Unexpected response from the server.");
+  try {
+    const response = await axios.post(
+      'https://solwyz.medocpharmacy.com/admin/api/auth/authenticate',
+      {
+        username: "superadmin",
+        password: "123456"
+      },
+      {
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       }
-    } catch (error) {
-      setApiError(error); // Display error from service
-    } finally {
-      setLoading(false);
+    );
+    console.log('API Response:', response);
+  } catch (err) {
+    console.error('Errorttt:', err);
+    setApiError(err.response?.data?.message || 'Login failed. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+
+  if (!phoneOrEmail || !password) {
+    setApiError("Please fill in all fields.");
+    setLoading(false);
+    return;
+  }
+
+  try {
+    const data = await loginAdmin(phoneOrEmail, password);
+    console.log("API Response:", data);
+
+    if (data?.token) {
+      localStorage.setItem("adminAuthToken", data.token);
+      alert("Login successful!");
+    } else {
+      setApiError("Unexpected response from the server.");
     }
-  };
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Login failed. Please try again.";
+    setApiError(errorMessage);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -48,12 +79,14 @@ function AdminLogin() {
           ...prev,
           phoneOrEmail: "This field is required.",
         }));
-      } else if (!/^\S+@\S+\.\S+$/.test(value) && !/^\d+$/.test(value)) {
-        setErrors((prev) => ({
-          ...prev,
-          phoneOrEmail: "Enter a valid email or phone number.",
-        }));
-      } else {
+      }
+      //  else if (!/^\S+@\S+\.\S+$/.test(value) && !/^\d+$/.test(value)) {
+      //   setErrors((prev) => ({
+      //     ...prev,
+      //     phoneOrEmail: "Enter a valid email or phone number.",
+      //   }));
+      // }
+       else {
         setErrors((prev) => ({ ...prev, phoneOrEmail: "" }));
       }
     }
