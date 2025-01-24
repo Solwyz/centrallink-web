@@ -1,22 +1,34 @@
 import React, { createContext, useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import AdminLogin from "../Pages/LoginPage/AdminLogin";
 import AdminSidebar from "./Sidebar/AdminSidebar";
 import AdminHeader from "./Header/AdminHeader";
-import { Outlet } from "react-router-dom";
+import { validateAdminToken } from "../Services/Services";
+
 
 export const adminContext = createContext();
 
 function AdminLayout() {
-  const [token, setToken] = useState(localStorage.getItem("adminToken"));
+  const [token, setToken] = useState(() => localStorage.getItem("adminToken"));
 
-  // Update localStorage and state when the token changes
   useEffect(() => {
-    if (token) {
-      localStorage.setItem("adminToken", token);
-    } else {
-      localStorage.removeItem("adminToken");
-    }
+    const validateToken = async () => {
+      if (token) {
+        try {
+          // Assume an API call to validate the token
+          const isValid = await validateAdminToken(token); // Implement this API
+          if (!isValid) {
+            setToken(null);
+          }
+        } catch (error) {
+          console.error("Token validation failed:", error);
+          setToken(null);
+        }
+      }
+    };
+    validateToken();
   }, [token]);
+  
 
   return (
     <adminContext.Provider value={{ token, setToken }}>
@@ -30,7 +42,7 @@ function AdminLayout() {
             </div>
           </div>
         ) : (
-          <AdminLogin setToken={setToken} />
+          <AdminLogin />
         )}
       </div>
     </adminContext.Provider>
