@@ -3,12 +3,14 @@ import axios from "axios";
 
 // Create an Axios instance
 const apiClient = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || "https://solwyz.medocpharmacy.com/hrms/api",
+  baseURL: process.env.REACT_APP_API_BASE_URL || "https://solwyz.medocpharmacy.com/admin/api",
   headers: {
     "Content-Type": "application/json",
-    "accept": "application/json",
+    "Accept": "application/json",
+   
   },
 });
+
 
 // Token Validation
 // export const validateAdminToken = async (token) => {
@@ -110,5 +112,9 @@ export const addImageToProject = async (projectId, imageData) => {
     throw new Error(error.response?.data?.message || "Failed to add image to project.");
   }
 };
+
+//Blog Api
+
+
 
 export default apiClient;
