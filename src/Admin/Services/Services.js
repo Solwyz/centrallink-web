@@ -1,13 +1,15 @@
 import axios from "axios";
 
+const token = localStorage.getItem("adminAuthToken")
+
 
 // Create an Axios instance
 const apiClient = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL || "https://solwyz.medocpharmacy.com/admin/api",
   headers: {
     "Content-Type": "application/json",
-    "Accept": "application/json",
-   
+    "Accept": "application/json"
+    
   },
 });
 
@@ -76,7 +78,7 @@ export const updateProject = async (projectId, projectData) => {
 // Get all projects
 export const getAllProjects = async () => {
   try {
-    const response = await apiClient.get("/projects/all");
+    const response = await apiClient.get("/project", {'Authorization': `Bearer ${token}`});
     return response.data;
   } catch (error) {
     console.error("Error in getAllProjects:", error.message);
@@ -112,9 +114,5 @@ export const addImageToProject = async (projectId, imageData) => {
     throw new Error(error.response?.data?.message || "Failed to add image to project.");
   }
 };
-
-//Blog Api
-
-
 
 export default apiClient;

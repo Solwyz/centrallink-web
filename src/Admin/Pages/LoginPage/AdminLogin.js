@@ -30,13 +30,15 @@ function AdminLogin() {
   
     try {
       const data = await loginAdmin(phoneOrEmail, password); // Using the imported `loginAdmin` function
-      console.log("API Response:", data);  // Log the entire response
+      console.log("API Response:", data); // Log the entire response
   
       // Check for the token in the API response
       if (data && data.jwt) {
         localStorage.setItem("adminAuthToken", data.jwt); // Store token
-        alert("Login successful!"); // Optional: You can remove this alert
-        navigate("/admin"); // Redirect to /admin after login success
+  
+        // Navigate to the /admin route and refresh the page to reflect the new state
+        navigate("/admin");
+        window.location.reload(); // This will refresh the page to ensure the state updates properly
       } else {
         setApiError("Unexpected response from the server.");
       }
