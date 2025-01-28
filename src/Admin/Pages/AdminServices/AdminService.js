@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import saveIcom from "../../../Assets/Admin/save.svg";
 import rightArrow from "../../../Assets/Admin/projects/right Arrow.svg";
 import uploadIcon from "../../../Assets/Admin/image add.svg";
 import deleteIcon from "../../../Assets/Admin/projects/delete.svg";
 import editIcon from "../../../Assets/Admin/edit.svg";
-import deleteWarn from "../../../Assets/Admin/projects/deleteWarning.svg"
-import saveInfo from "../../../Assets/Admin/projects/saveIcon.svg"
+import deleteWarn from "../../../Assets/Admin/projects/deleteWarning.svg";
+import saveInfo from "../../../Assets/Admin/projects/saveIcon.svg";
+import Api from "../../Services/Api";
 
 function AdminService() {
   const [showForm, setShowForm] = useState(false);
@@ -16,13 +17,35 @@ function AdminService() {
   const [formData, setFormData] = useState({
     title: "",
     icon: null,
-    image: null,
+    photo: null,
     shortDescription: "",
     mainDescription: "",
   });
   const [previewImage, setPreviewImage] = useState(null);
   const [previewIcon, setPreviewIcon] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const token = localStorage.getItem("adminAuthToken");
+
+  // Fetch Services
+  useEffect(() => {
+    console.log("Token being used:", token); // Log the token to check its value
+  
+    
+    Api.get("api/services", {
+    Authorization: `Bearer ${token}` ,
+    }).then((response) => {
+        setServices(response.data);
+        console.log("Fetched Services:", response.data);
+        setIsLoading(false);
+      }).catch((error) => {
+        console.error("Error fetching services:", error);
+        setIsLoading(false);
+      });
+  },[]);
+  
+
+  // Toggle Form
   const toggleForm = (service = null) => {
     setShowForm(!showForm);
     setCurrentService(service);
@@ -30,41 +53,34 @@ function AdminService() {
       service || {
         title: "",
         icon: null,
-        image: null,
+        photo: null,
         shortDescription: "",
         mainDescription: "",
       }
     );
-    setPreviewImage(service?.image || null);
+    setPreviewImage(service?.photo || null);
     setPreviewIcon(service?.icon || null);
   };
 
+  // Reset Selected Service
   const resetSelectedService = () => {
     setShowForm(false);
     setCurrentService(null);
   };
 
-  const openSaveModal = () => {
-    setShowSaveModal(true);
-  };
+  // Modals
+  const openSaveModal = () => setShowSaveModal(true);
+  const closeSaveModal = () => setShowSaveModal(false);
+  const openDeleteModal = () => setShowDeleteModal(true);
+  const closeDeleteModal = () => setShowDeleteModal(false);
 
-  const closeSaveModal = () => {
-    setShowSaveModal(false);
-  };
-
-  const openDeleteModal = () => {
-    setShowDeleteModal(true);
-  };
-
-  const closeDeleteModal = () => {
-    setShowDeleteModal(false);
-  };
-
+  // Handle Input Change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle File Change
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
     if (file) {
@@ -74,8 +90,8 @@ function AdminService() {
           setPreviewImage(reader.result);
           setFormData((prev) => ({
             ...prev,
-            image: reader.result,
-            imageName: file.name,
+            photo: reader.result,
+            photoName: file.name,
           }));
         } else if (type === "icon") {
           setPreviewIcon(reader.result);
@@ -90,29 +106,56 @@ function AdminService() {
     }
   };
 
+  // Handle Save
   const handleSave = () => {
-    if (currentService) {
-      setServices((prev) =>
-        prev.map((service) =>
-          service === currentService ? { ...formData } : service
-        )
-      );
-    } else {
-      setServices((prev) => [{ ...formData }, ...prev]);
-    }
-    toggleForm();
-    closeSaveModal();
-    resetSelectedService();
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const apiCall = currentService
+      ? Api.put(`api/services/${currentService.id}`, formData, config)
+      : Api.post("api/services", formData, config);
+
+    apiCall
+      .then((response) => {
+        setServices((prev) =>
+          currentService
+            ? prev.map((service) =>
+                service.id === currentService.id ? response.data : service
+              )
+            : [response.data, ...prev]
+        );
+        toggleForm();
+        closeSaveModal();
+        resetSelectedService();
+      })
+      .catch((error) => {
+        console.error("Error saving service:", error);
+      });
   };
 
+  // Handle Delete
   const handleDelete = () => {
-    setServices((prev) => prev.filter((service) => service !== currentService));
-    closeDeleteModal();
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    Api.delete(`api/services/${currentService.id}`, config)
+      .then(() => {
+        setServices((prev) =>
+          prev.filter((service) => service.id !== currentService.id)
+        );
+        closeDeleteModal();
+      })
+      .catch((error) => {
+        console.error("Error deleting service:", error);
+      });
   };
 
+  // Validation Check
   const isComplete =
     formData.title &&
-    formData.image &&
+    formData.photo &&
     formData.shortDescription &&
     formData.mainDescription;
 
@@ -122,7 +165,7 @@ function AdminService() {
       currentService || {
         title: "",
         icon: null,
-        image: null,
+        photo: null,
         shortDescription: "",
         mainDescription: "",
       }
@@ -130,7 +173,9 @@ function AdminService() {
 
   return (
     <div className="mt-6 pr-[72px]">
-      {!showForm ? (
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : !showForm ? (
         <div>
           <div className="flex justify-between items-center">
             <h1 className="text-base font-normal">All Services</h1>
@@ -143,21 +188,18 @@ function AdminService() {
           </div>
 
           <div className="grid grid-cols-5 gap-5 mt-12">
-            {services.map((service, index) => (
+          {services && Array.isArray(services) && services.map((service, index) => (
               <div
                 key={index}
                 className="border w-[196px] h-[254px] bg-white shadow relative"
               >
-                {/* Image Section */}
                 <div className="p-2">
                   <img
-                    src={service.image}
+                    src={service.photo}
                     alt="Service"
-                    className="h-[134px] w-full  object-cover rounded-t"
+                    className="h-[134px] w-full object-cover rounded-t"
                   />
                 </div>
-
-                {/* Icon Section */}
                 {service.icon && (
                   <div className="flex items-center justify-center ml-[66px] h-[64px] w-[64px] rounded-full bg-[#F6F6F6] absolute top-[105px]">
                     <img
@@ -167,17 +209,16 @@ function AdminService() {
                     />
                   </div>
                 )}
-
-                {/* Title */}
                 <h2 className="text-base font-medium text-center mt-[22px]">
                   {service.title}
                 </h2>
-
-                {/* Action Buttons */}
                 <div className="flex w-full mt-[22px]">
                   <button
                     className="text-[#EE1717] flex items-center justify-center px-2 w-full h-[35px] bg-[#ECECEC] text-sm"
-                    onClick={() => openDeleteModal()}
+                    onClick={() => {
+                      setCurrentService(service);
+                      openDeleteModal();
+                    }}
                   >
                     Delete
                     <img
@@ -222,7 +263,7 @@ function AdminService() {
 
             <div className=" ">
               <button
-                onClick={() => isComplete && isModified && openSaveModal  ()}
+                onClick={() => isComplete && isModified && openSaveModal()}
                 disabled={!isComplete || !isModified}
                 className={`flex items-center h-[36px] px-4 font-normal text-sm rounded-md text-white ${
                   isComplete && isModified
@@ -339,13 +380,17 @@ function AdminService() {
         </div>
       )}
 
-      {/* Modal */}
+      {/* Save Modal */}
       {showSaveModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-10 rounded-2xl w-[428px] shadow">
-          <img src={saveInfo} alt="" />
-            <h3 className="mt-4 text-[#947F41] font-medium text-base ">Confirm Save?</h3>
-            <p className="mt-2 font-normal text-sm text-[#818180]">Are you sure you want to confirm save now?</p>
+            <img src={saveInfo} alt="" />
+            <h3 className="mt-4 text-[#947F41] font-medium text-base ">
+              Confirm Save?
+            </h3>
+            <p className="mt-2 font-normal text-sm text-[#818180]">
+              Are you sure you want to confirm save now?
+            </p>
             <div className="flex justify-between mt-8">
               <button
                 className="w-[166px] h-[56px] rounded-lg border border-[#B3B3B3] text-[#947F41] text-base font-medium"
@@ -368,9 +413,13 @@ function AdminService() {
       {showDeleteModal && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-10 rounded-2xl w-[428px] shadow">
-          <img src={deleteWarn} alt="" />
-            <h3 className="mt-4 text-[#947F41] font-medium text-base ">Confirm Delete?</h3>
-            <p className="mt-2 font-normal text-sm text-[#818180]">Are you sure you want to delete the service now?</p>
+            <img src={deleteWarn} alt="" />
+            <h3 className="mt-4 text-[#947F41] font-medium text-base ">
+              Confirm Delete?
+            </h3>
+            <p className="mt-2 font-normal text-sm text-[#818180]">
+              Are you sure you want to delete the service now?
+            </p>
             <div className="flex justify-between mt-8">
               <button
                 className="w-[166px] h-[56px] rounded-lg border border-[#B3B3B3] text-[#947F41] text-base font-medium"

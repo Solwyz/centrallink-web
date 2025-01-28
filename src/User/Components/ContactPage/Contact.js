@@ -60,7 +60,7 @@ function Contact() {
             <p className="text-sm font-semibold hover:text-[#FFC107]">
               +971 566977258
             </p>
-            <p className="text-sm font-semibold ml-6 hover:text-[#FFC107]">+971 54 379 2474 </p>
+            <p className="text-sm font-semibold ml-6 hover:text-[#FFC107]">+971 543792474</p>
 
           </div>
           <div className="mt-6 flex items-center">

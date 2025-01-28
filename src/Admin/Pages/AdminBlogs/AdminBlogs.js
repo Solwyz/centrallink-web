@@ -365,10 +365,10 @@ function AdminBlogs() {
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-10 rounded-lg w-[507px] h-[237px]">
-            <h2 className="text-[14px] font-light">Add Category name</h2>
+            <h2 className="text-[14px] font-light">Add Blog Category Name</h2>
             <input
               type="text"
-              placeholder="Category Name"
+              placeholder="Blog Category Name"
               value={blogCategoryName}
               onChange={(e) => setBlogCategoryName(e.target.value)}
               className="rounded-lg px-4 py-3 mt-2 w-full text-[12px] border border-[#E8E8E8] font-normal focus:outline-none placeholder:text-[12px] placeholder:font-light"

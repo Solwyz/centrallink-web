@@ -8,7 +8,10 @@ import {
   deleteProject,
   addImageToProject,
 } from "../../Services/Services";
+import Api from "../../Services/Api";
 
+const token = localStorage.getItem("adminAuthToken");
+console.log("token:", token);
 
 function AdminProject() {
   const [categories, setCategories] = useState([]);
@@ -21,6 +24,7 @@ function AdminProject() {
   const [newImage, setNewImage] = useState(null);
   const [categoryToDelete, setCategoryToDelete] = useState("");
   const [loading, setLoading] = useState(true);
+  const [deleteCategoryId, setDeleteCategoryId] = useState('')
 
   // Fetch categories on component mount
   useEffect(() => {
@@ -42,6 +46,26 @@ function AdminProject() {
     };
     fetchCategories();
   }, []);
+  // =====================
+
+  const handleDelete = (id) => {
+    // e.stopPropagation();
+    // setCategoryToDelete(category);
+    setDeleteModalOpen(true);
+    console.log("iii", id);
+    setDeleteCategoryId(id)
+  };
+
+  useEffect(() => {
+    Api.get("api/project", {
+      Authorization: `Bearer ${token}`,
+    }).then((response) => {
+      if (response && response.data) {
+        console.log("pprojcts", response.data.content);
+        setCategories(response.data.content);
+      }
+    });
+  }, []);
 
   const addCategory = async () => {
     try {
@@ -56,18 +80,25 @@ function AdminProject() {
     }
   };
 
-  const confirmDeleteCategory = async () => {
-    try {
-      await deleteProject(categoryToDelete);
-      setCategories(categories.filter((cat) => cat !== categoryToDelete));
-      const updatedImages = { ...images };
-      delete updatedImages[categoryToDelete];
-      setImages(updatedImages);
-      setDeleteModalOpen(false);
-    } catch (error) {
-      console.error("Error deleting category:", error);
-    }
-  };
+  // const confirmDeleteCategory = async () => {
+  //   try {
+  //     await deleteProject(categoryToDelete);
+  //     setCategories(categories.filter((cat) => cat !== categoryToDelete));
+  //     const updatedImages = { ...images };
+  //     delete updatedImages[categoryToDelete];
+  //     setImages(updatedImages);
+  //     setDeleteModalOpen(false);
+  //   } catch (error) {
+  //     console.error("Error deleting category:", error);
+  //   }
+  // };
+
+  const confirmDeleteCategory =()=> {
+    Api.delete(`api/project/${deleteCategoryId}`,{
+      'Authorization': `Bearer ${token}`
+    })
+    .then(response => console.log('dlt stats :', response))
+  }
 
   const addImage = async () => {
     if (!newImage || !selectedCategory) return;
@@ -95,7 +126,7 @@ function AdminProject() {
     <div className=" mt-6  pr-[72px]">
       {!selectedCategory && (
         <div className="flex items-center justify-between  ">
-          <div className="font-normal text-[16px]">All Product Categories</div>
+          <div className="font-normal text-[16px]">All Project Categories</div>
           <button
             onClick={() => setCategoryModalOpen(true)}
             className="px-6 h-[36px] rounded bg-[#6C5C2B] text-sm hover:bg-[#947F41]  text-white font-normal text-[16px]"
@@ -111,15 +142,16 @@ function AdminProject() {
               <div
                 key={category}
                 className="flex w-full  py-[17px] pl-6 pr-12 justify-between text-[#947F41] font-medium text-sm  items-center  border border-[#D6D6D6] p-4 rounded-lg  hover:border-[#928C8C] transition"
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => setSelectedCategory(category.projectName)}
               >
-                <span className="cursor-pointer  font-medium">{category}</span>
+                <span className="cursor-pointer  font-medium">
+                  {category.projectName}
+                </span>
                 <button
                   className="text-[#C30303] mr-2 text-sm flex font-normal "
                   onClick={(e) => {
-                    e.stopPropagation();
-                    setCategoryToDelete(category);
-                    setDeleteModalOpen(true);
+                    e.stopPropagation(); // Prevent event from bubbling to the parent div
+                    handleDelete(category.id);
                   }}
                 >
                   Delete
@@ -131,7 +163,7 @@ function AdminProject() {
         </div>
       ) : (
         <div className="">
-          {/* <h2 className="text-xl font-bold mb-6">{selectedCategory}</h2> */}
+          <h2 className="text-xl font-bold mb-6">{selectedCategory}</h2>
 
           <div className="flex justify-between items-center">
             <div className="flex items-center">
@@ -185,7 +217,7 @@ function AdminProject() {
       {isCategoryModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-10 rounded-2xl  w-[507px] ">
-            <h2 className="text-sm  font-medium">Add Category name</h2>
+            <h2 className="text-sm  font-medium">Add Project Category Name</h2>
             <input
               type="text"
               value={newCategoryName}
