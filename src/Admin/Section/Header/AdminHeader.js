@@ -47,7 +47,7 @@ function AdminHeader() {
   }, []);
 
   return (
-    <div className="bg-[#F0F0F0] rounded-[16px] fixed h-[88px] pl-6 pr-10 py-[26px] flex justify-between items-center min-w-[1160px] ml-[305px] mr-[72px]">
+    <div className="bg-[#F0F0F0] rounded-[16px] fixed z-50 h-[88px] pl-6 pr-10 py-[26px] flex justify-between items-center min-w-[1160px] ml-[305px] mr-[72px]">
       <div>
         <img src={logo} className="w-[161px] h-[36px]" alt="Logo" />
       </div>
