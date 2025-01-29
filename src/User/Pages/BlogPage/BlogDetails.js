@@ -1,44 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import interiorDetail from "../../../Assets/blogs/blogDetail.png";
 import shareIcon from "../../../Assets/blogs/shareIcon.svg";
 import building from "../../../Assets/blogs/building.png";
 import demolition from "../../../Assets/blogs/demoliton.png";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { FaCopy, FaWhatsapp, FaFacebook, FaTwitter } from "react-icons/fa";
+import Api from "../../../Admin/Services/Api";
 
 export default function BlogDetails() {
-  const blogData = [
-    {
-      image: interiorDetail,
-      title: "Trends in Modern Office Interiors",
-      description: "Discover evolving styles shaping office spaces today.",
-      category: "Office Interiors",
-    },
-  ];
+ 
 
-  const blogs = [
-    {
-      id: 2,
-      title: "Essential Building Maintenance Checklist",
-      description: "Tips to keep buildings functional and efficient always.",
-      category: "Offices",
-      tag: "Building Maintenance",
-      image: building,
-    },
-    {
-      id: 3,
-      title: "Safe and Efficient Demolition Practices",
-      description: "Learn demolition techniques ensuring safety and precision.",
-      category: "Interior",
-      tag: "Demolition Services",
-      image: demolition,
-    },
-  ];
-  const handleBlogClick = (id) => {
-    // navigate(`/blogs/details/${id}`);
-    Navigate("/blogs/details");
-  };
+  const { id } = useParams();
+  const [blogs, setBlogs] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const token = localStorage.getItem("adminAuthToken");
   const [isOpen, setIsOpen] = useState(false);
+ 
+  useEffect(() => {
+    console.log('idd',id)
+    Api.get(`api/blogs/${id}`, {
+     'Authorization': `Bearer ${token}` ,
+    })
+      .then((response) => {
+        console.log(response.data)
+        setBlogs(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching service details:", error);
+        setIsLoading(false);
+      });
+  }, [id]);
+ 
+  if (isLoading) {
+    return <p className="text-center mt-10 text-lg text-gray-500">Loading...</p>;
+  }
+ 
+  if (!blogs) {
+    return <p className="text-center mt-10 text-lg text-gray-500">Service not found.</p>;
+  }
+  // const handleBlogClick = (id) => {
+  //   // navigate(`/blogs/details/${id}`);
+  //   Navigate("/blogs/details");
+  // };
+
   const handleShare = (platform) => {
     const url = window.location.href; // Use the current page URL
     switch (platform) {
@@ -70,10 +75,10 @@ export default function BlogDetails() {
   return (
     <div className="pt-[118px] md:px-[120px] px-4">
       <div className="grid grid-cols-1 md:mt-[72px]  ">
-        {blogData.map((item, index) => (
+        {blogs.map((item, index) => (
           <div key={index} className="relative  rounded-lg  overflow-hidden">
             <img
-              src={item.image}
+              src={`data:image/png;base64,${item.photo}`}
               alt={item.title}
               className="w-full md:h-[533px] h-[302px] object-cover"
             />
@@ -138,120 +143,27 @@ export default function BlogDetails() {
             {/* Category Tag */}
             <div className="absolute bottom-4 right-4  md:bottom-8 md:right-8">
               <span className="border border-white font-medium text-xs px-2 py-1 rounded text-white">
-                {item.category}
+                {item.categoryName}
               </span>
             </div>
           </div>
         ))}
+        {blogs.map((item, index) => (
         <div>
           <div className="md:mt-[72px] mt-6">
             <h3 className="text-xl font-semibold ">
-              Trends in Modern Office Interiors
+           {item.title}
             </h3>
             <p className="md:hidden text-[#707070] text-base font-medium mt-2">
-              Discover evolving styles shaping office spaces today.
+             {item.shortDescription}
             </p>
             <p className="text-base text-justify font-normal leading-[32px] mt-8">
-              In the ever-evolving world of office design, modern interiors are
-              embracing innovation, functionality, and aesthetics to create
-              spaces that inspire creativity, boost productivity, and promote
-              well-being. Here are some of the top trends shaping the modern
-              workplace:
-            </p>
-          </div>
-          <div className="md:mt-10 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              1. Open and Flexible Workspaces
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Gone are the days of cubicles and rigid layouts. Modern offices
-              prioritize open layouts that encourage collaboration and
-              communication. Flexible workstations, movable furniture, and
-              modular setups allow teams to adapt the space to their needs,
-              fostering a dynamic and inclusive work environment.
-            </p>
-          </div>
-          <div className="md:mt-6 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              2. Biophilic Design
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Integrating nature into the office has become a hallmark of
-              contemporary design. Biophilic elements such as indoor plants,
-              natural light, green walls, and organic materials like wood and
-              stone create a calming atmosphere, reduce stress, and improve air
-              quality, enhancing overall employee well-being.
-            </p>
-          </div>
-          <div className="md:mt-6 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              3. Sustainable and Eco-Friendly Materials
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Sustainability is at the forefront of modern office interiors.
-              Recycled, upcycled, and eco-friendly materials are widely used for
-              furniture, flooring, and finishes. Energy-efficient lighting,
-              water-saving fixtures, and renewable energy sources are also
-              integral to green office design.
-            </p>
-          </div>
-          <div className="md:mt-6 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              4. Technology-Integrated Workspaces
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Smart technology is revolutionizing how offices function. From
-              touchless entry systems and interactive whiteboards to smart
-              lighting and climate control, technology is seamlessly integrated
-              into modern interiors to enhance efficiency and convenience.
-            </p>
-          </div>
-          <div className="md:mt-6 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              5. Wellness-Centric Design
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Employers are prioritizing health and wellness by incorporating
-              features like ergonomic furniture, standing desks, and relaxation
-              zones. Dedicated wellness rooms for meditation, fitness, or quiet
-              reflection are becoming essential in promoting a balanced work
-              environment.
-            </p>
-          </div>
-          <div className="md:mt-6 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              6. Home-Inspired Interiors
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Blurring the lines between home and office, modern workspaces are
-              adopting residential design elements. Cozy lounge areas, warm
-              lighting, plush furniture, and textured finishes create a
-              welcoming environment that feels more like home.
-            </p>
-          </div>
-          <div className="md:mt-6 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              7. Color Psychology
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Colors play a significant role in setting the tone of a workspace.
-              Modern offices are experimenting with bold, vibrant palettes to
-              energize teams while using calming hues in breakout zones to
-              foster relaxation and focus.
-            </p>
-          </div>
-          <div className="md:mt-6 mt-8">
-            <h2 className="text-[#947F41] text-base font-semibold  ">
-              8. Multi-Functional Spaces
-            </h2>
-            <p className="md:mt-2 mt-4 font-normal text-base leading-[32px] text-justify">
-              Space optimization is key in modern interiors. Offices are
-              incorporating multi-functional zones that can serve as meeting
-              rooms, brainstorming hubs, or casual lounges, maximizing utility
-              without compromising aesthetics.
+           {item.mainDescription}
             </p>
           </div>
         </div>
+        ))}
+          
         {/* Blog Cards */}
         <div className="md:mt-[108px] hidden md:block ">
           <h1 className="font-semibold text-base">More related blogs</h1>
