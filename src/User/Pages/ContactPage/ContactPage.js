@@ -27,7 +27,9 @@ function ContactPage() {
     console.log("Form Submitted: ", data);
 
     Api.post('api/Inquiry', {
+
         "id": 0,
+
         "name": data.name,
         "email": data.email,
         "serviceName": {
@@ -35,7 +37,9 @@ function ContactPage() {
         },
         "message": data.message
       
+
     })
+
     .then(response => {
       if(response && response.data) {
         console.log('Inquiry submitted', response.data);

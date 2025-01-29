@@ -19,7 +19,11 @@ import AdminBlogs from "./Admin/Pages/AdminBlogs/AdminBlogs";
 import AdminEnquiry from "./Admin/Pages/AdminEnquiry/AdminEnquiry";
 import AdminGeneral from "./Admin/Pages/AdminGeneral/AdminGeneral";
 
+
+
+
 import ServiceDetailDynamic from "./User/Pages/ServicePage/ServiceDetailDynamic";
+
 
 function App() {
   const location = useLocation();
@@ -37,7 +41,7 @@ function App() {
           <Route path="services/details/office-interior" element={<ServiceDetail />} />
          
           <Route path="blogs" element={<BlogPage />} />
-          <Route path="blogs/details" element={<BlogDetails />} />
+          <Route path="blogs/details/:id" element={<BlogDetails />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="contact" element={<ContactPage />} />
         </Route>

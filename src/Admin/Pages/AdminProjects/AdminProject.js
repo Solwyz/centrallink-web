@@ -33,7 +33,9 @@ function AdminProject() {
   const [isAdding, setIsAdding] = useState(false);
   const [isPhotoAdding, setIsPhotoAdding] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+
   const [detailedProject, setDetailedProject] = useState({})
+
 
   // Fetch categories on component mount
   useEffect(() => {
@@ -55,7 +57,7 @@ function AdminProject() {
     };
     fetchCategories();
   }, []);
-  // =====================
+  
 
   const handleDelete = (id) => {
     // e.stopPropagation();
@@ -72,6 +74,7 @@ function AdminProject() {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.categoryName)
     setSelectedCategoryId(category.id)
+
     Api.get(`api/project/${category.id}`, {
       'Authorization': `Bearer ${token}`
     })
@@ -83,6 +86,7 @@ function AdminProject() {
           console.error('Error fetching detailed project:', response)
         }
       })
+
   }
 
   //api/project/1?categoryName=kstringttt&id=1
@@ -365,6 +369,7 @@ function AdminProject() {
                     </label>
                   </div>
                 </div>
+
               
             
 
