@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import { adminContext } from "../AdminLayout";
 import logo from "../../../Assets/Logo.svg";
 import notICon from "../../../Assets/Admin/noti.svg";
@@ -9,11 +10,14 @@ import logOut from "../../../Assets/Admin/logoutt.svg";
 function AdminHeader() {
   const [isDropdown, setIsDropdown] = useState(false);
   const [isNotiDropdown, setIsNotiDropdown] = useState(false);
+  const [username, setUsername] = useState("Admin");
 
-  const { setToken, username } = useContext(adminContext);
+  const { setToken } = useContext(adminContext);
 
   const dropdownRef = useRef(null);
   const notiDropdownRef = useRef(null);
+
+ 
 
   const handleLogout = () => {
     setToken(null);
@@ -32,19 +36,19 @@ function AdminHeader() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        (dropdownRef.current && !dropdownRef.current.contains(event.target)) &&
-        (notiDropdownRef.current && !notiDropdownRef.current.contains(event.target))
-      ) {
-        setIsDropdown(false);
-        setIsNotiDropdown(false);
+    const token = localStorage.getItem("adminAuthToken");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        console.log("Decoded Token:", decoded); // Check the full token structure
+        console.log("Extracted Username:", decoded.username); // See if "superadmin" appears
+        setUsername(decoded.username || "Admin");
+      } catch (error) {
+        console.error("Error decoding token:", error);
       }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
   }, []);
+  
 
   return (
     <div className="bg-[#F0F0F0] rounded-[16px] fixed z-50 h-[88px] pl-6 pr-10 py-[26px] flex justify-between items-center min-w-[1160px] ml-[305px] mr-[72px]">
@@ -80,9 +84,7 @@ function AdminHeader() {
         </div>
         <div className="flex items-center ml-6 justify-center">
           <img src={people} className="w-8 h-8 mr-4" alt="Admin" />
-          <h2 className="text-base font-medium">
-            Hi {username ? username : "Admin"}
-          </h2>
+          <h2 className="text-base font-medium">Hi {username}</h2>
         </div>
         <div className="ml-2" ref={dropdownRef}>
           <img
