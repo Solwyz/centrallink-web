@@ -20,7 +20,10 @@ import AdminEnquiry from "./Admin/Pages/AdminEnquiry/AdminEnquiry";
 import AdminGeneral from "./Admin/Pages/AdminGeneral/AdminGeneral";
 
 
+
+
 import ServiceDetailDynamic from "./User/Pages/ServicePage/ServiceDetailDynamic";
+
 
 function App() {
   const location = useLocation();
