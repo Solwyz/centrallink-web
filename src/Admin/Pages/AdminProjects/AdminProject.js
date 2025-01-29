@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import deleteIcon from "../../../Assets/Admin/projects/delete.svg";
 import deleteWarning from "../../../Assets/Admin/projects/deleteWarning.svg";
 import rightArrow from "../../../Assets/Admin/projects/right Arrow.svg";
+import testImage from "../../../Assets/send (1).png"
 import {
   getAllProjects,
   createProject,
@@ -25,6 +26,13 @@ function AdminProject() {
   const [categoryToDelete, setCategoryToDelete] = useState("");
   const [loading, setLoading] = useState(true);
   const [deleteCategoryId, setDeleteCategoryId] = useState('')
+  const [selectedCategoryId, setSelectedCategoryId] = useState('')
+  const [addNewCategoryName, setAddNewCategoryName] = useState('')
+  const [addNewImg, setAddNewImg] = useState(null)
+  const [refreshKey, setRefreshKey] = useState(0)
+  const [isAdding, setIsAdding] = useState(false);
+  const [isPhotoAdding, setIsPhotoAdding] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Fetch categories on component mount
   useEffect(() => {
@@ -56,29 +64,108 @@ function AdminProject() {
     setDeleteCategoryId(id)
   };
 
+  const handleCreateClick = () => {
+    setCategoryModalOpen(true)
+  }
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category.categoryName)
+    setSelectedCategoryId(category.id)
+  }
+
+  //api/project/1?categoryName=kstringttt&id=1
+
+  const confirmDeleteCategory = () => {
+    setIsDeleting(true);
+    Api.delete(`api/project/${deleteCategoryId}`, {
+      'Authorization': `Bearer ${token}`
+    })
+      .then(response => {
+        setIsDeleting(false);
+        console.log('delete category response:', response)
+        setDeleteCategoryId('')
+        setDeleteModalOpen(false)
+        setRefreshKey(prev => prev + 1)
+      })
+  }
+
+
+  const addImage = () => {
+    setIsPhotoAdding(true);
+    const formData = new FormData();
+    formData.append("photo", newImage);
+
+    Api.put(`api/project/${selectedCategoryId}?categoryName=finest&id=1`, formData, {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    })
+      .then(response => {
+        setIsPhotoAdding(false);
+        if (response && response.data) {
+          console.log('add image response:', response.data)
+          setNewImage(null)
+          setImageModalOpen(false)
+          setRefreshKey(prev => prev + 1)
+        } else {
+          console.error('Error adding image:', response)
+        }
+      })
+  }
+
+  // api/project?categoryName=NewCategory
+
+  const addCategory = () => {
+    setIsAdding(true);
+    const formData = new FormData();
+    formData.append("photo", addNewImg);
+
+    Api.post(`api/project?categoryName=${addNewCategoryName}`, formData, {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    })
+      .then(response => {
+        setIsAdding(false);
+        if (response && response.data) {
+          console.log('add categoty response:', response)
+          setAddNewCategoryName('')
+          setAddNewImg(null)
+          setCategoryModalOpen(false)
+          setRefreshKey(prev => prev + 1)
+        } else {
+          console.error('Error adding category:', response)
+        }
+      })
+    // Api.post('api/project', {}, {'Authorization': `Bearer ${token}`})
+  }
+
   useEffect(() => {
+
     Api.get("api/project", {
       Authorization: `Bearer ${token}`,
     }).then((response) => {
-      if (response && response.data) {
-        console.log("pprojcts", response.data.content);
-        setCategories(response.data.content);
+      if (response) {
+        if (response && response.data) {
+          console.log('response2222', response.data)
+          setCategories(response.data);
+        } else {
+          console.error('Error fetching projects:', response)
+        }
       }
     });
-  }, []);
+  }, [refreshKey]);
 
-  const addCategory = async () => {
-    try {
-      const newCategory = { name: newCategoryName, images: [] };
-      const createdCategory = await createProject(newCategory);
-      setCategories([...categories, createdCategory.name]);
-      setImages({ ...images, [createdCategory.name]: [] });
-      setNewCategoryName("");
-      setCategoryModalOpen(false);
-    } catch (error) {
-      console.error("Error creating category:", error);
-    }
-  };
+  // const addCategory = async () => {
+  //   try {
+  //     const newCategory = { name: newCategoryName, images: [] };
+  //     const createdCategory = await createProject(newCategory);
+  //     setCategories([...categories, createdCategory.name]);
+  //     setImages({ ...images, [createdCategory.name]: [] });
+  //     setNewCategoryName("");
+  //     setCategoryModalOpen(false);
+  //   } catch (error) {
+  //     console.error("Error creating category:", error);
+  //   }
+  // };
 
   // const confirmDeleteCategory = async () => {
   //   try {
@@ -93,26 +180,23 @@ function AdminProject() {
   //   }
   // };
 
-  const confirmDeleteCategory =()=> {
-    Api.delete(`api/project/${deleteCategoryId}`,{
-      'Authorization': `Bearer ${token}`
-    })
-    .then(response => console.log('dlt stats :', response))
-  }
 
-  const addImage = async () => {
-    if (!newImage || !selectedCategory) return;
-    try {
-      const formData = new FormData();
-      formData.append("image", newImage);
-      const updatedImages = await addImageToProject(selectedCategory, formData);
-      setImages({ ...images, [selectedCategory]: updatedImages });
-      setNewImage(null);
-      setImageModalOpen(false);
-    } catch (error) {
-      console.error("Error adding image:", error);
-    }
-  };
+
+  // const addImage = async () => {
+  //   if (!newImage || !selectedCategory) return;
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("image", newImage);
+  //     const updatedImages = await addImageToProject(selectedCategory, formData);
+  //     setImages({ ...images, [selectedCategory]: updatedImages });
+  //     setNewImage(null);
+  //     setImageModalOpen(false);
+  //   } catch (error) {
+  //     console.error("Error adding image:", error);
+  //   }
+  // };
+
+
 
   const resetSelectedCategory = () => {
     setSelectedCategory("");
@@ -128,7 +212,7 @@ function AdminProject() {
         <div className="flex items-center justify-between  ">
           <div className="font-normal text-[16px]">All Project Categories</div>
           <button
-            onClick={() => setCategoryModalOpen(true)}
+            onClick={handleCreateClick}
             className="px-6 h-[36px] rounded bg-[#6C5C2B] text-sm hover:bg-[#947F41]  text-white font-normal text-[16px]"
           >
             Create New
@@ -142,10 +226,10 @@ function AdminProject() {
               <div
                 key={category}
                 className="flex w-full  py-[17px] pl-6 pr-12 justify-between text-[#947F41] font-medium text-sm  items-center  border border-[#D6D6D6] p-4 rounded-lg  hover:border-[#928C8C] transition"
-                onClick={() => setSelectedCategory(category.projectName)}
+                onClick={() => handleCategoryClick(category)}
               >
                 <span className="cursor-pointer  font-medium">
-                  {category.projectName}
+                  {category.categoryName}
                 </span>
                 <button
                   className="text-[#C30303] mr-2 text-sm flex font-normal "
@@ -217,14 +301,50 @@ function AdminProject() {
       {isCategoryModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-10 rounded-2xl  w-[507px] ">
-            <h2 className="text-sm  font-medium">Add Project Category Name</h2>
-            <input
-              type="text"
-              value={newCategoryName}
-              onChange={(e) => setNewCategoryName(e.target.value)}
-              className="border p-4 w-full h-[48px] mt-2 rounded-lg focus:outline-none text-sm  border-[#E8E8E8] "
-              placeholder="Category Name"
-            />
+            {isAdding ?
+              <div className="text-base font-medium py-4  text-[#947F41] ">Adding New Category. Please wait..</div> :
+              <div>
+                <h2 className="text-sm  font-medium">Add Project Category Name</h2>
+                <input
+                  type="text"
+                  value={addNewCategoryName}
+                  onChange={(e) => setAddNewCategoryName(e.target.value)}
+                  className="border p-4 w-full h-[48px] mt-2 rounded-lg focus:outline-none text-sm  border-[#E8E8E8] "
+                  placeholder="Category Name"
+                />
+
+
+
+                <h2 className="text-base font-medium  text-[#947F41] ">
+                  Add Photo
+                </h2>
+                <div className="relative mt-6">
+                  {addNewImg && (
+                    <img
+                      src={URL.createObjectURL(addNewImg)}
+                      alt="Preview"
+                      className="w-[196px] h-[196px] rounded-lg object-cover mx-auto shadow-md"
+                    />
+                  )}
+                  <input
+                    type="file"
+                    id="fileInput"
+                    onChange={(e) => setAddNewImg(e.target.files[0])}
+                    className="hidden"
+                  />
+                  <div className="flex item-center ml-[163px] mt-2">
+                    <label
+                      htmlFor="fileInput"
+                      className="cursor-pointer  py-2 px-4 text-center justify-center text-sm  text-[#947F41] rounded-lg border-2 border-[#6C5C2B]"
+                    >
+                      Choose file
+                    </label>
+                  </div>
+                </div>
+              </div>
+            }
+
+
             <div className="flex justify-end mt-10">
               <button
                 className="py-2 px-4 rounded-lg mr-2 w-[99px] text-base font-medium h-[47px] border-[#947F41] text-[#947F41] border transition"
@@ -246,27 +366,31 @@ function AdminProject() {
       {isDeleteModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-10 w-[428px] rounded-2xl ">
-            <img src={deleteWarning} alt="" />
-            <h2 className="text-base font-medium text-[#947F41] mt-6">
-              Delete Category ?
-            </h2>
-            <p className="mt-2 text-[#818180] text-sm font-normal">
-              Are you sure you want to delete the category "{categoryToDelete}"?
-            </p>
-            <div className="flex justify-center gap-4 mt-8">
-              <button
-                className="  w-[165px] rounded-lg h-[56px] text-center border font-medium text-base text-[#947F41] border-[#947F41] transition"
-                onClick={() => setDeleteModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-[#947F41] rounded-lg w-[165px] text-white h-[56px] text-center font-medium text-base transition"
-                onClick={confirmDeleteCategory}
-              >
-                Delete
-              </button>
-            </div>
+            {isDeleting ? <div className="text-base font-medium py-4  text-[#947F41] ">Deleting. Please wait..</div> :
+              <div>
+                <img src={deleteWarning} alt="" />
+                <h2 className="text-base font-medium text-[#947F41] mt-6">
+                  Delete Category ?
+                </h2>
+                <p className="mt-2 text-[#818180] text-sm font-normal">
+                  Are you sure you want to delete the category "{categoryToDelete}"?
+                </p>
+                <div className="flex justify-center gap-4 mt-8">
+                  <button
+                    className="  w-[165px] rounded-lg h-[56px] text-center border font-medium text-base text-[#947F41] border-[#947F41] transition"
+                    onClick={() => setDeleteModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-[#947F41] rounded-lg w-[165px] text-white h-[56px] text-center font-medium text-base transition"
+                    onClick={confirmDeleteCategory}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            }
           </div>
         </div>
       )}
@@ -274,47 +398,53 @@ function AdminProject() {
       {isImageModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-10 rounded-2xl w-[506px]">
-            <h2 className="text-base font-medium  text-[#947F41] ">
-              Add Photo
-            </h2>
-            <div className="relative mt-6">
-              {newImage && (
-                <img
-                  src={URL.createObjectURL(newImage)}
-                  alt="Preview"
-                  className="w-[196px] h-[196px] rounded-lg object-cover mx-auto shadow-md"
-                />
-              )}
-              <input
-                type="file"
-                id="fileInput"
-                onChange={(e) => setNewImage(e.target.files[0])}
-                className="hidden"
-              />
-              <div className="flex item-center ml-[163px] mt-2">
-                <label
-                  htmlFor="fileInput"
-                  className="cursor-pointer  py-2 px-4 text-center justify-center text-sm  text-[#947F41] rounded-lg border-2 border-[#6C5C2B]"
-                >
-                  Choose file
-                </label>
-              </div>
-            </div>
+            {isPhotoAdding ?
+              <div className="text-base font-medium py-4  text-[#947F41] ">Adding New Category. Please wait..</div> :
+              <div>
+                <h2 className="text-base font-medium  text-[#947F41] ">
+                  Add Photo
+                </h2>
+                <div className="relative mt-6">
+                  {newImage && (
+                    <img
+                      src={URL.createObjectURL(newImage)}
+                      alt="Preview"
+                      className="w-[196px] h-[196px] rounded-lg object-cover mx-auto shadow-md"
+                    />
+                  )}
+                  <input
+                    type="file"
+                    id="fileInput"
+                    onChange={(e) => setNewImage(e.target.files[0])}
+                    className="hidden"
+                  />
+                  <div className="flex item-center ml-[163px] mt-2">
+                    <label
+                      htmlFor="fileInput"
+                      className="cursor-pointer  py-2 px-4 text-center justify-center text-sm  text-[#947F41] rounded-lg border-2 border-[#6C5C2B]"
+                    >
+                      Choose file
+                    </label>
+                  </div>
+                </div>
 
-            <div className="flex justify-center mt-[48px] space-x-2">
-              <button
-                className="py-2 px-4 rounded-lg mr-2 w-[99px] text-base font-medium h-[47px] border-[#947F41] text-[#947F41] border transition"
-                onClick={() => setImageModalOpen(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-[#947F41] w-[99px] h-[47px] text-base font-medium text-white py-2 px-4 rounded-lg  transition"
-                onClick={addImage}
-              >
-                Save
-              </button>
-            </div>
+                <div className="flex justify-center mt-[48px] space-x-2">
+                  <button
+                    className="py-2 px-4 rounded-lg mr-2 w-[99px] text-base font-medium h-[47px] border-[#947F41] text-[#947F41] border transition"
+                    onClick={() => setImageModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-[#947F41] w-[99px] h-[47px] text-base font-medium text-white py-2 px-4 rounded-lg  transition"
+                    onClick={addImage}
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            }
+
           </div>
         </div>
       )}
