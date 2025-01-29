@@ -37,22 +37,26 @@ const ProjectsPage = () => {
             Our Leading Projects
           </h2>
 
+
           {/* Filter Tabs */}
-          <div className="flex justify-center items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px] gap-4">
-            {["All", "Interior", "Offices"].map((category) => (
-              <button
-                key={category}
-                onClick={() => setFilter(category)}
-                className={`px-4 py-[6px] h-[36px] items-center rounded-[18px] transition-all ${
-                  filter === category
-                    ? "bg-[#947F41] text-white shadow-md"
-                    : "bg-white text-[#947F41] border border-[#947F41] hover:bg-[#f7e6c2]"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+<div className="flex justify-center md:justify-start items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px]">
+  <div className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
+    {["All", "events", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
+      <button
+        key={category}
+        onClick={() => setFilter(category)}
+        className={`px-4 py-[6px] h-[36px] flex-shrink-0 items-center rounded-[18px] transition-all ${
+          filter === category
+            ? "bg-[#947F41] text-white shadow-md"
+            : "bg-white text-[#947F41] border border-[#947F41] hover:bg-[#f7e6c2]"
+        }`}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+</div>
+
         </div>
 
         {/* Gallery Section */}

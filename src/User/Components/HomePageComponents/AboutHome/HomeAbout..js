@@ -105,9 +105,11 @@ function HomeAbout() {
             reality with precision and dedication.
           </p>
           <div className="flex justify-center mt-6">
-            <div className="w-[183px] h-[56px] text-[#736B5B] font-medium text-base border border-[#726E62] focus:outline-none rounded-lg flex items-center justify-center text-center hover:shadow-[0px_7px_7px_0px_#00000026] transition-shadow">
-              Read More
-            </div>
+            <Link to={"/about"}>
+              <div className="w-[183px] h-[56px] text-[#736B5B] font-medium text-base border border-[#726E62] focus:outline-none rounded-lg flex items-center justify-center text-center hover:shadow-[0px_7px_7px_0px_#00000026] transition-shadow">
+                Read More
+              </div>
+            </Link>
           </div>
         </motion.div>
       </div>
