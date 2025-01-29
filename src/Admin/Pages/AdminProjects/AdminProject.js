@@ -34,6 +34,9 @@ function AdminProject() {
   const [isPhotoAdding, setIsPhotoAdding] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const [detailedProject, setDetailedProject] = useState({})
+
+
   // Fetch categories on component mount
   useEffect(() => {
     const fetchCategories = async () => {
@@ -54,7 +57,7 @@ function AdminProject() {
     };
     fetchCategories();
   }, []);
-  // =====================
+  
 
   const handleDelete = (id) => {
     // e.stopPropagation();
@@ -71,6 +74,19 @@ function AdminProject() {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category.categoryName)
     setSelectedCategoryId(category.id)
+
+    Api.get(`api/project/${category.id}`, {
+      'Authorization': `Bearer ${token}`
+    })
+      .then(response => {
+        if (response && response.data) {
+          console.log('detailed project :', response.data)
+          setDetailedProject(response.data)
+        } else {
+          console.error('Error fetching detailed project:', response)
+        }
+      })
+
   }
 
   //api/project/1?categoryName=kstringttt&id=1
@@ -274,6 +290,18 @@ function AdminProject() {
           </div>
 
           <div className="grid mt-[48px] grid-cols-5 gap-6">
+            {detailedProject && (
+              <div className="relative">
+                <img
+                  src={`data:image/png;base64,${detailedProject.photo}`}
+                  alt="Category Image"
+                  className="w-[196px] h-[196px]  object-cover"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* <div className="grid mt-[48px] grid-cols-5 gap-6">
             {(images[selectedCategory] || []).map((image, index) => (
               <div key={index} className="relative">
                 <img
@@ -294,7 +322,7 @@ function AdminProject() {
                 </button>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       )}
 
@@ -341,8 +369,9 @@ function AdminProject() {
                     </label>
                   </div>
                 </div>
-              </div>
-            }
+
+              
+            
 
 
             <div className="flex justify-end mt-10">
@@ -359,6 +388,8 @@ function AdminProject() {
                 Save
               </button>
             </div>
+            </div>
+          }
           </div>
         </div>
       )}
