@@ -7,6 +7,7 @@ import editIcon from "../../../Assets/Admin/edit.svg";
 import deleteWarn from "../../../Assets/Admin/projects/deleteWarning.svg";
 import saveInfo from "../../../Assets/Admin/projects/saveIcon.svg";
 import Api from "../../Services/Api";
+import { form } from "framer-motion/client";
 
 function AdminService() {
   const [showForm, setShowForm] = useState(false);
@@ -26,7 +27,7 @@ function AdminService() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [uploadPhoto, setUploadPhoto] = useState(null);
-  const [uploadIcn, setUploadIcn] = useState(null);
+  const [uploadIcon, setUploadIcon] = useState(null);
 
   const formDataToSend = new FormData();
 
@@ -110,7 +111,7 @@ function AdminService() {
             photoName: file.name, // Store the image file name
           }));
         } else if (type === "icon") {
-          setUploadIcn(e.target.files[0]);
+          setUploadIcon(e.target.files[0]);
           setPreviewIcon(reader.result); // Set the icon preview
           setFormData((prev) => ({
             ...prev,
@@ -125,52 +126,56 @@ function AdminService() {
   };
 
   const handleSave = () => {
+    
     console.log("photooo", uploadPhoto);
     const formsData = new FormData();
-    formsData.append("icon", uploadPhoto);
+    formsData.append("icon", uploadIcon);
     formsData.append("photo", uploadPhoto);
+    formsData.append("title", formData.title);
+    formsData.append("shortDescription", formData.shortDescription);
+    formsData.append("mainDescription", formData.mainDescription);
     console.log("fomdataaaaa :", formData);
-    Api.post(
-      `api/services?title=${formData.title}&shortDescription=${formData.shortDescription}&mainDescription=${formData.mainDescription}`,
-      formsData,
-      {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      }
-    ).then((response) => console.log("www", response));
+
+    if (currentService) {
+      // PUT request for updating an existing service
+      // console.log('formsDataaa:',formsData)
+      Api.put(
+        `api/services/${currentService.id}`,
+        formsData,
+        {
+         
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+        
+        }
+      ).then((response) => {
+        console.log("PUT response:", response);
+        resetSelectedService(); // Close form after updating
+      }).catch(error => {
+        console.error("Error updating service:", error);
+      });
+    } else {
+      // POST request for adding a new service
+      Api.post(
+        `api/services`,
+        formsData,
+        {
+        
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+       
+        }
+      ).then((response) => {
+        console.log("POST response:", response);
+        resetSelectedService(); // Close form after saving
+      }).catch(error => {
+        console.error("Error saving service:", error);
+      });
+    }
     closeSaveModal();
   };
 
-  const createService = async (formDataToSend, token) => {
-    try {
-      const response = await Api.post("api/services", formDataToSend, {
-        Authorization: `Bearer ${token}`,
-        // "Content-Type": "multipart/form-data", // Sometimes this header can be left out as Axios/FormData auto handles it
-      });
-      return response;
-    } catch (error) {
-      console.error(
-        "Error creating service:",
-        error.response?.data || error.message
-      );
-      throw error;
-    }
-  };
 
-  const updateService = async (serviceId, formData, token) => {
-    try {
-      const response = await Api.put(`api/services/${serviceId}`, formData, {
-        Authorization: `Bearer ${token}`,
-      });
-      return response;
-    } catch (error) {
-      console.error(
-        "Error updating service:",
-        error.response?.data || error.message
-      );
-      throw error;
-    }
-  };
 
   // Handle Delete
   const handleDelete = () => {
@@ -242,9 +247,9 @@ function AdminService() {
                   {service.icon && (
                     <div className="flex items-center justify-center ml-[66px] h-[64px] w-[64px] rounded-full bg-[#F6F6F6] absolute top-[105px]">
                       <img
-                        src={`data:image/svg+xml;base64,${service.icon}`} // If this is base64, this will work just fine too
+                        src={`data:image/${service.iconType};base64,${service.icon}`}
                         alt={typeof service.icon}
-                        className="h-[32px] w-[32px] object-contain"
+                        className="h-[32px] w-[32px] object-contain rounded-full"
                       />
                     </div>
                   )}
@@ -374,7 +379,7 @@ function AdminService() {
                   <div className="flex flex-col items-center w-fit">
                     {previewImage ? (
                       // If previewImage is a base64 string, show it as an image
-                      previewImage.startsWith("data:image") ? (
+                      previewImage.startsWith("data:image/svg+xml;base64") ? (
                         <img
                           src={previewImage}
                           alt="Profile Preview"
