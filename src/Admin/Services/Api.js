@@ -1,6 +1,6 @@
 import axios from "axios";
  
-const apiUrl = process.env.REACT_APP_API_URL || null
+const apiUrl = process.env.REACT_APP_API_ || "https://solwyz.medocpharmacy.com/admin"
  
  
 const Api = {
@@ -31,6 +31,7 @@ const Api = {
                     headers: {
                         'accept': 'application/json',
                         'Content-Type': 'application/json',
+
                         ...header
                     }
                 }
@@ -68,6 +69,7 @@ const Api = {
                     headers: {
                         'accept': 'application/json',
                         'Content-Type': 'application/json',
+
                         ...header
                     }
                 }

@@ -1,18 +1,44 @@
-import React, { useState } from 'react'
-import ArrowDownIcon from "../../../Assets/Admin/arrowDown.svg"
-import ArrowUpIcon from "../../../Assets/Admin/arrowUp.svg"
-import saveIcom from "../../../Assets/Admin/save.svg"
+import React, { useState, useEffect } from 'react';
+import ArrowDownIcon from "../../../Assets/Admin/arrowDown.svg";
+import ArrowUpIcon from "../../../Assets/Admin/arrowUp.svg";
+import saveIcom from "../../../Assets/Admin/save.svg";
+import Api from "../../Services/Api";
 
 
 function AdminGeneral() {
-  const [contactEmail, setContactEmail] = useState('info@centrallink.com');
-  const [facebookLink, setFacebookLink] = useState('https://centrallink.com');
-  const [instagramLink, setInstagramLink] = useState('https://centrallink.com');
-  const [twitterLink, setTwitterLink] = useState('https://centrallink.com');
-  
+  const [contactEmail, setContactEmail] = useState('');
+  const [facebookLink, setFacebookLink] = useState('');
+  const [instagramLink, setInstagramLink] = useState('');
+  const [linkedinLink, setLinkedinLink] = useState('');
+
   const [isModified, setIsModified] = useState(false);
-  const [openSection, setOpenSection] = useState(null); // Track which section is open
-  const [showModal, setShowModal] = useState(false); // Manage modal visibility
+  const [openSection, setOpenSection] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  
+  const [settingsId, setSettingsId] = useState(null); // Assume we get this id from the backend or props
+  const token = localStorage.getItem("adminAuthToken");
+
+
+  // Fetch settings on component mount (GET API)
+  useEffect(() => {
+    if (settingsId) {
+      Api.get(`api/settings/${settingsId}`, {
+          Authorization: `Bearer ${token}`, // Correct way to set Authorization header
+        
+      })
+      .then(response => {
+        const { enquiryEmail, facebookUrl, instagramUrl, linkedinUrl } = response.data;
+        setContactEmail(enquiryEmail);
+        setFacebookLink(facebookUrl);
+        setInstagramLink(instagramUrl);
+        setLinkedinLink(linkedinUrl);
+      })
+      .catch(error => {
+        console.error("Error fetching settings", error);
+      });
+    }
+  }, [settingsId]);
+  
 
   const handleInputChange = (setter) => (event) => {
     setter(event.target.value);
@@ -20,25 +46,63 @@ function AdminGeneral() {
   };
 
   const handleSave = () => {
-    setShowModal(true); // Show the modal on Save button click
+    setShowModal(true);
   };
 
   const confirmSave = () => {
-    console.log("Data saved");
-    setIsModified(false);
-    setShowModal(false); // Hide the modal after confirming
+    if (settingsId) {
+      // PUT Request to update settings
+      Api.put(`api/settings/${settingsId}`, {
+        enquiryEmail: contactEmail,
+        facebookUrl: facebookLink,
+        instagramUrl: instagramLink,
+        linkedinUrl: linkedinLink,
+      }, {
+          Authorization: `Bearer ${token}`, // Correctly add the Authorization header
+        
+      })
+      .then(response => {
+        console.log("Settings updated successfully:", response.data);
+        setIsModified(false);
+        setShowModal(false);
+      })
+      .catch(error => {
+        console.error("Error updating settings:", error);
+      });
+      
+    } else {
+      // POST Request to create settings (if no settingsId)
+      Api.post('api/settings', {
+        enquiryEmail: contactEmail,
+        facebookUrl: facebookLink,
+        instagramUrl: instagramLink,
+        linkedinUrl: linkedinLink,
+      }, {
+          Authorization: `Bearer ${token}`, // Correctly add the Authorization header
+        
+      })
+      .then(response => {
+        console.log("Settings saved successfully:", response.data);
+        setIsModified(false);
+        setShowModal(false);
+      })
+      .catch(error => {
+        console.error("Error saving settings:", error);
+      });
+      
+    }
   };
 
   const cancelSave = () => {
-    setShowModal(false); // Hide the modal without saving
+    setShowModal(false);
   };
 
   const toggleSection = (section) => {
-    setOpenSection(openSection === section ? null : section); // Toggle open/closed
+    setOpenSection(openSection === section ? null : section);
   };
 
   return (
-    <div className=" pr-[72px] mt-6 w-full">
+    <div className="pr-[72px] mt-6 w-full">
       <h2 className="text-xl font-normal">General Settings</h2>
 
       {/* Contact Details Section */}
@@ -60,7 +124,7 @@ function AdminGeneral() {
           }`}
         >
           {openSection === 'contact' && (
-            <div className="p-6 item-center ">
+            <div className="p-6 item-center">
               <label className="text-sm items-center flex font-light">
                 Enquiry receiving mail:
                 <input
@@ -114,11 +178,11 @@ function AdminGeneral() {
                 />
               </label>
               <label className="text-sm items-center flex font-light">
-                Twitter:
+                LinkedIn:
                 <input
                   type="text"
-                  value={twitterLink}
-                  onChange={handleInputChange(setTwitterLink)}
+                  value={linkedinLink}
+                  onChange={handleInputChange(setLinkedinLink)}
                   className="px-4 h-[40px] ml-[39px] text-[#5C5C5C] focus:outline-none text-sm font-light w-[297px] bg-[#F7F7F7] rounded-md"
                 />
               </label>
@@ -167,4 +231,5 @@ function AdminGeneral() {
     </div>
   );
 }
-export default AdminGeneral
+
+export default AdminGeneral;

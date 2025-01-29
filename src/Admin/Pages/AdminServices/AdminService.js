@@ -7,6 +7,7 @@ import editIcon from "../../../Assets/Admin/edit.svg";
 import deleteWarn from "../../../Assets/Admin/projects/deleteWarning.svg";
 import saveInfo from "../../../Assets/Admin/projects/saveIcon.svg";
 import Api from "../../Services/Api";
+import { form } from "framer-motion/client";
 
 function AdminService() {
   const [showForm, setShowForm] = useState(false);
@@ -25,25 +26,38 @@ function AdminService() {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [uploadPhoto, setUploadPhoto] = useState(null);
+  const [uploadIcon, setUploadIcon] = useState(null);
+
+  const formDataToSend = new FormData();
+
+  // Assuming the `formData` object contains base64 strings for `icon` and `photo`
+  formDataToSend.append("icon", formData.icon); // base64 encoded icon
+  formDataToSend.append("photo", formData.photo); // base64 encoded photo
+  formDataToSend.append("title", formData.title);
+  formDataToSend.append("shortDescription", formData.shortDescription);
+  formDataToSend.append("mainDescription", formData.mainDescription);
+  console.log("FormData being sent:", formDataToSend);
+
   const token = localStorage.getItem("adminAuthToken");
 
   // Fetch Services
   useEffect(() => {
     console.log("Token being used:", token); // Log the token to check its value
-  
-    
+
     Api.get("api/services", {
-    Authorization: `Bearer ${token}` ,
-    }).then((response) => {
+      Authorization: `Bearer ${token}`,
+    })
+      .then((response) => {
         setServices(response.data);
         console.log("Fetched Services:", response.data);
         setIsLoading(false);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.error("Error fetching services:", error);
         setIsLoading(false);
       });
-  },[]);
-  
+  }, [token]);
 
   // Toggle Form
   const toggleForm = (service = null) => {
@@ -80,67 +94,94 @@ function AdminService() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle File Change
   const handleFileChange = (e, type) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]; // Get the first file from the FileList
+    // setUploadPhoto(e.target.files[0]);
     if (file) {
       const reader = new FileReader();
+
       reader.onload = () => {
+        // Check if the file is an image or icon and handle accordingly
         if (type === "image") {
-          setPreviewImage(reader.result);
+          setUploadPhoto(e.target.files[0]);
+          setPreviewImage(reader.result); // Set the image preview
           setFormData((prev) => ({
             ...prev,
-            photo: reader.result,
-            photoName: file.name,
+            photo: reader.result, // Store the base64 image here
+            photoName: file.name, // Store the image file name
           }));
         } else if (type === "icon") {
-          setPreviewIcon(reader.result);
+          setUploadIcon(e.target.files[0]);
+          setPreviewIcon(reader.result); // Set the icon preview
           setFormData((prev) => ({
             ...prev,
-            icon: reader.result,
-            iconName: file.name,
+            icon: reader.result, // Store the base64 icon here
+            iconName: file.name, // Store the icon file name
           }));
         }
       };
-      reader.readAsDataURL(file);
+
+      reader.readAsDataURL(file); // Converts the file to a base64 string
     }
   };
 
-  // Handle Save
   const handleSave = () => {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
+    
+    console.log("photooo", uploadPhoto);
+    const formsData = new FormData();
+    formsData.append("icon", uploadIcon);
+    formsData.append("photo", uploadPhoto);
+    formsData.append("title", formData.title);
+    formsData.append("shortDescription", formData.shortDescription);
+    formsData.append("mainDescription", formData.mainDescription);
+    console.log("fomdataaaaa :", formData);
 
-    const apiCall = currentService
-      ? Api.put(`api/services/${currentService.id}`, formData, config)
-      : Api.post("api/services", formData, config);
-
-    apiCall
-      .then((response) => {
-        setServices((prev) =>
-          currentService
-            ? prev.map((service) =>
-                service.id === currentService.id ? response.data : service
-              )
-            : [response.data, ...prev]
-        );
-        toggleForm();
-        closeSaveModal();
-        resetSelectedService();
-      })
-      .catch((error) => {
+    if (currentService) {
+      // PUT request for updating an existing service
+      // console.log('formsDataaa:',formsData)
+      Api.put(
+        `api/services/${currentService.id}`,
+        formsData,
+        {
+         
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+        
+        }
+      ).then((response) => {
+        console.log("PUT response:", response);
+        resetSelectedService(); // Close form after updating
+      }).catch(error => {
+        console.error("Error updating service:", error);
+      });
+    } else {
+      // POST request for adding a new service
+      Api.post(
+        `api/services`,
+        formsData,
+        {
+        
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+       
+        }
+      ).then((response) => {
+        console.log("POST response:", response);
+        resetSelectedService(); // Close form after saving
+      }).catch(error => {
         console.error("Error saving service:", error);
       });
+    }
+    closeSaveModal();
   };
+
+
 
   // Handle Delete
   const handleDelete = () => {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
-    Api.delete(`api/services/${currentService.id}`, config)
+    Api.delete(`api/services/${currentService.id}`, {
+      Authorization: `Bearer ${token}`,
+    })
       .then(() => {
         setServices((prev) =>
           prev.filter((service) => service.id !== currentService.id)
@@ -188,59 +229,64 @@ function AdminService() {
           </div>
 
           <div className="grid grid-cols-5 gap-5 mt-12">
-          {services && Array.isArray(services) && services.map((service, index) => (
-              <div
-                key={index}
-                className="border w-[196px] h-[254px] bg-white shadow relative"
-              >
-                <div className="p-2">
-                  <img
-                    src={service.photo}
-                    alt="Service"
-                    className="h-[134px] w-full object-cover rounded-t"
-                  />
-                </div>
-                {service.icon && (
-                  <div className="flex items-center justify-center ml-[66px] h-[64px] w-[64px] rounded-full bg-[#F6F6F6] absolute top-[105px]">
+            {services &&
+              Array.isArray(services) &&
+              services.map((service, index) => (
+                <div
+                  key={index}
+                  className="border w-[196px] h-[254px] bg-white shadow relative"
+                >
+                  <div className="p-2">
+                    {/* For base64 images, no need to change the logic */}
                     <img
-                      src={service.icon}
-                      alt="Icon"
-                      className="h-[32px] w-[32px] object-contain"
+                      src={`data:image/png;base64,${service.photo}`} // If this is base64, this will work just fine
+                      alt={typeof service.photo}
+                      className="h-[134px] w-full object-cover rounded-t"
                     />
                   </div>
-                )}
-                <h2 className="text-base font-medium text-center mt-[22px]">
-                  {service.title}
-                </h2>
-                <div className="flex w-full mt-[22px]">
-                  <button
-                    className="text-[#EE1717] flex items-center justify-center px-2 w-full h-[35px] bg-[#ECECEC] text-sm"
-                    onClick={() => {
-                      setCurrentService(service);
-                      openDeleteModal();
-                    }}
-                  >
-                    Delete
-                    <img
-                      src={deleteIcon}
-                      className="ml-1 h-4 w-4"
-                      alt="Delete Icon"
-                    />
-                  </button>
-                  <button
-                    className="flex items-center justify-center w-full h-[35px] bg-[#F6F6F6] text-sm"
-                    onClick={() => toggleForm(service)}
-                  >
-                    Edit
-                    <img
-                      src={editIcon}
-                      className="ml-1 h-4 w-4"
-                      alt="Edit Icon"
-                    />
-                  </button>
+                  {service.icon && (
+                    <div className="flex items-center justify-center ml-[66px] h-[64px] w-[64px] rounded-full bg-[#F6F6F6] absolute top-[105px]">
+                      <img
+                        src={`data:image/${service.iconType};base64,${service.icon}`}
+                        alt={typeof service.icon}
+                        className="h-[32px] w-[32px] object-contain rounded-full"
+                      />
+                    </div>
+                  )}
+                  <h2 className="text-base font-medium text-center mt-[22px]">
+                    {service.title}
+                  </h2>
+                  <div className="flex w-full mt-[22px]">
+                    {/* Delete Button */}
+                    <button
+                      className="text-[#EE1717] flex items-center justify-center px-2 w-full h-[35px] bg-[#ECECEC] text-sm"
+                      onClick={() => {
+                        setCurrentService(service);
+                        openDeleteModal();
+                      }}
+                    >
+                      Delete
+                      <img
+                        src={deleteIcon}
+                        className="ml-1 h-4 w-4"
+                        alt="Delete Icon"
+                      />
+                    </button>
+                    {/* Edit Button */}
+                    <button
+                      className="flex items-center justify-center w-full h-[35px] bg-[#F6F6F6] text-sm"
+                      onClick={() => toggleForm(service)}
+                    >
+                      Edit
+                      <img
+                        src={editIcon}
+                        className="ml-1 h-4 w-4"
+                        alt="Edit Icon"
+                      />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       ) : (
@@ -332,11 +378,21 @@ function AdminService() {
                 <div className="h-fit">
                   <div className="flex flex-col items-center w-fit">
                     {previewImage ? (
-                      <img
-                        src={previewImage}
-                        alt="Profile Preview"
-                        className="mb-2 w-[285px] h-[231px] object-cover"
-                      />
+                      // If previewImage is a base64 string, show it as an image
+                      previewImage.startsWith("data:image/svg+xml;base64") ? (
+                        <img
+                          src={previewImage}
+                          alt="Profile Preview"
+                          className="mb-2 w-[285px] h-[231px] object-cover"
+                        />
+                      ) : (
+                        // If it's not a base64 string, treat it as a URL
+                        <img
+                          src={previewImage}
+                          alt="Profile Preview"
+                          className="mb-2 w-[285px] h-[231px] object-cover"
+                        />
+                      )
                     ) : (
                       <div className="mb-2 w-[285px] h-[231px] border border-dashed flex items-center justify-center bg-[#F5F5F5] text-gray-400">
                         <span>
@@ -382,10 +438,14 @@ function AdminService() {
 
       {/* Save Modal */}
       {showSaveModal && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+        <div
+          className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center"
+          role="dialog"
+          aria-modal="true"
+        >
           <div className="bg-white p-10 rounded-2xl w-[428px] shadow">
-            <img src={saveInfo} alt="" />
-            <h3 className="mt-4 text-[#947F41] font-medium text-base ">
+            <img src={saveInfo} alt="Save Confirmation Icon" />
+            <h3 className="mt-4 text-[#947F41] font-medium text-base">
               Confirm Save?
             </h3>
             <p className="mt-2 font-normal text-sm text-[#818180]">
@@ -395,12 +455,14 @@ function AdminService() {
               <button
                 className="w-[166px] h-[56px] rounded-lg border border-[#B3B3B3] text-[#947F41] text-base font-medium"
                 onClick={closeSaveModal}
+                aria-label="Cancel saving"
               >
                 Cancel
               </button>
               <button
-                className="w-[166px] h-[56px] rounded-lg text-white  bg-[#947F41] text-base font-medium"
+                className="w-[166px] h-[56px] rounded-lg text-white bg-[#947F41] text-base font-medium"
                 onClick={handleSave}
+                aria-label="Confirm save"
               >
                 Confirm
               </button>
