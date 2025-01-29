@@ -1,14 +1,15 @@
 import React from "react";
 import interiorOffice from "../../../Assets/Service/serviceDetail.png";
 import interiorOfficeMob from "../../../Assets/Service/ServiceMob.png";
+
 function ServiceElectrical() {
   return (
     <div className="pt-[118px] md:px-[120px] px-4">
       {/* Main Heading */}
-
       <h2 className="text-[#817140] font-normal text-[40px] mt-10 font-milchella text-center">
         Electrical Work{" "}
       </h2>
+
       <div className="md:flex md:pl-[5px] mt-8 md:mt-[56px]">
         {/* Image */}
         <div className="hidden md:block">
@@ -26,12 +27,12 @@ function ServiceElectrical() {
           />
         </div>
         <p className="md:w-[590px] mt-10 md:mt-0 md:ml-5 leading-[28px] text-base text-[#252012] text-justify font-normal">
-          At our contracting company, we provide end-to-end office interior
-          solutions tailored to meet your specific needs, delivering a seamless
-          and professional transformation of your workspace. From
-          conceptualizing the design to handing over the keys, we ensure every
-          detail is executed with precision and care, creating an inspiring and
-          functional environment. 
+          Our comprehensive electrical services are tailored to meet the diverse
+          needs of residential, commercial, and industrial projects. From
+          initial wiring to final installations, we ensure every aspect of your
+          electrical system is designed and executed with precision, safety, and
+          efficiency. With a focus on innovation and compliance, we deliver
+          solutions that power your spaces seamlessly.
         </p>
       </div>
 
@@ -41,108 +42,97 @@ function ServiceElectrical() {
           Our Comprehensive Services
         </h3>
         <div className="mt-[56px] text-start ">
+
           {/* Service 1 */}
           <div>
             <h4 className="text-[#252012] text-base font-semibold ">
-              Flooring Installation
+              Electrical System Installation
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              We offer premium flooring solutions designed to enhance both the
-              durability and aesthetic appeal of your office. Whether you prefer
-              hardwood for sophistication, vinyl for practicality, carpet for
-              comfort, or tiles for a modern look, our expert team ensures
-              flawless installation. We employ advanced tools and techniques for
-              precision and durability, providing a sturdy and visually pleasing
-              foundation for your workspace. 
+              We specialize in the design and installation of electrical systems for new buildings and renovations. From wiring and circuit breakers to switchboards and distribution panels, we ensure every component is installed with meticulous attention to detail for optimal functionality and safety.
             </p>
           </div>
 
           {/* Service 2 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Wall Painting and Finishing
+              Lighting Solutions
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Our professional painting services transform your walls into a
-              canvas that reflects your brand’s identity and desired ambiance.
-              Using high-quality paints and specialized techniques, we achieve a
-              seamless finish tailored to your needs—be it bold and dynamic or
-              calm and professional. Every step, from surface preparation to the
-              final coat, is managed with meticulous attention to detail,
-              ensuring vibrant, long-lasting results that enhance your office
-              environment. 
+              Our team provides energy-efficient and aesthetically pleasing lighting solutions for all types of spaces. Whether it’s ambient lighting for offices, decorative lighting for interiors, or outdoor illumination, we deliver tailored designs that enhance your environment while reducing energy consumption.
             </p>
           </div>
 
           {/* Service 3 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Decorative Elements
+              Electrical Upgrades and Renovations
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Decorative elements bring life and character to your office space.
-              We thoughtfully curate and install items such as hanging
-              paintings, wall art, and other aesthetic accents to align with
-              your brand’s personality and office theme. Our professional
-              designers collaborate with you to select unique, high-quality
-              pieces that not only enhance visual appeal but also create a
-              welcoming and inspiring atmosphere. Each element is placed
-              strategically to complement the overall interior design, ensuring
-              a cohesive and polished look. 
+              We handle upgrades to existing electrical systems to meet the demands of modern appliances and technologies. From increasing system capacity to replacing outdated wiring and panels, we ensure your system is safe, efficient, and future-ready.
             </p>
           </div>
 
           {/* Service 4 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              False Walls and Room Separators
+              Troubleshooting and Repairs
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Optimize your office layout with our expertly designed false walls
-              and room separators. We use innovative designs and premium
-              materials to create partitions that enhance functionality without
-              compromising style. Whether you need private workspaces or open
-              collaborative areas, our solutions are tailored to suit your
-              workflow and aesthetic preferences. 
+              Our expert electricians quickly diagnose and repair electrical issues, minimizing downtime and restoring functionality. Whether it’s flickering lights, tripped circuits, or faulty outlets, we provide prompt and effective solutions to keep your systems running smoothly.
             </p>
           </div>
 
           {/* Service 5 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Furniture Solutions
+              Power Backup Systems
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              Stylish, ergonomic, and functional furniture is an integral part
-              of a productive office. Our team provides customized furniture
-              solutions that align with your office’s aesthetic and operational
-              requirements. From modern workstations and conference tables to
-              lounge seating and storage units, we ensure every piece combines
-              comfort, durability, and visual appeal. 
+              We install and maintain power backup systems, including generators, UPS systems, and inverter setups, ensuring uninterrupted power supply during outages. Our solutions are designed to meet your specific energy needs with reliability and efficiency.
             </p>
           </div>
 
           {/* Service 6 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Aesthetic Detailing
+              Smart Home and Automation Solutions
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              The finishing touches make all the difference. We incorporate
-              elements such as contemporary lighting fixtures, indoor plants,
-              and carefully chosen accessories to create a cohesive and inviting
-              office atmosphere. These details enhance the workspace's
-              aesthetics, fostering a professional yet comfortable environment
-              that boosts employee morale and impresses clients. 
-              <p className="text-[#252012] text-base text-justify font-normal leading-[28px]">
-                At every stage of the project, our professional approach ensures
-                top-notch quality and a hassle-free experience. Let us handle
-                every detail, from flooring to furnishings, so you can walk into
-                a fully transformed office space that inspires productivity and
-                success. 
-              </p>
+              We bring convenience and innovation to your home or office with smart electrical solutions. From automated lighting and temperature controls to integrated security systems, we design and install systems that enhance comfort and efficiency.
             </p>
           </div>
+
+          {/* Service 7 */}
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Electrical Safety Inspections
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Ensure the safety and compliance of your property with our comprehensive electrical safety inspections. We identify potential hazards, provide detailed reports, and recommend corrective measures to safeguard your building and its occupants.
+            </p>
+          </div>
+
+          {/* Service 8 */}
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Energy Management and Efficiency
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Our team offers energy-saving solutions, including the installation of LED lighting, solar panels, and energy monitoring systems. We help you reduce electricity costs while minimizing your environmental footprint.
+            </p>
+          </div>
+
+          {/* Service 9 */}
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Emergency Electrical Services
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Available 24/7, our emergency electrical services ensure that critical issues are addressed promptly and professionally. Whether it’s a sudden power failure or a critical repair, we’re just a call away.
+            </p>
+          </div>
+
         </div>
       </div>
     </div>

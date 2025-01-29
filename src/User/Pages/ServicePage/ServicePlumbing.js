@@ -6,10 +6,10 @@ function ServicePlumbing() {
   return (
     <div className="pt-[118px] md:px-[120px] px-4">
       {/* Main Heading */}
-
       <h2 className="text-[#817140] font-normal text-[40px] mt-10 font-milchella text-center">
         Plumbing Work{" "}
       </h2>
+
       <div className="md:flex md:pl-[5px] mt-8 md:mt-[56px]">
         {/* Image */}
         <div className="hidden md:block">
@@ -27,12 +27,12 @@ function ServicePlumbing() {
           />
         </div>
         <p className="md:w-[590px] mt-10 md:mt-0 md:ml-5 leading-[28px] text-base text-[#252012] text-justify font-normal">
-          At our contracting company, we provide end-to-end office interior
-          solutions tailored to meet your specific needs, delivering a seamless
-          and professional transformation of your workspace. From
-          conceptualizing the design to handing over the keys, we ensure every
-          detail is executed with precision and care, creating an inspiring and
-          functional environment. 
+          Our professional plumbing services are designed to meet the needs of
+          residential, commercial, and industrial projects. With a commitment to
+          quality and reliability, we handle everything from installations to
+          repairs, ensuring a seamless flow of water and efficient waste
+          management. Our expert team delivers solutions that combine
+          functionality, durability, and compliance with the highest standards.
         </p>
       </div>
 
@@ -42,108 +42,97 @@ function ServicePlumbing() {
           Our Comprehensive Services
         </h3>
         <div className="mt-[56px] text-start ">
+
           {/* Service 1 */}
           <div>
             <h4 className="text-[#252012] text-base font-semibold ">
-              Flooring Installation
+              Plumbing System Installation
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              We offer premium flooring solutions designed to enhance both the
-              durability and aesthetic appeal of your office. Whether you prefer
-              hardwood for sophistication, vinyl for practicality, carpet for
-              comfort, or tiles for a modern look, our expert team ensures
-              flawless installation. We employ advanced tools and techniques for
-              precision and durability, providing a sturdy and visually pleasing
-              foundation for your workspace. 
+              We provide end-to-end installation of plumbing systems, including water supply lines, drainage systems, and fixtures. Whether it’s a new construction project or a renovation, our team ensures precise execution for reliable performance.
             </p>
           </div>
 
           {/* Service 2 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Wall Painting and Finishing
+              Pipe Repair and Replacement
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Our professional painting services transform your walls into a
-              canvas that reflects your brand’s identity and desired ambiance.
-              Using high-quality paints and specialized techniques, we achieve a
-              seamless finish tailored to your needs—be it bold and dynamic or
-              calm and professional. Every step, from surface preparation to the
-              final coat, is managed with meticulous attention to detail,
-              ensuring vibrant, long-lasting results that enhance your office
-              environment. 
+              Our skilled technicians quickly identify and repair leaks, cracks, or blockages in pipes. For damaged or outdated pipelines, we offer replacement services using high-quality materials to ensure long-lasting durability.
             </p>
           </div>
 
           {/* Service 3 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Decorative Elements
+              Water Heater Installation and Maintenance
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Decorative elements bring life and character to your office space.
-              We thoughtfully curate and install items such as hanging
-              paintings, wall art, and other aesthetic accents to align with
-              your brand’s personality and office theme. Our professional
-              designers collaborate with you to select unique, high-quality
-              pieces that not only enhance visual appeal but also create a
-              welcoming and inspiring atmosphere. Each element is placed
-              strategically to complement the overall interior design, ensuring
-              a cohesive and polished look. 
+              From installing energy-efficient water heaters to providing regular maintenance and repairs, we ensure a consistent supply of hot water tailored to your needs. Our solutions include tankless water heaters, solar heaters, and traditional systems.
             </p>
           </div>
 
           {/* Service 4 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              False Walls and Room Separators
+              Bathroom and Kitchen Plumbing
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Optimize your office layout with our expertly designed false walls
-              and room separators. We use innovative designs and premium
-              materials to create partitions that enhance functionality without
-              compromising style. Whether you need private workspaces or open
-              collaborative areas, our solutions are tailored to suit your
-              workflow and aesthetic preferences. 
+              We handle the installation, repair, and maintenance of plumbing fixtures in bathrooms and kitchens, including sinks, faucets, showers, bathtubs, and toilets. Our team ensures functionality while focusing on aesthetics and efficiency.
             </p>
           </div>
 
           {/* Service 5 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Furniture Solutions
+              Drainage System Services
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              Stylish, ergonomic, and functional furniture is an integral part
-              of a productive office. Our team provides customized furniture
-              solutions that align with your office’s aesthetic and operational
-              requirements. From modern workstations and conference tables to
-              lounge seating and storage units, we ensure every piece combines
-              comfort, durability, and visual appeal. 
+              Keep your drainage system in top condition with our comprehensive services, including cleaning, unclogging, and repairs. We use advanced tools and techniques to resolve blockages and prevent flooding or water damage.
             </p>
           </div>
 
           {/* Service 6 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Aesthetic Detailing
+              Sewage and Wastewater Management
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              The finishing touches make all the difference. We incorporate
-              elements such as contemporary lighting fixtures, indoor plants,
-              and carefully chosen accessories to create a cohesive and inviting
-              office atmosphere. These details enhance the workspace's
-              aesthetics, fostering a professional yet comfortable environment
-              that boosts employee morale and impresses clients. 
-              <p className="text-[#252012] text-base text-justify font-normal leading-[28px]">
-                At every stage of the project, our professional approach ensures
-                top-notch quality and a hassle-free experience. Let us handle
-                every detail, from flooring to furnishings, so you can walk into
-                a fully transformed office space that inspires productivity and
-                success. 
-              </p>
+              Our experts provide solutions for efficient sewage and wastewater systems, including installation, repairs, and maintenance. We ensure compliance with environmental regulations and the smooth operation of your building's waste management systems.
             </p>
           </div>
+
+          {/* Service 7 */}
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Water Filtration and Softening Systems
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Enhance water quality with our installation and maintenance of water filtration and softening systems. We offer customized solutions to address hard water issues and ensure clean, safe water for your home or business.
+            </p>
+          </div>
+
+          {/* Service 8 */}
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Plumbing Inspections and Maintenance
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Prevent potential plumbing issues with our regular inspection and maintenance services. Our team identifies problems early, providing cost-effective solutions to extend the life of your plumbing systems.
+            </p>
+          </div>
+
+          {/* Service 9 */}
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Emergency Plumbing Services
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Available 24/7, our emergency plumbing services address urgent issues such as burst pipes, severe leaks, or clogged drains. We respond quickly to minimize damage and restore normalcy.
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
