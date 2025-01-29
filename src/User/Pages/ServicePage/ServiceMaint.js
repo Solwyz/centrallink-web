@@ -27,12 +27,12 @@ function ServiceMaint() {
           />
         </div>
         <p className="md:w-[590px] mt-10 md:mt-0 md:ml-5 leading-[28px] text-base text-[#252012] text-justify font-normal">
-          At our contracting company, we provide end-to-end office interior
-          solutions tailored to meet your specific needs, delivering a seamless
-          and professional transformation of your workspace. From
-          conceptualizing the design to handing over the keys, we ensure every
-          detail is executed with precision and care, creating an inspiring and
-          functional environment. 
+          Our comprehensive building maintenance services are designed to ensure
+          the longevity, safety, and functionality of your property. With a
+          professional approach and a team of skilled experts, we provide
+          tailored solutions to meet the unique needs of your building. From
+          routine upkeep to complex repairs, we manage every detail to maintain
+          your property to the highest standards.
         </p>
       </div>
 
@@ -45,103 +45,127 @@ function ServiceMaint() {
           {/* Service 1 */}
           <div>
             <h4 className="text-[#252012] text-base font-semibold ">
-              Flooring Installation
+              Electrical Systems Maintenance
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              We offer premium flooring solutions designed to enhance both the
-              durability and aesthetic appeal of your office. Whether you prefer
-              hardwood for sophistication, vinyl for practicality, carpet for
-              comfort, or tiles for a modern look, our expert team ensures
-              flawless installation. We employ advanced tools and techniques for
-              precision and durability, providing a sturdy and visually pleasing
-              foundation for your workspace. 
+              We ensure the efficient functioning of your building’s electrical
+              systems with regular inspections, repairs, and upgrades. Our
+              certified electricians handle everything from lighting systems and
+              wiring to circuit repairs and energy-efficient installations,
+              guaranteeing safety and compliance with local regulations.
             </p>
           </div>
 
           {/* Service 2 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Wall Painting and Finishing
+              Plumbing and Water Systems
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Our professional painting services transform your walls into a
-              canvas that reflects your brand’s identity and desired ambiance.
-              Using high-quality paints and specialized techniques, we achieve a
-              seamless finish tailored to your needs—be it bold and dynamic or
-              calm and professional. Every step, from surface preparation to the
-              final coat, is managed with meticulous attention to detail,
-              ensuring vibrant, long-lasting results that enhance your office
-              environment. 
+              Our team provides reliable plumbing services, including pipe
+              repairs, leak detection, drainage cleaning, and water system
+              maintenance. We use advanced tools and techniques to resolve
+              issues promptly, ensuring uninterrupted water supply and efficient
+              waste management for your property.
             </p>
           </div>
 
           {/* Service 3 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Decorative Elements
+              HVAC Maintenance
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Decorative elements bring life and character to your office space.
-              We thoughtfully curate and install items such as hanging
-              paintings, wall art, and other aesthetic accents to align with
-              your brand’s personality and office theme. Our professional
-              designers collaborate with you to select unique, high-quality
-              pieces that not only enhance visual appeal but also create a
-              welcoming and inspiring atmosphere. Each element is placed
-              strategically to complement the overall interior design, ensuring
-              a cohesive and polished look. 
+              Keep your building comfortable year-round with our HVAC
+              maintenance services. From air conditioning repairs and servicing
+              to ventilation and heating system checks, we ensure optimal
+              performance and energy efficiency for a pleasant indoor
+              environment.
             </p>
           </div>
 
           {/* Service 4 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              False Walls and Room Separators
+              Structural Repairs
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Optimize your office layout with our expertly designed false walls
-              and room separators. We use innovative designs and premium
-              materials to create partitions that enhance functionality without
-              compromising style. Whether you need private workspaces or open
-              collaborative areas, our solutions are tailored to suit your
-              workflow and aesthetic preferences. 
+              We specialize in maintaining the integrity of your building’s
+              structure through timely repairs and reinforcements. Our services
+              include crack sealing, wall reinforcements, roofing repairs, and
+              addressing any wear and tear to ensure the safety and stability of
+              your property.
             </p>
           </div>
 
           {/* Service 5 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Furniture Solutions
+              Painting and Surface Maintenance
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              Stylish, ergonomic, and functional furniture is an integral part
-              of a productive office. Our team provides customized furniture
-              solutions that align with your office’s aesthetic and operational
-              requirements. From modern workstations and conference tables to
-              lounge seating and storage units, we ensure every piece combines
-              comfort, durability, and visual appeal. 
+              Enhance your building’s aesthetics and protect its surfaces with
+              our professional painting and surface restoration services. We use
+              high-quality materials and techniques to refresh walls, facades,
+              and other surfaces, maintaining a clean and polished appearance.
             </p>
           </div>
 
           {/* Service 6 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Aesthetic Detailing
+              Cleaning and Sanitization
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              The finishing touches make all the difference. We incorporate
-              elements such as contemporary lighting fixtures, indoor plants,
-              and carefully chosen accessories to create a cohesive and inviting
-              office atmosphere. These details enhance the workspace's
-              aesthetics, fostering a professional yet comfortable environment
-              that boosts employee morale and impresses clients. 
-              <p className="text-[#252012] text-base text-justify font-normal leading-[28px]">
-                At every stage of the project, our professional approach ensures
-                top-notch quality and a hassle-free experience. Let us handle
-                every detail, from flooring to furnishings, so you can walk into
-                a fully transformed office space that inspires productivity and
-                success. 
-              </p>
+              We offer thorough cleaning and sanitization services tailored to
+              your building’s needs. From common areas to specialized spaces,
+              our team uses eco-friendly cleaning products and modern equipment
+              to maintain a spotless and hygienic environment.
+            </p>
+          </div>
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Cleaning and Sanitization
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              We offer thorough cleaning and sanitization services tailored to
+              your building’s needs. From common areas to specialized spaces,
+              our team uses eco-friendly cleaning products and modern equipment
+              to maintain a spotless and hygienic environment.
+            </p>
+          </div>
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Security and Surveillance Systems
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Ensure the safety of your property with our expert security system
+              maintenance services. We handle the installation, inspection, and
+              repair of CCTV cameras, access control systems, alarms, and other
+              security solutions to provide 24/7 protection
+            </p>
+          </div>
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Landscaping and Exterior Upkeep
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Maintain the exterior appeal of your building with our landscaping
+              and outdoor maintenance services. We manage everything from lawn
+              care and tree pruning to hardscape cleaning and façade pressure
+              washing, creating a welcoming and well-maintained exterior.
+            </p>
+          </div>
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Preventive Maintenance Programs
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              Our preventive maintenance programs are designed to identify and
+              address potential issues before they escalate. Through regular
+              inspections and scheduled servicing, we ensure your building
+              operates efficiently and remains in excellent condition, reducing
+              long-term costs and downtime.
             </p>
           </div>
         </div>

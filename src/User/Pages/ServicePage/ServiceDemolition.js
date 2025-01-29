@@ -27,12 +27,11 @@ function ServiceDemolition() {
           />
         </div>
         <p className="md:w-[590px] mt-10 md:mt-0 md:ml-5 leading-[28px] text-base text-[#252012] text-justify font-normal">
-          At our contracting company, we provide end-to-end office interior
-          solutions tailored to meet your specific needs, delivering a seamless
-          and professional transformation of your workspace. From
-          conceptualizing the design to handing over the keys, we ensure every
-          detail is executed with precision and care, creating an inspiring and
-          functional environment. 
+          Our demolition services are designed to provide efficient, safe, and
+          environmentally responsible solutions for your building removal needs.
+          Whether it's a small structure or a large-scale project, our expert
+          team ensures the entire process is handled with precision and
+          professionalism, from planning to site clearance.
         </p>
       </div>
 
@@ -45,103 +44,100 @@ function ServiceDemolition() {
           {/* Service 1 */}
           <div>
             <h4 className="text-[#252012] text-base font-semibold ">
-              Flooring Installation
+              Complete Building Demolition
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              We offer premium flooring solutions designed to enhance both the
-              durability and aesthetic appeal of your office. Whether you prefer
-              hardwood for sophistication, vinyl for practicality, carpet for
-              comfort, or tiles for a modern look, our expert team ensures
-              flawless installation. We employ advanced tools and techniques for
-              precision and durability, providing a sturdy and visually pleasing
-              foundation for your workspace. 
+              We specialize in the complete demolition of residential,
+              commercial, and industrial buildings. Using advanced machinery and
+              techniques, we ensure a controlled and efficient teardown while
+              adhering to all safety and regulatory requirements.
             </p>
           </div>
 
           {/* Service 2 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Wall Painting and Finishing
+              Selective Demolition
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Our professional painting services transform your walls into a
-              canvas that reflects your brand’s identity and desired ambiance.
-              Using high-quality paints and specialized techniques, we achieve a
-              seamless finish tailored to your needs—be it bold and dynamic or
-              calm and professional. Every step, from surface preparation to the
-              final coat, is managed with meticulous attention to detail,
-              ensuring vibrant, long-lasting results that enhance your office
-              environment. 
+              When only specific parts of a structure need to be removed, our
+              selective demolition services are the perfect solution. We
+              carefully dismantle targeted areas, preserving the surrounding
+              structure and ensuring minimal disruption to ongoing operations
             </p>
           </div>
 
           {/* Service 3 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Decorative Elements
+              Interior Demolition
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Decorative elements bring life and character to your office space.
-              We thoughtfully curate and install items such as hanging
-              paintings, wall art, and other aesthetic accents to align with
-              your brand’s personality and office theme. Our professional
-              designers collaborate with you to select unique, high-quality
-              pieces that not only enhance visual appeal but also create a
-              welcoming and inspiring atmosphere. Each element is placed
-              strategically to complement the overall interior design, ensuring
-              a cohesive and polished look. 
+              For renovation projects, we offer comprehensive interior
+              demolition services, including the removal of walls, ceilings,
+              flooring, and fixtures. Our team works with precision to clear out
+              spaces while protecting the structural integrity of the building.
             </p>
           </div>
 
           {/* Service 4 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              False Walls and Room Separators
+              Site Clearance and Debris Removal
             </h4>
             <p className="mt-4 text-[#252012] text-justify text-base font-normal leading-[28px]">
-              Optimize your office layout with our expertly designed false walls
-              and room separators. We use innovative designs and premium
-              materials to create partitions that enhance functionality without
-              compromising style. Whether you need private workspaces or open
-              collaborative areas, our solutions are tailored to suit your
-              workflow and aesthetic preferences. 
+              After demolition, we handle the complete removal of debris and
+              waste materials. Our team ensures the site is left clean and ready
+              for the next phase of construction, adhering to environmentally
+              responsible disposal practices.
             </p>
           </div>
 
           {/* Service 5 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Furniture Solutions
+              Concrete and Asphalt Removal
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              Stylish, ergonomic, and functional furniture is an integral part
-              of a productive office. Our team provides customized furniture
-              solutions that align with your office’s aesthetic and operational
-              requirements. From modern workstations and conference tables to
-              lounge seating and storage units, we ensure every piece combines
-              comfort, durability, and visual appeal. 
+              We provide specialized services for the demolition and removal of
+              concrete slabs, foundations, and asphalt surfaces. Using advanced
+              tools, we break down and remove hardscapes efficiently, preparing
+              the area for new development.
             </p>
           </div>
 
           {/* Service 6 */}
           <div className="mt-10">
             <h4 className="text-[#252012] text-base font-semibold ">
-              Aesthetic Detailing
+              Hazardous Material Removal
             </h4>
             <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
-              The finishing touches make all the difference. We incorporate
-              elements such as contemporary lighting fixtures, indoor plants,
-              and carefully chosen accessories to create a cohesive and inviting
-              office atmosphere. These details enhance the workspace's
-              aesthetics, fostering a professional yet comfortable environment
-              that boosts employee morale and impresses clients. 
-              <p className="text-[#252012] text-base text-justify font-normal leading-[28px]">
-                At every stage of the project, our professional approach ensures
-                top-notch quality and a hassle-free experience. Let us handle
-                every detail, from flooring to furnishings, so you can walk into
-                a fully transformed office space that inspires productivity and
-                success. 
-              </p>
+              Our team is equipped to handle the safe removal and disposal of
+              hazardous materials such as asbestos, lead, and mold that may be
+              encountered during demolition. We follow strict safety protocols
+              and environmental guidelines to ensure a risk-free process.
+            </p>
+          </div>
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Industrial and Heavy Structure Demolition
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              We have the expertise and equipment to manage the demolition of
+              heavy structures, including factories, warehouses, bridges, and
+              large-scale facilities. Our team handles complex projects with
+              precision and ensures minimal impact on surrounding areas.
+            </p>
+          </div>
+          <div className="mt-10">
+            <h4 className="text-[#252012] text-base font-semibold ">
+              Demolition Planning and Permitting
+            </h4>
+            <p className="mt-4 text-[#252012] text-base text-justify font-normal leading-[28px]">
+              We provide end-to-end support, including the preparation of
+              detailed demolition plans and securing necessary permits from
+              local authorities. Our team ensures all aspects of the project
+              comply with legal and safety standards
             </p>
           </div>
         </div>
