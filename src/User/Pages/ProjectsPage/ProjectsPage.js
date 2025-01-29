@@ -57,7 +57,7 @@ const ProjectsPage = () => {
 
           {/* Filter Tabs */}
           <div className="flex justify-center items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px] gap-4">
-            {["All", "events", "program"].map((category) => (
+            {["All", "events", "demolition", "interior", "miscallaneous", "electrical"].map((category) => (
               <button
                 key={category}
                 onClick={() => setFilter(category)}
