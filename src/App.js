@@ -18,12 +18,8 @@ import AdminService from "./Admin/Pages/AdminServices/AdminService";
 import AdminBlogs from "./Admin/Pages/AdminBlogs/AdminBlogs";
 import AdminEnquiry from "./Admin/Pages/AdminEnquiry/AdminEnquiry";
 import AdminGeneral from "./Admin/Pages/AdminGeneral/AdminGeneral";
-import ServiceAc from "./User/Pages/ServicePage/ServiceAc";
-import ServiceDemolition from "./User/Pages/ServicePage/ServiceDemolition";
-import ServicePlumbing from "./User/Pages/ServicePage/ServicePlumbing";
-import ServiceVoice from "./User/Pages/ServicePage/ServiceVoice";
-import ServiceElectrical from "./User/Pages/ServicePage/ServiceElectrical";
-import ServiceMaint from "./User/Pages/ServicePage/ServiceMaint";
+
+import ServiceDetailDynamic from "./User/Pages/ServicePage/ServiceDetailDynamic";
 
 function App() {
   const location = useLocation();
@@ -37,13 +33,9 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="services" element={<ServicePage />} />
+          <Route path="/services/details/:id" element={<ServiceDetailDynamic />} />
           <Route path="services/details/office-interior" element={<ServiceDetail />} />
-          <Route path="services/details/ac" element={<ServiceAc />} />
-          <Route path="services/details/demolition" element={<ServiceDemolition />} />
-          <Route path="services/details/plumbing" element={<ServicePlumbing />} />
-          <Route path="services/details/voice" element={<ServiceVoice />} />
-          <Route path="services/details/electrical" element={<ServiceElectrical />} />
-          <Route path="services/details/building-maintenace" element={<ServiceMaint />} />
+         
           <Route path="blogs" element={<BlogPage />} />
           <Route path="blogs/details" element={<BlogDetails />} />
           <Route path="projects" element={<ProjectsPage />} />
