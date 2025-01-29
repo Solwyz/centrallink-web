@@ -56,15 +56,13 @@ function ContactPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    Api.get('api/services', {
-      'Authorization': `Bearer ${token}`
-    })
+    Api.get('api/services')
       .then(response => {
         if (response && response.data) {
           console.log('servicesss', response.data);
           setServices(response.data);
         } else {
-          console.error('Innvalid response', response);
+          console.error('Innvalid service response', response);
         }
       })
   }, [])
