@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import interior1 from "../../../Assets/projects/interior1.png";
 import interior2 from "../../../Assets/projects/interior2.png";
 import interior3 from "../../../Assets/projects/interior3.png";
@@ -8,25 +8,43 @@ import office2 from "../../../Assets/projects/office2.png";
 import office3 from "../../../Assets/projects/office3.png";
 import office4 from "../../../Assets/projects/office4.png";
 import Location from "../../Components/LocateUs/Location";
+import Api from "../../../Admin/Services/Api";
+
+const token = localStorage.getItem("adminAuthToken");
 
 const ProjectsPage = () => {
   const [filter, setFilter] = useState("All");
+  const [projects, setProjects] = useState([]);
 
-  const projects = [
-    { id: 1, category: "Offices", image: office1 },
-    { id: 2, category: "Interior", image: interior1 },
-    { id: 3, category: "Interior", image: interior2 },
-    { id: 4, category: "Offices", image: office2 },
-    { id: 5, category: "Interior", image: interior3 },
-    { id: 6, category: "Interior", image: interior4 },
-    { id: 7, category: "Offices", image: office3 },
-    { id: 8, category: "Offices", image: office4 },
-  ];
+
+  // const projects = [
+  //   { id: 1, category: "Offices", image: office1 },
+  //   { id: 2, category: "Interior", image: interior1 },
+  //   { id: 3, category: "Interior", image: interior2 },
+  //   { id: 4, category: "Offices", image: office2 },
+  //   { id: 5, category: "Interior", image: interior3 },
+  //   { id: 6, category: "Interior", image: interior4 },
+  //   { id: 7, category: "Offices", image: office3 },
+  //   { id: 8, category: "Offices", image: office4 },
+  // ];
 
   const filteredProjects =
     filter === "All"
       ? projects
-      : projects.filter((project) => project.category === filter);
+      : projects.filter((project) => project.categoryName === filter);
+
+  useEffect(() => {
+    Api.get('api/project', {
+      Authorization: `Bearer ${token}`,
+    }).then((response) => {
+        if (response && response.data) {
+          console.log('responseProjectList', response.data)
+          setProjects(response.data);
+        } else {
+          console.error('Error fetching projects:', response)
+        }
+    })
+  }, [])
 
   return (
     <div>
@@ -57,6 +75,7 @@ const ProjectsPage = () => {
   </div>
 </div>
 
+
         </div>
 
         {/* Gallery Section */}
@@ -67,7 +86,8 @@ const ProjectsPage = () => {
               className="overflow-hidden  shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <img
-                src={project.image}
+                // src={project.image}
+                src={`data:image/png;base64,${project.photo}`}
                 alt={`Project ${project.id}`}
                 className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
               />

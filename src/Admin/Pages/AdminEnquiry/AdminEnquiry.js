@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import arrowLeft from "../../../Assets/Admin/leftArrow.svg"
 import arrowRight from "../../../Assets/Admin/rightArrow.svg"
+import Api from '../../Services/Api';
+
+const token = localStorage.getItem("adminAuthToken");
 
 function AdminEnquiry() {
   const [enquiries, setEnquiries] = useState([]);
@@ -8,20 +11,34 @@ function AdminEnquiry() {
   const enquiriesPerPage = 5;
 
   const enquiriesData = [
- 
+
     {
       "date": "09-June-2024",
       "company": "ABC Corporation",
       "email": "abc@example.com",
       "service": "Consulting",
       "details": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-    }, 
+    },
 
   ]
 
 
   useEffect(() => {
-    setEnquiries(enquiriesData);
+    Api.get('api/Inquiry', {
+      'Authorization': `Bearer ${token}`
+    })
+    .then(response => {
+      if(response && response.data) {
+
+        console.log('enquiryss',response);
+
+
+        setEnquiries(response.data);
+      } else {
+        console.error('Innvalid response', response);
+      }
+    })
+    // setEnquiries(enquiriesData);
   }, []);
 
   const totalPages = Math.ceil(enquiries.length / enquiriesPerPage);
@@ -44,16 +61,16 @@ function AdminEnquiry() {
             </div>
             <div className='pl-6 pr-10 pb-6'>
               <div className='flex items-center justify-between mt-[10px]'>
-                <div className='text-[18px] font-normal text-[#555555]'>{enquiry.company}</div>
+                <div className='text-[18px] font-normal text-[#555555]'>{enquiry.name}</div>
                 <div className='text-[14px] font-light text-[#2A2E35]'>Email: {enquiry.email}</div>
               </div>
               <div className='flex gap-4 text-[#2A2E35] text-[14px] mt-4'>
                 <div className='font-normal'>Service:</div>
-                <div className='font-light'>{enquiry.service}</div>
+                <div className='font-light'>{enquiry.serviceName?.title}</div>
               </div>
               <div className='flex gap-4 text-[#2A2E35] text-[14px] mt-4'>
                 <div className='font-normal'>Details:</div>
-                <div className='font-light'>{enquiry.details}</div>
+                <div className='font-light'>{enquiry.serviceName?.shortDescription}</div>
               </div>
             </div>
           </div>

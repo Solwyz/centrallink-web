@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import fbicon from "../../../Assets/contact/fb.svg";
 import downArrow from "../../../Assets/contact/arrowDown.svg";
@@ -9,26 +9,70 @@ import callIcon from "../../../Assets/contact/call.svg";
 import Location from "../../Components/LocateUs/Location";
 import teleIcon from "../../../Assets/contact/telephone.svg"
 import Swal from "sweetalert2";
+import Api from "../../../Admin/Services/Api";
+
+const token = localStorage.getItem("adminAuthToken");
 
 function ContactPage() {
+
+  const [services, setServices] = useState([]);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
- const onSubmit = (data) => {
-     console.log("Form Submitted: ", data);
- 
-     Swal.fire({
-       icon: "success",
-       title: " Submitted",
-       text: "Thank you for reaching out. We will get back to you soon!",
-       confirmButtonColor: "#FFC107",
-     });
-   };
- 
+  const onSubmit = (data) => {
+    console.log("Form Submitted: ", data);
+
+    Api.post('api/Inquiry', {
+
+        "id": 0,
+
+        "name": data.name,
+        "email": data.email,
+        "serviceName": {
+          "id": data.service
+        },
+        "message": data.message
+      
+
+    })
+
+    .then(response => {
+      if(response && response.data) {
+        console.log('Inquiry submitted', response.data);
+        
+      } else {
+        console.error('Invalid response', response);
+      }
+    })
+
+    Swal.fire({
+      icon: "success",
+      title: " Submitted",
+      text: "Thank you for reaching out. We will get back to you soon!",
+      confirmButtonColor: "#FFC107",
+    });
+  };
+
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    Api.get('api/services', {
+      'Authorization': `Bearer ${token}`
+    })
+      .then(response => {
+        if (response && response.data) {
+          console.log('servicesss', response.data);
+          setServices(response.data);
+        } else {
+          console.error('Innvalid response', response);
+        }
+      })
+  }, [])
+
 
   return (
     <div className="pt-[118px]">
@@ -62,10 +106,10 @@ function ContactPage() {
               <p className="text-sm font-semibold ml-6 hover:text-[#FFC107]">+971 543792474 </p>
             </div>
             <div className="mt-6 flex items-center">
-                <img src={teleIcon} alt="" className="w-5 h-5 mr-2" />
-                <p className="text-sm font-semibold hover:text-[#FFC107]">0543792474</p>
+              <img src={teleIcon} alt="" className="w-5 h-5 mr-2" />
+              <p className="text-sm font-semibold hover:text-[#FFC107]">0543792474</p>
 
-              </div>
+            </div>
           </div>
           <div className="flex mt-6 md:mt-8 space-x-4">
             <a
@@ -117,9 +161,8 @@ function ContactPage() {
                 <input
                   {...register("name", { required: "Name is required" })}
                   placeholder="Enter your Name"
-                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${
-                    errors.name ? "border-red-500" : ""
-                  }`}
+                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${errors.name ? "border-red-500" : ""
+                    }`}
                 />
                 <div className="h-4">
                   {errors.name && (
@@ -143,9 +186,8 @@ function ContactPage() {
                     },
                   })}
                   placeholder="Enter your Email"
-                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${
-                    errors.email ? "border-red-500" : ""
-                  }`}
+                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${errors.email ? "border-red-500" : ""
+                    }`}
                 />
                 <div className="h-4">
                   {errors.email && (
@@ -163,18 +205,29 @@ function ContactPage() {
                 </label>
                 <div className="relative">
                   <select
-                    name="service"
-                    className={`w-full text-gray-600 text-sm  mt-2   h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${
-                      errors.service ? "border-red-500" : ""
-                    }`}
+                    {...register("service", { required: "Please select a service" })}
+                    className={`w-full text-gray-600 text-sm mt-2 h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${errors.service ? "border-red-500" : ""
+                      }`}
                     onClick={() => setIsOpen(!isOpen)}
                     onBlur={() => setIsOpen(false)}
                   >
                     <option value="">Select Service</option>
-                    <option value="Construction">Construction</option>
-                    <option value="Interior Design">Interior Design</option>
-                    <option value="Demolition">Demolition</option>
+                    {services.map((service) => (
+                      <option key={service.id} value={service.id}>{service.title}</option>
+                    ))}
                   </select>
+                  {/* <select
+                    name="service"
+                    className={`w-full text-gray-600 text-sm  mt-2   h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${errors.service ? "border-red-500" : ""
+                      }`}
+                    onClick={() => setIsOpen(!isOpen)}
+                    onBlur={() => setIsOpen(false)}
+                  >
+                    <option value="">Select Service</option>
+                    {services.map((service, index) => (
+                    <option value={service.id}>{service.title}</option>
+                  ))}
+                  </select> */}
                   <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                     <img
                       src={isOpen ? upArrow : downArrow}
@@ -202,9 +255,8 @@ function ContactPage() {
                 <textarea
                   {...register("message", { required: "Message is required" })}
                   placeholder="Write your message here..."
-                  className={`h-[176px] w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium resize-none rounded-lg ${
-                    errors.message ? "border-red-500" : ""
-                  }`}
+                  className={`h-[176px] w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium resize-none rounded-lg ${errors.message ? "border-red-500" : ""
+                    }`}
                   rows="4"
                 ></textarea>
                 <div className="h-4">
@@ -221,11 +273,10 @@ function ContactPage() {
                 <button
                   type="submit"
                   disabled={!isValid}
-                  className={`w-full h-[48px] text-white text-sm font-bold rounded-lg ${
-                    isValid
-                      ? "bg-[#FFC107] hover:bg-[#E2B737]"
-                      : "bg-[#D2D2D2] cursor-not-allowed"
-                  }`}
+                  className={`w-full h-[48px] text-white text-sm font-bold rounded-lg ${isValid
+                    ? "bg-[#FFC107] hover:bg-[#E2B737]"
+                    : "bg-[#D2D2D2] cursor-not-allowed"
+                    }`}
                 >
                   Submit
                 </button>
@@ -235,7 +286,7 @@ function ContactPage() {
         </div>
       </div>
       <Location />
-      
+
     </div>
   );
 }
