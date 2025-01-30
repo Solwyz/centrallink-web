@@ -284,7 +284,7 @@ function AdminBlogs() {
                   className="w-full h-[95px] flex items-center justify-between p-4 border hover:border-[#928C8C] border-[#D6D6D6]">
                     <div className="flex items-center">
                       <img
-                        src={rightArrow}
+                        src={`data:image/png;base64,${blog.photo}`}
                         alt=''
                         className="w-[95px] h-[63px] rounded-lg object-cover mr-6"
                       />
