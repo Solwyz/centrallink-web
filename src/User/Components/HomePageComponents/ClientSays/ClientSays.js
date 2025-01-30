@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion"; // Import motion from framer-motion
 import quoteIcon from "../../../../Assets/Home/clientSays/quoteIcon.svg";
+import quoteUp from "../../../../Assets/Home/clientSays/quoteUp.svg";
+import quoteDown from "../../../../Assets/Home/clientSays/quoteDown.svg";
 import people from "../../../../Assets/Home/clientSays/people.png";
 import sophia from "../../../../Assets/Home/clientSays/sophia.png";
 import emily from "../../../../Assets/Home/clientSays/emily.png";
@@ -50,21 +52,27 @@ function ClientSays() {
     <div className="md:px-[120px] md:mt-[72px] mt-[72px] ">
       <div className="grid grid-cols-1 md:grid-cols-2 md:h-[552px]">
         {/* Left Section */}
-        <div className="bg-[#C8BD9C] hidden md:flex md:px-[72px]">
+        <div className="bg-[#C8BD9C] hidden  relative md:flex md:p-[40px]">
           {/* Animation for "What Do Our Clients Say" */}
+          <img src={quoteUp} alt="" className="w-[80px] h-[80px]"/>
           <motion.h2
-            className="text-[32px] md:text-[48px] md:mt-[136px] leading-[48px] font-milchella text-start"
+            className="text-[32px] md:text-[48px] ml-[-32px] md:mt-[200px] leading-[48px] font-milchella text-start"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
             What Do Our <br /> Clients Say
           </motion.h2>
+          <img src={quoteDown} alt="" className="w-[80px] h-[80px]  absolute bottom-10 right-10 " />
         </div>
-        <div className="bg-[#C8BD9C] w-full h-[304px] items-center justify-center md:hidden flex">
-          <h2 className="text-[32px] text-center leading-[48px] font-milchella ">
+        <div className="bg-[#C8BD9C] w-full h-[304px] relative  p-6 items-center justify-center md:hidden flex">
+        <img src={quoteUp} alt="" className="w-[40px] h-[40px] absolute top-6 left-6 "/>
+
+          <h2 className="text-[32px] text-center  leading-[48px] font-milchella ">
             What Do Our <br /> Clients Say
           </h2>
+          <img src={quoteDown} alt="" className="w-[40px] h-[40px]  absolute bottom-6 right-6 " />
+
         </div>
         {/* Right Section */}
         <div className="bg-[#FAFAFA] hidden md:block md:px-[72px] md:py-[82px]">
