@@ -38,25 +38,25 @@ function AdminProject() {
 
 
   // Fetch categories on component mount
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        const data = await getAllProjects();
-        setCategories(data.projects); // Assume API returns an array of projects
-        const imageMap = data.projects.reduce((acc, project) => {
-          acc[project.name] = project.images || [];
-          return acc;
-        }, {});
-        setImages(imageMap);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCategories();
-  }, []);
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const data = await getAllProjects();
+  //       setCategories(data.projects); // Assume API returns an array of projects
+  //       const imageMap = data.projects.reduce((acc, project) => {
+  //         acc[project.name] = project.images || [];
+  //         return acc;
+  //       }, {});
+  //       setImages(imageMap);
+  //     } catch (error) {
+  //       console.error("Error fetching projecttts:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchCategories();
+  // }, []);
   
 
   const handleDelete = (id) => {
@@ -162,7 +162,7 @@ function AdminProject() {
           console.log('adminresponse2222', response.data)
           setCategories(response.data);
         } else {
-          console.error('Error fetching projects:', response)
+          console.error('Error fetching admin projectsss:', response)
         }
       }
     });
@@ -216,9 +216,9 @@ function AdminProject() {
     setSelectedCategory("");
   };
 
-  if (loading) {
-    return <div className="mt-6 text-center">Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div className="mt-6 text-center">Loading...</div>;
+  // }
 
   return (
     <div className=" mt-6  pr-[72px]">
