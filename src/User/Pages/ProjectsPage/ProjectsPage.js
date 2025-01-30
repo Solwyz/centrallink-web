@@ -57,7 +57,7 @@ const ProjectsPage = () => {
           {/* Filter Tabs */}
 <div className="flex justify-center md:justify-start items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px]">
   <div className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
-    {["All", "events", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
+    {["All", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
       <button
         key={category}
         onClick={() => setFilter(category)}
