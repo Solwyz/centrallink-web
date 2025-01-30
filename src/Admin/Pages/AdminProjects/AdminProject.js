@@ -159,7 +159,7 @@ function AdminProject() {
     Api.get("api/project").then((response) => {
       if (response) {
         if (response && response.data) {
-          console.log('response2222', response.data)
+          console.log('adminresponse2222', response.data)
           setCategories(response.data);
         } else {
           console.error('Error fetching projects:', response)
@@ -236,9 +236,9 @@ function AdminProject() {
       {!selectedCategory ? (
         <div className="mt-12">
           <div className="space-y-2 w-full justify-between items-center">
-            {(categories ?? []).map((category) => (
+            {Array.isArray(categories) && categories.map((category,index) => (
               <div
-                key={category}
+                key={index}
                 className="flex w-full  py-[17px] pl-6 pr-12 justify-between text-[#947F41] font-medium text-sm  items-center  border border-[#D6D6D6] p-4 rounded-lg  hover:border-[#928C8C] transition"
                 onClick={() => handleCategoryClick(category)}
               >
