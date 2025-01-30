@@ -131,7 +131,7 @@ function AdminProject() {
   // api/project?categoryName=NewCategory
 
   const addCategory = () => {
-    setIsAdding(true);
+    setIsAdding(true)
     const formData = new FormData();
     formData.append("photo", addNewImg);
 
