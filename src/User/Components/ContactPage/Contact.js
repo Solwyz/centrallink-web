@@ -119,7 +119,7 @@ function ContactPage() {
               <img src={fbicon} alt="Facebook Icon" className="w-5 h-5" />
             </a>
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/centrallinkllc/?utm_source=ig_web_button_share_sheet"
               target="_blank"
               rel="noopener noreferrer"
               className="w-5 h-5 "
