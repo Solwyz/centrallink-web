@@ -41,7 +41,7 @@ const BlogPage = () => {
       </div>
 
       {/* Filter Buttons */}
-      <div className="flex justify-center items-center font-normal text-center text-base gap-4 mt-[64px] md:mt-[72px]">
+      <div className="flex justify-center items-center font-normal text-center text-base gap-4 mt-[64px] md:mt-[72px]  overflow-x-auto whitespace-nowrap px-4 py-2 w-full scrollbar-hide">
         {["All", "Office Interiors", "Building Maintenance","Demolition Services","Electrical Work"].map((category) => (
           <button
             key={category}
