@@ -31,7 +31,7 @@ const BlogPage = () => {
   return (
     <div className="pt-[118px] md:px-[120px] px-4">
       {/* Header Section */}
-      <div className="text-center md:mt-[61px] mt-4 ">
+      <div className="text-center md:mt-[40px] mt-4 ">
         <h1 className="md:text-[40px] hidden md:block text-[32px] font-milchella leading-[48px] font-normal  text-[#947F41] ">
           Seamless Design and Build: <br /> Your Resource for Inspiration
         </h1>
@@ -41,7 +41,8 @@ const BlogPage = () => {
       </div>
 
       {/* Filter Buttons */}
-      <div className="flex justify-center items-center font-normal text-center text-base gap-4 mt-[64px] md:mt-[72px]  overflow-x-auto whitespace-nowrap px-4 py-2 w-full scrollbar-hide">
+
+      <div className="flex justify-center items-center font-normal text-center text-base gap-4 mt-[64px] md:mt-[40px]  overflow-x-auto whitespace-nowrap px-4 py-2 w-full scrollbar-hide">
         {["All", "Office Interiors", "Building Maintenance","Electrical Work"].map((category) => (
           <button
             key={category}

@@ -53,7 +53,7 @@ function AboutPage() {
           <img src={bgImg} className="h-[572px] w-full" alt="" />
         </motion.div>
         <motion.div
-          className="hidden px-[152px] py-[56px] md:block mx-auto translate-y-[-90px] w-[895px] h-[316px] bg-[#F6F6F6]"
+          className="hidden px-[92px]  py-[56px] md:block mx-auto translate-y-[-110px] w-[895px] h-[316px] bg-[#F1F0EC]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -76,7 +76,7 @@ function AboutPage() {
 
         <div className="md:hidden bg-aboutBgmob w-full bg-cover px-4 py-[88px] h-[584px]">
           <motion.div
-            className="px-[16px] py-[48px] w-full h-[408px] bg-[#F6F6F6]"
+            className="px-[16px] py-[48px] w-full h-[408px] bg-[#F1F0EC]"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -98,7 +98,7 @@ function AboutPage() {
         </div>
 
         <motion.div
-          className="px-6 md:px-0 mt-[120px] md:mt-[40px]"
+          className="px-6 md:px-0 mt-[72px] md:mt-[-38px]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
