@@ -7,7 +7,7 @@ function Location() {
   return (
     <div className="mt-[72px] px-4 md:px-[120px]">
       {/* Desktop version */}
-      <div className="md:flex justify-between hidden">
+      <div className="md:flex justify-between  hidden">
         <div className="mt-[137px]">
           {/* Animate "Locate Us" text when in view */}
           <motion.h3
