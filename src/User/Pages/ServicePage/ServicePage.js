@@ -37,14 +37,14 @@ function ServicePage() {
         <h2 className="text-center text-[32px] font-milchella font-normal md:text-[40px] text-[#817140]">
           Our Best Services
         </h2>
-        <div className="hidden md:block mt-[72px]">
+        <div className="hidden md:block mt-[40px]">
           <img src={ServiceBg} className="h-[287px] w-full" alt="" />
         </div>
         <div className="md:hidden block mt-10">
           <img src={serviceMob} className="h-[287px] w-full" alt="" />
         </div>
         <motion.p
-          className="mt-[48px] text-[#252012] text-base font-normal leading-[28px] text-justify"
+          className="mt-[32px] text-[#252012] text-base font-normal leading-[28px] text-justify"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% of text is in view
@@ -64,7 +64,7 @@ function ServicePage() {
         </motion.p>
       </div>
 
-      <div className="md:px-[120px] mt-[56px] md:mt-[168px] px-4">
+      <div className="md:px-[120px] mt-[56px] md:mt-[72px] px-4">
         {isLoading ? (
           <p className="text-center mt-10 text-lg text-gray-500">
             Loading services...
