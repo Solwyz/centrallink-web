@@ -8,23 +8,23 @@ function ServiceDetailDynamic() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    Api.get(`api/services/${id}`)
-      .then((response) => {
-        setService(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching service details:", error);
-        setIsLoading(false);
-      });
-  }, [id]);
+    Api.get(`/api/services/${id}`) // Ensure the backend allows access without a token
+    .then((response) => {
+      setService(response.data);
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.error("Error fetching service details:", error);
+      setIsLoading(false);
+    });
+}, [id]);
 
   if (isLoading) {
-    return <p className="text-center pt-[118px] mt-10 text-lg text-gray-500">Loading...</p>;
+    return <p className="text-center pt-[140px]  text-lg text-gray-500">Loading...</p>;
   }
 
   if (!service) {
-    return <p className="text-center pt-[118px] mt-10 text-lg text-gray-500">Service not found.</p>;
+    return <p className="text-center pt-[140px]  text-lg text-gray-500">Service not found.</p>;
   }
 
   return (

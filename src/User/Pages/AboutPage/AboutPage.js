@@ -50,7 +50,7 @@ function AboutPage() {
           transition={{ duration: 1 }}
           variants={fadeIn}
         >
-          <img src={bgImg} className="h-[572px]" alt="" />
+          <img src={bgImg} className="h-[572px] w-full" alt="" />
         </motion.div>
         <motion.div
           className="hidden px-[152px] py-[56px] md:block mx-auto translate-y-[-90px] w-[895px] h-[316px] bg-[#F6F6F6]"
