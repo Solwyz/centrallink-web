@@ -21,7 +21,7 @@ function HomeAbout() {
   };
 
   return (
-    <div className="px-4 md:px-[120px] mt-[64px] md:mt-[168px]">
+    <div className="px-4 md:px-[120px] mt-[64px] md:mt-[72px]">
       {/* Desktop Layout */}
       <div className="hidden md:flex flex-row items-center">
         {/* Image Section */}

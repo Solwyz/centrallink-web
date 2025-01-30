@@ -47,7 +47,7 @@ function ClientSays() {
   ];
 
   return (
-    <div className="md:px-[120px] md:mt-[168px] mt-[72px] ">
+    <div className="md:px-[120px] md:mt-[72px] mt-[72px] ">
       <div className="grid grid-cols-1 md:grid-cols-2 md:h-[552px]">
         {/* Left Section */}
         <div className="bg-[#C8BD9C] hidden md:flex md:px-[72px]">
