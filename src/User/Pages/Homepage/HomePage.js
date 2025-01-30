@@ -65,7 +65,7 @@ function HomePage() {
         whileInView={{ opacity: 1 }} 
         transition={{ duration: 0.5 }}
       >
-        <Location />
+        {/* <Location /> */}
       </motion.div>
     
       
