@@ -87,7 +87,7 @@ function HomeAbout() {
 
         {/* Text Section */}
         <motion.div
-          className="w-[319px] h-[468px] bg-[#FBFBFB] p-4 mt-[-40px]"
+          className="w-[319px] h-[468px] bg-[#F2F2F2] p-4 mt-[-40px]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}

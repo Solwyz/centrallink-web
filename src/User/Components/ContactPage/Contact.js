@@ -31,7 +31,7 @@ function Contact() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1460px] px-4 pt-[56px] mt-[120px] w-full md:h-[900px] md:px-[120px] md:pt-[64px] md:mt-[168px] md:flex">
+    <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1460px] px-4 pt-[56px] mt-[72px] w-full md:h-[900px] md:px-[120px] md:pt-[64px] md:mt-[168px] md:flex">
       {/* Left Section */}
       <div className="text-white md:w-1/2 md:pt-[120px]">
         <h2 className="text-[40px] font-milchella md:text-start text-center font-normal">

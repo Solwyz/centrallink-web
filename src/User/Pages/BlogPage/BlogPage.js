@@ -21,7 +21,7 @@ const BlogPage = () => {
   })
   },[])
   const filteredBlogs =
-    filter === "All" ? blogs : blogs.filter((blog) => blog.category === filter);
+    filter === "All" ? blogs : blogs.filter((blog) => blog.categoryName === filter);
 
   // const handleBlogClick = (id) => {
   //   // navigate(`/blogs/details/${id}`);

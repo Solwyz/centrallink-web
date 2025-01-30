@@ -8,21 +8,21 @@ import { FaCopy, FaWhatsapp, FaFacebook, FaTwitter } from "react-icons/fa";
 import Api from "../../../Admin/Services/Api";
 
 export default function BlogDetails() {
- 
+
 
   const { id } = useParams();
   const [blogs, setBlogs] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const token = localStorage.getItem("adminAuthToken");
+  // const token = localStorage.getItem("adminAuthToken");
   const [isOpen, setIsOpen] = useState(false);
- 
+  const [moreBlogs, setMoreBlogs] =useState([]);
+
   useEffect(() => {
-    console.log('idd',id)
-    Api.get(`api/blogs/${id}`, {
-     'Authorization': `Bearer ${token}` ,
-    })
+    console.log('idd', id)
+    Api.get(`api/blogs/${id}`
+    )
       .then((response) => {
-        console.log(response.data)
+        console.log('id response',response.data)
         setBlogs(response.data);
         setIsLoading(false);
       })
@@ -30,12 +30,18 @@ export default function BlogDetails() {
         console.error("Error fetching service details:", error);
         setIsLoading(false);
       });
-  }, [id]);
  
+      Api.get('api/blogs')  
+    .then((response) =>{
+      console.log(response.data)
+       setMoreBlogs(response.data)
+    })
+    }, [id]);
+
   if (isLoading) {
     return <p className="text-center mt-10 text-lg text-gray-500">Loading...</p>;
   }
- 
+
   if (!blogs) {
     return <p className="text-center mt-10 text-lg text-gray-500">Service not found.</p>;
   }
@@ -75,11 +81,11 @@ export default function BlogDetails() {
   return (
     <div className="pt-[118px] md:px-[120px] px-4">
       <div className="grid grid-cols-1 md:mt-[72px]  ">
-        {blogs.map((item, index) => (
-          <div key={index} className="relative  rounded-lg  overflow-hidden">
+        {/* {blogs.map((item, index) => ( */}
+          <div  className="relative  rounded-lg  overflow-hidden">
             <img
-              src={`data:image/png;base64,${item.photo}`}
-              alt={item.title}
+              src={`data:image/png;base64,${blogs.photo}`}
+              alt={blogs.title}
               className="w-full md:h-[533px] h-[302px] object-cover"
             />
             {/* Gradient Overlay */}
@@ -93,10 +99,10 @@ export default function BlogDetails() {
             {/* Content */}
             <div className="absolute hidden md:block bottom-8 left-8 text-white">
               <h2 className="md:text-[32px] md:leading-[32px] font-semibold">
-                {item.title}
+                {blogs.title}
               </h2>
               <p className="md:text-[24px] md:mt-6 font-medium leading-[24px]">
-                {item.description}
+                {blogs.shortDescription}
               </p>
             </div>
             {/* Share Now Button */}
@@ -143,53 +149,53 @@ export default function BlogDetails() {
             {/* Category Tag */}
             <div className="absolute bottom-4 right-4  md:bottom-8 md:right-8">
               <span className="border border-white font-medium text-xs px-2 py-1 rounded text-white">
-                {item.categoryName}
+                {blogs.categoryName}
               </span>
             </div>
           </div>
-        ))}
-        {blogs.map((item, index) => (
-        <div>
-          <div className="md:mt-[72px] mt-6">
-            <h3 className="text-xl font-semibold ">
-           {item.title}
-            </h3>
-            <p className="md:hidden text-[#707070] text-base font-medium mt-2">
-             {item.shortDescription}
-            </p>
-            <p className="text-base text-justify font-normal leading-[32px] mt-8">
-           {item.mainDescription}
-            </p>
+        {/* ))} */}
+        {/* {blogs.map((item, index) => ( */}
+          <div>
+            <div className="md:mt-[72px] mt-6">
+              <h3 className="text-xl font-semibold ">
+                {blogs.title}
+              </h3>
+              <p className="md:hidden text-[#707070] text-base font-medium mt-2">
+                {blogs.shortDescription}
+              </p>
+              <p className="text-base text-justify font-normal leading-[32px] mt-8">
+                {blogs.mainDescription}
+              </p>
+            </div>
           </div>
-        </div>
-        ))}
-          
+        {/* ))} */}
+
         {/* Blog Cards */}
         <div className="md:mt-[108px] hidden md:block ">
           <h1 className="font-semibold text-base">More related blogs</h1>
           <div className="grid grid-cols-1  md:grid-cols-2 gap-[20px] mt-8 ">
-            {blogs.map((blog) => (
+            {moreBlogs.map((moreBlogs) => (
               <div
-                key={blog.id}
+                key={moreBlogs.id}
                 className="bg-white flex w-[361px] md:w-[590px] h-[136px] md:h-[190px] group cursor-pointer"
               >
                 <div className="">
                   <img
-                    src={blog.image}
-                    alt={blog.title}
+                    src={`data:image/png;base64,${moreBlogs.photo}`}
+                    alt={moreBlogs.title}
                     className=" w-[173px] md:w-[285px] h-[136px] md:h-[190px] md:object-cover object-fit group-hover:rounded-lg"
                   />
                 </div>
 
                 <div className="ml-[22px] w-[172px] md:w-[283px]">
                   <h2 className="md:text-[24px] text-sm leading-[16px] md:leading-[32px] font-semibold group-hover:text-[#968A66] text-[#252012]">
-                    {blog.title}
+                    {moreBlogs.title}
                   </h2>
                   <p className="text-[#6C6B67] text-sm md:text-base leading-[16px] mt-4 font-medium md:leading-[24px] group-hover:text-[#968A66]">
-                    {blog.description}
+                    {moreBlogs.shortDescription}
                   </p>
                   <span className="inline-block font-medium mt-4 md:mt-[30px] px-2 py-1 text-[10px] md:text-xs text-[#252012] border border-black rounded-full">
-                    {blog.tag}
+                    {moreBlogs.categoryName}
                   </span>
                 </div>
               </div>
