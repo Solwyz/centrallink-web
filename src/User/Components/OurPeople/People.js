@@ -36,7 +36,7 @@ function People() {
   ];
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between md:pr-[120px] mt-[120px] md:mt-[120px]">
+    <div className="flex flex-col md:flex-row items-center justify-between md:pr-[120px] mt-[72px] md:mt-[72px]">
       {/* Left Section */}
       <div className="rounded-full hidden md:block bg-[#FFFCF5] md:w-[537px] md:h-[537px] bg-cover md:ml-[-103px]">
         <div className="flex-1 ml-[295px] items-center justify-center md:w-[354px] text-center md:text-left md:mt-[129px]">
