@@ -31,7 +31,7 @@ const BlogPage = () => {
   return (
     <div className="pt-[118px] md:px-[120px] px-4">
       {/* Header Section */}
-      <div className="text-center md:mt-[61px] mt-4 ">
+      <div className="text-center md:mt-[40px] mt-4 ">
         <h1 className="md:text-[40px] hidden md:block text-[32px] font-milchella leading-[48px] font-normal  text-[#947F41] ">
           Seamless Design and Build: <br /> Your Resource for Inspiration
         </h1>

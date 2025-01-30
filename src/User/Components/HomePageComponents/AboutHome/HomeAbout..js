@@ -41,7 +41,7 @@ function HomeAbout() {
 
         {/* Text Section */}
         <motion.div
-          className="w-[688px] h-[356px] bg-[#FBFBFB] p-8 absolute left-[626px]"
+          className="w-[688px] h-[344px] bg-[#F1F0EC] p-10 absolute left-[626px]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -58,7 +58,7 @@ function HomeAbout() {
             commercial, and industrial interiors, transforming visions into
             reality with precision and dedication.
           </p>
-          <div className="flex justify-start mt-6">
+          <div className="flex justify-start mt-8">
             <Link to={"/about"}>
               <div className="w-[183px] h-[56px] text-[#736B5B] font-medium text-base border border-[#726E62] focus:outline-none rounded-lg flex items-center justify-center text-center hover:shadow-[0px_7px_7px_0px_#00000026] transition-shadow">
                 Read More
@@ -87,7 +87,7 @@ function HomeAbout() {
 
         {/* Text Section */}
         <motion.div
-          className="w-[319px] h-[468px] bg-[#F2F2F2] p-4 mt-[-40px]"
+          className="w-[319px] h-[468px] bg-[#F1F0EC] p-4 mt-[-40px]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -104,7 +104,7 @@ function HomeAbout() {
             commercial, and industrial interiors, transforming visions into
             reality with precision and dedication.
           </p>
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-8">
             <Link to={"/about"}>
               <div className="w-[183px] h-[56px] text-[#736B5B] font-medium text-base border border-[#726E62] focus:outline-none rounded-lg flex items-center justify-center text-center hover:shadow-[0px_7px_7px_0px_#00000026] transition-shadow">
                 Read More
