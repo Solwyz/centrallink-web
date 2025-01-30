@@ -6,12 +6,9 @@ function ServiceDetailDynamic() {
   const { id } = useParams();
   const [service, setService] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const token = localStorage.getItem("adminAuthToken");
 
   useEffect(() => {
-    Api.get(`api/services/${id}`, {
-     Authorization: `Bearer ${token}` ,
-    })
+    Api.get(`api/services/${id}`)
       .then((response) => {
         setService(response.data);
         setIsLoading(false);
@@ -23,11 +20,11 @@ function ServiceDetailDynamic() {
   }, [id]);
 
   if (isLoading) {
-    return <p className="text-center mt-10 text-lg text-gray-500">Loading...</p>;
+    return <p className="text-center pt-[118px] mt-10 text-lg text-gray-500">Loading...</p>;
   }
 
   if (!service) {
-    return <p className="text-center mt-10 text-lg text-gray-500">Service not found.</p>;
+    return <p className="text-center pt-[118px] mt-10 text-lg text-gray-500">Service not found.</p>;
   }
 
   return (
@@ -64,13 +61,11 @@ function ServiceDetailDynamic() {
         <h3 className="text-[24px] font-semibold text-center">
           Our Comprehensive Services
         </h3>
-        <div className="mt-[56px] text-start">
           {/* Service Description */}
-          <div>
-            <h4 className="text-[#252012] text-base font-semibold">
+          <div className="mt-[56px] ">
+            <h4 className="text-[#252012] text-justify text-base font-normal">
               {service.mainDescription}
             </h4>
-          </div>
         </div>
       </div>
     </div>

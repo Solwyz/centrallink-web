@@ -31,7 +31,7 @@ function HomeProjects() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between px-6 md:px-[120px] mt-[120px] md:mt-[168px]">
+    <div className="flex flex-col md:flex-row justify-between px-6 md:px-[120px] mt-[72px] md:mt-[168px]">
       {/* Left Section */}
       <motion.div
         className="md:w-1/2"

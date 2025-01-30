@@ -5,7 +5,7 @@ import { motion } from "framer-motion"; // Import motion for animations
 
 function Location() {
   return (
-    <div className="mt-[120px] px-4 md:px-[120px]">
+    <div className="mt-[72px] px-4 md:px-[120px]">
       {/* Desktop version */}
       <div className="md:flex justify-between hidden">
         <div className="mt-[137px]">
