@@ -24,6 +24,7 @@ function AdminBlogs() {
   const [addSecondImage, setAddSecondImage] = useState(null)
   const [refreshKey, setRefreshKey] = useState(0)
   const [deleteID,setDeleteID] = useState(null)
+  const [editingBlog, setEditingBlog] = useState(null)
 
 
   const [blogForm, setBlogForm] = useState({
@@ -46,6 +47,15 @@ function AdminBlogs() {
     setBlogCategoryName("");
     setImage(null);
   };
+
+  useEffect(() => {
+    if(editingBlog) {
+      setBlogForm((prevForm) => ({
+        ...prevForm,
+        name: editingBlog.title || "",
+      }))
+    }
+  },[editingBlog])
 
   useEffect(() => {
     console.log("kk", token);
@@ -213,6 +223,8 @@ function AdminBlogs() {
   };
 
   const editBlog = (blog, blogIndex) => {
+    console.log('bblll',blog)
+    setEditingBlog(blog);
     setIsBlogFormOpen({
       name: blog.name,
       shortDescription: blog.shortDescription,
