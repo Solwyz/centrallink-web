@@ -26,7 +26,7 @@ function HomeServices() {
   }, []);
 
   return (
-    <div className="md:mt-[168px] mt-[72px] px-4 md:px-[120px]">
+    <div className="md:mt-[72px] mt-[72px] px-4 md:px-[120px]">
       <h2 className="text-center text-[32px] font-milchella font-normal md:text-[40px] text-[#817140]">
         Our Best Services
       </h2>
