@@ -34,9 +34,7 @@ const ProjectsPage = () => {
       : projects.filter((project) => project.categoryName === filter);
 
   useEffect(() => {
-    Api.get('api/project', {
-      Authorization: `Bearer ${token}`,
-    }).then((response) => {
+    Api.get('api/project').then((response) => {
         if (response && response.data) {
           console.log('responseProjectList', response.data)
           setProjects(response.data);
