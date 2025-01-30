@@ -57,7 +57,7 @@ function ServiceDetailDynamic() {
       </div>
 
       {/* Services Section */}
-      <div className="mt-[120px] md:mt-[88px]">
+      <div className="mt-[72px] md:mt-[72px]">
         <h3 className="text-[24px] font-semibold text-center">
           Our Comprehensive Services
         </h3>
