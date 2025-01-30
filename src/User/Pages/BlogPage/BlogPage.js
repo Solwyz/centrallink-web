@@ -11,15 +11,15 @@ import Api from "../../../Admin/Services/Api";
 const BlogPage = () => {
   const [filter, setFilter] = useState("All");
   const navigate = useNavigate();
-  const [blogs, setBlogs]= useState([]);
+  const [blogs, setBlogs] = useState([]);
 
-  useEffect (()=>{
-   Api.get('api/blogs')
-  .then(response =>{
-    console.log(response.data)
-    setBlogs(response.data)
-  })
-  },[])
+  useEffect(() => {
+    Api.get('api/blogs')
+      .then(response => {
+        console.log(response.data)
+        setBlogs(response.data)
+      })
+  }, [])
   const filteredBlogs =
     filter === "All" ? blogs : blogs.filter((blog) => blog.categoryName === filter);
 
@@ -42,21 +42,22 @@ const BlogPage = () => {
 
       {/* Filter Buttons */}
 
-      <div className="flex justify-center items-center font-normal text-center text-base gap-4 mt-[64px] md:mt-[40px]  overflow-x-auto whitespace-nowrap px-4 py-2 w-full scrollbar-hide">
-        {["All", "Office Interiors", "Building Maintenance","Electrical Work"].map((category) => (
-          <button
-            key={category}
-            onClick={() => setFilter(category)}
-            className={`px-4 py-[6px] h-[36px] item-center rounded-[18px] ${
-              filter === category
-                ? "bg-[#947F41] text-white"
-                : "bg-white text-[#947F41]"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+      <div className="w-full overflow-x-auto px-4 py-2 scrollbar-hide scroll-smooth">
+        <div className="flex gap-4 whitespace-nowrap min-w-max">
+          {["All", "Office Interiors", "Building Maintenance", "Electrical Work"].map((category) => (
+            <button
+              key={category}
+              onClick={() => setFilter(category)}
+              className={`px-4 py-[6px] h-[36px] rounded-[18px] min-w-max ${filter === category ? "bg-[#947F41] text-white" : "bg-white text-[#947F41]"
+                }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
+
+
 
       {/* Blog Cards */}
       <div className="grid grid-cols-1  md:grid-cols-2 gap-[20px] mt-[72px]">
