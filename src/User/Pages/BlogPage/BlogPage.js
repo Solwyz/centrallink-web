@@ -42,7 +42,7 @@ const BlogPage = () => {
 
       {/* Filter Buttons */}
       <div className="flex justify-center items-center font-normal text-center text-base gap-4 mt-[64px] md:mt-[72px]">
-        {["All", "Interior", "Offices"].map((category) => (
+        {["All", "Office Interiors", "Building Maintenance","Demolition Services","Electrical Work"].map((category) => (
           <button
             key={category}
             onClick={() => setFilter(category)}
@@ -74,7 +74,7 @@ const BlogPage = () => {
             </div>
 
             <div className="ml-[22px] w-[172px] md:w-[283px]">
-              <h2 className="md:text-[24px] text-sm leading-[16px] md:leading-[32px] font-semibold group-hover:text-[#968A66] text-[#252012]">
+              <h2 className="md:text-[24px] text-sm leading-[16px] md:leading-[32px] md:tracking-tighter font-semibold group-hover:text-[#968A66] text-[#252012]">
                 {blog.title}
               </h2>
               <p className="text-[#6C6B67] text-sm md:text-base leading-[16px] mt-4 font-medium md:leading-[24px] group-hover:text-[#968A66]">
