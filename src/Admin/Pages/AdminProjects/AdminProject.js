@@ -156,9 +156,7 @@ function AdminProject() {
 
   useEffect(() => {
 
-    Api.get("api/project", {
-      Authorization: `Bearer ${token}`,
-    }).then((response) => {
+    Api.get("api/project").then((response) => {
       if (response) {
         if (response && response.data) {
           console.log('response2222', response.data)
