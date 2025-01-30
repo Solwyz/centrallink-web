@@ -24,6 +24,7 @@ function AdminBlogs() {
   const [addSecondImage, setAddSecondImage] = useState(null)
   const [refreshKey, setRefreshKey] = useState(0)
   const [deleteID,setDeleteID] = useState(null)
+  const [editingBlog, setEditingBlog] = useState(null)
 
 
   const [blogForm, setBlogForm] = useState({
@@ -46,6 +47,36 @@ function AdminBlogs() {
     setBlogCategoryName("");
     setImage(null);
   };
+
+  useEffect(() => {
+  if (editingBlog) {
+    let imageFile = null;
+ 
+    if (editingBlog.photo && editingBlog.photo.startsWith("data:image")) {
+      try {
+        const base64String = editingBlog.photo.split(",")[1]; // Remove prefix (data:image/png;base64,)
+        const byteCharacters = atob(base64String.trim()); // Decode Base64 safely
+        const byteNumbers = new Uint8Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+ 
+        const blob = new Blob([byteNumbers], { type: "image/png" }); // Adjust MIME type
+        imageFile = new File([blob], "image.png", { type: "image/png" }); // Convert to File
+      } catch (error) {
+        console.error("Error decoding Base64:", error);
+      }
+    }
+ 
+    setBlogForm((prevForm) => ({
+      ...prevForm,
+      name: editingBlog.title || "",
+      shortDescription: editingBlog.shortDescription || "",
+      mainDescription: editingBlog.mainDescription || "",
+      photo: imageFile || null, // Store as a File for file input compatibility
+    }));
+  }
+}, [editingBlog]);
 
   useEffect(() => {
     console.log("kk", token);
@@ -213,6 +244,8 @@ function AdminBlogs() {
   };
 
   const editBlog = (blog, blogIndex) => {
+    console.log('bblll',blog)
+    setEditingBlog(blog);
     setIsBlogFormOpen({
       name: blog.name,
       shortDescription: blog.shortDescription,
@@ -434,8 +467,12 @@ function AdminBlogs() {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      onChange={(e) => setAddSecondImage(e.target.files[0] ) 
-                      }
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        setBlogForm({ ...blogForm, image: file });
+                        setAddSecondImage(e.target.files[0]);
+                        setPreviewImage(URL.createObjectURL(file));
+                        }}
                     />
                   </div>
                 </div>
