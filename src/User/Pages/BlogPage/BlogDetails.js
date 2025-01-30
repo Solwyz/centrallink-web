@@ -3,7 +3,7 @@ import interiorDetail from "../../../Assets/blogs/blogDetail.png";
 import shareIcon from "../../../Assets/blogs/shareIcon.svg";
 import building from "../../../Assets/blogs/building.png";
 import demolition from "../../../Assets/blogs/demoliton.png";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { FaCopy, FaWhatsapp, FaFacebook, FaTwitter } from "react-icons/fa";
 import Api from "../../../Admin/Services/Api";
 
@@ -16,6 +16,7 @@ export default function BlogDetails() {
   // const token = localStorage.getItem("adminAuthToken");
   const [isOpen, setIsOpen] = useState(false);
   const [moreBlogs, setMoreBlogs] =useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('idd', id)
@@ -178,7 +179,8 @@ export default function BlogDetails() {
               <div
                 key={moreBlogs.id}
                 className="bg-white flex w-[361px] md:w-[590px] h-[136px] md:h-[190px] group cursor-pointer"
-              >
+                onClick={() => navigate(`/blogs/details/${moreBlogs.id}`)}
+               >
                 <div className="">
                   <img
                     src={`data:image/png;base64,${moreBlogs.photo}`}
