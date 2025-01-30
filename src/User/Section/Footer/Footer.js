@@ -33,7 +33,7 @@ function Footer() {
               />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/centrallinkllc/?utm_source=ig_web_button_share_sheet"
               target="_blank"
               rel="noopener noreferrer"
             >
