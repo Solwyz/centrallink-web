@@ -7,15 +7,18 @@ import instaIcon from "../../../Assets/contact/insta.svg";
 import mailicon from "../../../Assets/contact/mail.svg";
 import callIcon from "../../../Assets/contact/call.svg";
 import Location from "../../Components/LocateUs/Location";
-import teleIcon from "../../../Assets/contact/telephone.svg"
+import teleIcon from "../../../Assets/contact/telephone.svg";
 import Swal from "sweetalert2";
 import Api from "../../../Admin/Services/Api";
 
-const token = localStorage.getItem("adminAuthToken");
-
 function ContactPage() {
-
   const [services, setServices] = useState([]);
+  const [contactDetails, setContactDetails] = useState({
+    enquiryEmail: "",
+    facebookUrl: "",
+    instagramUrl: "",
+    linkedinUrl: "",
+  });
 
   const {
     register,
@@ -26,55 +29,81 @@ function ContactPage() {
   const onSubmit = (data) => {
     console.log("Form Submitted: ", data);
 
-    Api.post('api/Inquiry', {
-
-        "id": 0,
-
-        "name": data.name,
-        "email": data.email,
-        "serviceName": {
-          "id": data.service
-        },
-        "message": data.message
-      
-
+    Api.post("api/Inquiry", {
+      id: 0,
+      name: data.name,
+      email: data.email,
+      serviceName: {
+        id: data.service,
+      },
+      message: data.message,
     })
-
-    .then(response => {
-      if(response && response.data) {
-        console.log('Inquiry submitted', response.data);
-        
-      } else {
-        console.error('Invalid response', response);
-      }
-    })
+      .then((response) => {
+        if (response && response.data) {
+          console.log("Inquiry submitted", response.data);
+        } else {
+          console.error("Invalid response", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error submitting inquiry:", error);
+      });
 
     Swal.fire({
       icon: "success",
-      title: " Submitted",
+      title: "Submitted",
       text: "Thank you for reaching out. We will get back to you soon!",
       confirmButtonColor: "#FFC107",
     });
   };
 
   const [isOpen, setIsOpen] = useState(false);
+  const token = localStorage.getItem("adminAuthToken");
 
+
+  // Fetch services
   useEffect(() => {
-    Api.get('api/services')
-      .then(response => {
+    Api.get("api/services", {
+      Authorization: `Bearer ${token}`,
+  })
+      .then((response) => {
         if (response && response.data) {
-          console.log('servicesss', response.data);
+          console.log("Services:", response.data);
           setServices(response.data);
         } else {
-          console.error('Innvalid service response', response);
+          console.error("Invalid service response", response);
         }
       })
-  }, [])
+      .catch((error) => {
+        console.error("Error fetching services:", error);
+      });
+  }, []);
 
+  // Fetch contact details
+  useEffect(() => {
+    Api.get("api/settings/1") // Assuming the settings ID is 1
+      .then((response) => {
+        if (response && response.data) {
+          const { enquiryEmail, facebookUrl, instagramUrl, linkedinUrl } =
+            response.data;
+          setContactDetails({
+            enquiryEmail: enquiryEmail || "",
+            facebookUrl: facebookUrl || "",
+            instagramUrl: instagramUrl || "",
+            linkedinUrl: linkedinUrl || "",
+          });
+        } else {
+          console.error("Invalid contact details response", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching contact details:", error);
+      });
+  }, []);
 
   return (
     <div className="pt-[118px]">
-      <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1465px] px-4 pt-[56px]  w-full md:h-[900px] md:px-[120px] md:pt-[64px]  md:flex">
+      <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1465px] px-4 pt-[56px] w-full md:h-[900px] md:px-[120px] md:pt-[64px] md:flex">
         {/* Left Section */}
         <div className="text-white md:w-1/2 md:pt-[120px]">
           <h2 className="text-[40px] font-milchella md:text-start text-center font-normal">
@@ -93,25 +122,30 @@ function ContactPage() {
               <img src={mailicon} alt="Mail Icon" className="w-5 h-5 mr-2" />
               <a
                 className="text-base font-semibold hover:text-[#FFC107]"
-                href="mailto:hr@centralllc.com "
+                href={`mailto:${contactDetails.enquiryEmail}`}
               >
-                hr@centralllc.com
+                {contactDetails.enquiryEmail}
               </a>
             </div>
             <div className="flex items-center mt-6">
-              <img src={callIcon} alt="Call Icon" className="w-5 h-5 mr-2 " />
-              <p className="text-sm font-semibold hover:text-[#FFC107]">+971 566977258</p>
-              <p className="text-sm font-semibold ml-6 hover:text-[#FFC107]">+971 543792474 </p>
+              <img src={callIcon} alt="Call Icon" className="w-5 h-5 mr-2" />
+              <p className="text-sm font-semibold hover:text-[#FFC107]">
+                +971 566977258
+              </p>
+              <p className="text-sm font-semibold ml-6 hover:text-[#FFC107]">
+                +971 543792474
+              </p>
             </div>
             <div className="mt-6 flex items-center">
               <img src={teleIcon} alt="" className="w-5 h-5 mr-2" />
-              <p className="text-sm font-semibold hover:text-[#FFC107]">0543792474</p>
-
+              <p className="text-sm font-semibold hover:text-[#FFC107]">
+                0543792474
+              </p>
             </div>
           </div>
           <div className="flex mt-6 md:mt-8 space-x-4">
             <a
-              href="https://www.facebook.com/"
+              href={contactDetails.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-5 h-5"
@@ -119,10 +153,10 @@ function ContactPage() {
               <img src={fbicon} alt="Facebook Icon" className="w-5 h-5" />
             </a>
             <a
-              href="https://www.instagram.com/centrallinkllc/?utm_source=ig_web_button_share_sheet"
+              href={contactDetails.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-5 h-5 "
+              className="w-5 h-5"
             >
               <img src={instaIcon} alt="Instagram Icon" className="w-5 h-5" />
             </a>
@@ -131,7 +165,9 @@ function ContactPage() {
           <div className="mt-[88px] md:mt-[96px]">
             <p className="text-sm font-semibold leading-[24px]">
               Address: <br />
-              Khalifa city A, street number 35, <br /> building number,23 flat number 202 <br />Abudhabi, UAE
+              Khalifa city A, street number 35, <br /> building number,23 flat
+              number 202 <br />
+              Abudhabi, UAE
             </p>
           </div>
         </div>
@@ -159,8 +195,9 @@ function ContactPage() {
                 <input
                   {...register("name", { required: "Name is required" })}
                   placeholder="Enter your Name"
-                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${errors.name ? "border-red-500" : ""
-                    }`}
+                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${
+                    errors.name ? "border-red-500" : ""
+                  }`}
                 />
                 <div className="h-4">
                   {errors.name && (
@@ -178,14 +215,14 @@ function ContactPage() {
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
-                      value:
-                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                       message: "Enter a valid email address",
                     },
                   })}
                   placeholder="Enter your Email"
-                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${errors.email ? "border-red-500" : ""
-                    }`}
+                  className={`w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium rounded-lg ${
+                    errors.email ? "border-red-500" : ""
+                  }`}
                 />
                 <div className="h-4">
                   {errors.email && (
@@ -203,29 +240,22 @@ function ContactPage() {
                 </label>
                 <div className="relative">
                   <select
-                    {...register("service", { required: "Please select a service" })}
-                    className={`w-full text-gray-600 text-sm mt-2 h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${errors.service ? "border-red-500" : ""
-                      }`}
+                    {...register("service", {
+                      required: "Please select a service",
+                    })}
+                    className={`w-full text-gray-600 text-sm mt-2 h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${
+                      errors.service ? "border-red-500" : ""
+                    }`}
                     onClick={() => setIsOpen(!isOpen)}
                     onBlur={() => setIsOpen(false)}
                   >
                     <option value="">Select Service</option>
                     {services.map((service) => (
-                      <option key={service.id} value={service.id}>{service.title}</option>
+                      <option key={service.id} value={service.id}>
+                        {service.title}
+                      </option>
                     ))}
                   </select>
-                  {/* <select
-                    name="service"
-                    className={`w-full text-gray-600 text-sm  mt-2   h-[48px] px-4 py-2 focus:outline-none rounded-lg appearance-none ${errors.service ? "border-red-500" : ""
-                      }`}
-                    onClick={() => setIsOpen(!isOpen)}
-                    onBlur={() => setIsOpen(false)}
-                  >
-                    <option value="">Select Service</option>
-                    {services.map((service, index) => (
-                    <option value={service.id}>{service.title}</option>
-                  ))}
-                  </select> */}
                   <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                     <img
                       src={isOpen ? upArrow : downArrow}
@@ -253,8 +283,9 @@ function ContactPage() {
                 <textarea
                   {...register("message", { required: "Message is required" })}
                   placeholder="Write your message here..."
-                  className={`h-[176px] w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium resize-none rounded-lg ${errors.message ? "border-red-500" : ""
-                    }`}
+                  className={`h-[176px] w-full px-6 py-4 mt-2 focus:outline-none text-[#333333] text-sm font-medium resize-none rounded-lg ${
+                    errors.message ? "border-red-500" : ""
+                  }`}
                   rows="4"
                 ></textarea>
                 <div className="h-4">
@@ -271,10 +302,11 @@ function ContactPage() {
                 <button
                   type="submit"
                   disabled={!isValid}
-                  className={`w-full h-[48px] text-white text-sm font-bold rounded-lg ${isValid
-                    ? "bg-[#FFC107] hover:bg-[#E2B737]"
-                    : "bg-[#D2D2D2] cursor-not-allowed"
-                    }`}
+                  className={`w-full h-[48px] text-white text-sm font-bold rounded-lg ${
+                    isValid
+                      ? "bg-[#FFC107] hover:bg-[#E2B737]"
+                      : "bg-[#D2D2D2] cursor-not-allowed"
+                  }`}
                 >
                   Submit
                 </button>
@@ -284,7 +316,6 @@ function ContactPage() {
         </div>
       </div>
       <Location />
-
     </div>
   );
 }
