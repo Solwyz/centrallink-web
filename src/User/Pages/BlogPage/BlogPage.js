@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import interior from "../../../Assets/blogs/interior.png";
-import building from "../../../Assets/blogs/building.png";
-import demolition from "../../../Assets/blogs/demoliton.png";
-import electrical from "../../../Assets/blogs/electrical.png";
-import officeInterior from "../../../Assets/blogs/officeInterior.png";
-import voiceData from "../../../Assets/blogs/voiceData.png";
 import Api from "../../../Admin/Services/Api";
 
 const BlogPage = () => {
