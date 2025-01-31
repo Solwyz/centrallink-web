@@ -58,14 +58,11 @@ function ContactPage() {
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const token = localStorage.getItem("adminAuthToken");
 
 
   // Fetch services
   useEffect(() => {
-    Api.get("api/services", {
-      Authorization: `Bearer ${token}`,
-  })
+    Api.get("api/services")
       .then((response) => {
         if (response && response.data) {
           console.log("Services:", response.data);

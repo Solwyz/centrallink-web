@@ -11,7 +11,6 @@ import teleIcon from "../../../Assets/contact/telephone.svg"
 import Swal from "sweetalert2";
 import Api from "../../../Admin/Services/Api";
 
-const token = localStorage.getItem("adminAuthToken");
 
 function ContactPage() {
   const [services, setServices] = useState([]);
@@ -65,9 +64,7 @@ function ContactPage() {
 
   // Fetch services
   useEffect(() => {
-    Api.get("api/services", {
-      Authorization: `Bearer ${token}`,
-  })
+    Api.get("api/services")
       .then((response) => {
         if (response && response.data) {
           console.log("Services:", response.data);
