@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import { adminContext } from "../AdminLayout";
 import logo from "../../../Assets/Logo.svg";
 import notICon from "../../../Assets/Admin/noti.svg";
@@ -16,8 +16,6 @@ function AdminHeader() {
 
   const dropdownRef = useRef(null);
   const notiDropdownRef = useRef(null);
-
- 
 
   const handleLogout = () => {
     setToken(null);
@@ -39,16 +37,16 @@ function AdminHeader() {
     const token = localStorage.getItem("adminAuthToken");
     if (token) {
       try {
-        const decoded = jwtDecode(token);
-        console.log("Decoded Token:", decoded); // Check the full token structure
-        console.log("Extracted Username:", decoded.username); // See if "superadmin" appears
-        setUsername(decoded.username || "Admin");
+        const decoded = jwtDecode(token); // Decode the token
+        const username = decoded.userDetails.username || "Admin"; // Extract username
+        // console.log("Decoded Token:", decoded); 
+        // console.log("Extracted Username:", username); 
+        setUsername(username); // Set the username state
       } catch (error) {
         console.error("Error decoding token:", error);
       }
     }
   }, []);
-  
 
   return (
     <div className="bg-[#F0F0F0] rounded-[16px] fixed z-50 h-[88px] pl-6 pr-10 py-[26px] flex justify-between items-center min-w-[1160px] ml-[305px] mr-[72px]">
@@ -84,7 +82,7 @@ function AdminHeader() {
         </div>
         <div className="flex items-center ml-6 justify-center">
           <img src={people} className="w-8 h-8 mr-4" alt="Admin" />
-          <h2 className="text-base font-medium">Hi {username}</h2>
+          <h2 className="text-base font-medium">Hi {username}</h2> {/* Display the extracted username */}
         </div>
         <div className="ml-2" ref={dropdownRef}>
           <img
