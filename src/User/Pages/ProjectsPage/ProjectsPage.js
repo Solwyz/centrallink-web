@@ -35,12 +35,12 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     Api.get('api/project').then((response) => {
-        if (response && response.data) {
-          console.log('responseProjectList', response.data)
-          setProjects(response.data);
-        } else {
-          console.error('Error fetching projects:', response)
-        }
+      if (response && response.data) {
+        console.log('responseProjectList', response.data)
+        setProjects(response.data);
+      } else {
+        console.error('Error fetching projects:', response)
+      }
     })
   }, [])
 
@@ -55,23 +55,22 @@ const ProjectsPage = () => {
 
 
           {/* Filter Tabs */}
-<div className="flex justify-center md:justify-start items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px]">
-  <div className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
-    {["All", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
-      <button
-        key={category}
-        onClick={() => setFilter(category)}
-        className={`px-4 py-[6px] h-[36px] flex-shrink-0 items-center rounded-[18px] transition-all ${
-          filter === category
-            ? "bg-[#947F41] text-white shadow-md"
-            : "bg-white text-[#947F41] border border-[#947F41] hover:bg-[#f7e6c2]"
-        }`}
-      >
-        {category}
-      </button>
-    ))}
-  </div>
-</div>
+          <div className="flex justify-center md:justify-start items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px]">
+            <div className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
+              {["All", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setFilter(category)}
+                  className={`px-4 py-[6px] h-[36px] flex-shrink-0 items-center rounded-[18px] transition-all ${filter === category
+                      ? "bg-[#947F41] text-white shadow-md"
+                      : "bg-white text-[#947F41] border border-[#947F41] hover:bg-[#f7e6c2]"
+                    }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
 
 
         </div>
