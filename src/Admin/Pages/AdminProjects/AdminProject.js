@@ -13,6 +13,7 @@ import Api from "../../Services/Api";
 
 const token = localStorage.getItem("adminAuthToken");
 
+
 // const refreshToken = localStorage.getItem("refreshToken")
 
 // const callRefreshToken = () => {
@@ -32,6 +33,8 @@ const token = localStorage.getItem("adminAuthToken");
       
 //     })
 // }
+
+
 
 function AdminProject() {
   const [categories, setCategories] = useState([]);
@@ -162,6 +165,14 @@ function AdminProject() {
 
   //   return () => clearInterval(interval);
   // },[]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      callRefreshToken();
+    },600000);
+
+    return () => clearInterval(interval);
+  },[]);
 
   useEffect(() => {
 
