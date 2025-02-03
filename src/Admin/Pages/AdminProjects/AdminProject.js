@@ -13,25 +13,28 @@ import Api from "../../Services/Api";
 
 const token = localStorage.getItem("adminAuthToken");
 
-const refreshToken = localStorage.getItem("refreshToken")
 
-const callRefreshToken = () => {
-  console.log('refresh token called at', new Date().toLocaleTimeString());
-  Api.post('api/auth/refreshtoken', {
-    "refreshToken": refreshToken
-  })
-    .then(response => {
-      console.log('refresh token response:', response)
-      if (response && response.data) {
-        localStorage.setItem("adminAuthToken", response.data.jwt);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        return true;
-      } else {
-        return false
-      }
+// const refreshToken = localStorage.getItem("refreshToken")
+
+// const callRefreshToken = () => {
+//   console.log('refresh token called at', new Date().toLocaleTimeString());
+//   Api.post('api/auth/refreshtoken', {
+//     "refreshToken": refreshToken
+//   })
+//     .then(response => {
+//       console.log('refresh token response:', response)
+//       if (response && response.data) {
+//         localStorage.setItem("adminAuthToken", response.data.jwt);
+//         localStorage.setItem("refreshToken", response.data.refreshToken);
+//         return true;
+//       } else {
+//         return false
+//       }
       
-    })
-}
+//     })
+// }
+
+
 
 function AdminProject() {
   const [categories, setCategories] = useState([]);
@@ -154,6 +157,14 @@ function AdminProject() {
       })
     // Api.post('api/project', {}, {'Authorization': `Bearer ${token}`})
   }
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     callRefreshToken();
+  //   },600000);
+
+  //   return () => clearInterval(interval);
+  // },[]);
 
   useEffect(() => {
     const interval = setInterval(() => {
