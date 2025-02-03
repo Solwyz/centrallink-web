@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import logo from "../../../Assets/Logo.svg";
 import ResetPassword from "./ResetPassword";
 
+const expiredToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdXBlcmFkbWluIiwicm9sZXMiOiIiLCJleHAiOjE3MzgxMzU4NjcsInVzZXJEZXRhaWxzIjp7InBhc3N3b3JkIjoiIiwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiYXV0aG9yaXRpZXMiOltdLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJlbmFibGVkIjp0cnVlLCJpZCI6IjdmMDAwMDAxLTgzMDMtMTJiMi04MTgzLTAzNDkxNDYwMDAwMCIsInVzZXJOYW1lIjoic3VwZXJhZG1pbiJ9LCJpYXQiOjE3MzgxMzIyNjd9.gJx9M8Qla30BpQD1Rf3kcXxNJ-4baQUi24oeCR9a2xc"
+
 function AdminLogin() {
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +37,7 @@ function AdminLogin() {
       // Check for the token in the API response
       if (data && data.jwt) {
         localStorage.setItem("adminAuthToken", data.jwt); // Store token
-  
+        localStorage.setItem("refreshToken", data.refreshToken); // Store refresh token
         // Navigate to the /admin route and refresh the page to reflect the new state
         navigate("/admin");
         window.location.reload(); // This will refresh the page to ensure the state updates properly
