@@ -14,19 +14,17 @@ function AdminGeneral() {
   const [openSection, setOpenSection] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const [settingsId, setSettingsId] = useState(null); // ID from backend
   const token = localStorage.getItem("adminAuthToken");
 
   // ✅ Fetch settings on component mount
   useEffect(() => {
-    Api.get("api/settings", {
-      Authorization: `Bearer ${token}` 
+    Api.get("api/settings/1", {
+        Authorization: `Bearer ${token}`,
     })
       .then((response) => {
         if (response.data) {
-          const { id, enquiryEmail, facebookUrl, instagramUrl, linkedinUrl } =
+          const { enquiryEmail, facebookUrl, instagramUrl, linkedinUrl } =
             response.data;
-          setSettingsId(id); // Store settings ID for updates
           setContactEmail(enquiryEmail || "");
           setFacebookLink(facebookUrl || "");
           setInstagramLink(instagramUrl || "");
@@ -36,7 +34,7 @@ function AdminGeneral() {
       .catch((error) => {
         console.error("Error fetching settings", error);
       });
-  }, []);
+  }, [token]);
 
   // ✅ Handle input changes
   const handleInputChange = (setter) => (event) => {
@@ -44,7 +42,7 @@ function AdminGeneral() {
     setIsModified(true);
   };
 
-  // ✅ Handle save (PUT or POST dynamically)
+  // ✅ Handle save (PUT method only)
   const handleSave = () => {
     setShowModal(true);
   };
@@ -55,23 +53,13 @@ function AdminGeneral() {
       facebookUrl: facebookLink,
       instagramUrl: instagramLink,
       linkedinUrl: linkedinLink,
-    }
-  
-   
-   
-  
-    const apiCall = settingsId
-      ? Api.put(`api/settings/${settingsId}`, payload, {      Authorization: `Bearer ${token}`, 
-      })
-      : Api.post("api/settings", payload, {       Authorization: `Bearer ${token}`, 
-      });
-  
-    apiCall
+    };
+
+    Api.put("api/settings/1", payload, {
+        Authorization: `Bearer ${token}`,
+    })
       .then((response) => {
         console.log("Settings saved successfully:", response.data);
-        if (response.data && response.data.id) {
-          setSettingsId(response.data.id); // Avoid reading `undefined.id`
-        }
         setIsModified(false);
         setShowModal(false);
       })
@@ -79,7 +67,6 @@ function AdminGeneral() {
         console.error("Error saving settings:", error.response?.data || error);
       });
   };
-  
 
   const cancelSave = () => {
     setShowModal(false);
@@ -160,7 +147,7 @@ function AdminGeneral() {
                 type="text"
                 value={linkedinLink}
                 onChange={handleInputChange(setLinkedinLink)}
-                className="px-4 h-[40px] ml-[39px] text-[#5C5C5C] focus:outline-none text-sm font-light w-[297px] bg-[#F7F7F7] rounded-md"
+                className="px-4 h-[40px] ml-8 text-[#5C5C5C] focus:outline-none text-sm font-light w-[297px] bg-[#F7F7F7] rounded-md"
               />
             </label>
           </div>

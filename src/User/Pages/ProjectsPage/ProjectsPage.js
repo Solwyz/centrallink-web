@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-import interior1 from "../../../Assets/projects/interior1.png";
-import interior2 from "../../../Assets/projects/interior2.png";
-import interior3 from "../../../Assets/projects/interior3.png";
-import interior4 from "../../../Assets/projects/interior4.png";
-import office1 from "../../../Assets/projects/office1.png";
-import office2 from "../../../Assets/projects/office2.png";
-import office3 from "../../../Assets/projects/office3.png";
-import office4 from "../../../Assets/projects/office4.png";
 import Location from "../../Components/LocateUs/Location";
 import Api from "../../../Admin/Services/Api";
 
