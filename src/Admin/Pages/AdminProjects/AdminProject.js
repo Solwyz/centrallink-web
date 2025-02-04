@@ -166,13 +166,6 @@ function AdminProject() {
   //   return () => clearInterval(interval);
   // },[]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      callRefreshToken();
-    },600000);
-
-    return () => clearInterval(interval);
-  },[]);
 
   useEffect(() => {
 
