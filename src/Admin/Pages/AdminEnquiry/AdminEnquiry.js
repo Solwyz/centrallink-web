@@ -53,9 +53,9 @@ function AdminEnquiry() {
     <div className='mt-8 pr-[6px]'>
       <div className='text-[16px] font-normal'>Enquiries</div>
 
-      <div className='mt-12'>
+      <div className='mt-6'>
         {currentEnquiries.map((enquiry, index) => (
-          <div key={index} className='bg-white border rounded-lg border-[#D6D6D6] mt-2'>
+          <div key={index} className='bg-white border rounded-lg border-[#D6D6D6] mt-6'>
             <div className='bg-[#B5A268] w-fit text-[12px] items-center font-normal text-center py-[7px] text-[#FFFFFF] px-12 h-8'>
               {enquiry.date}
             </div>
@@ -64,13 +64,13 @@ function AdminEnquiry() {
                 <div className='text-[18px] font-normal text-[#555555]'>{enquiry.name}</div>
                 <div className='text-[14px] font-light text-[#2A2E35]'>Email: {enquiry.email}</div>
               </div>
-              <div className='flex gap-4 text-[#2A2E35] text-[14px] mt-4'>
+              {/* <div className='flex gap-4 text-[#2A2E35] text-[14px] mt-4'>
                 <div className='font-normal'>Service:</div>
                 <div className='font-light'>{enquiry.serviceName?.title}</div>
-              </div>
+              </div> */}
               <div className='flex gap-4 text-[#2A2E35] text-[14px] mt-4'>
-                <div className='font-normal'>Details:</div>
-                <div className='font-light'>{enquiry.serviceName?.shortDescription}</div>
+                <div className='font-normal'>Message:</div>
+                <div className='font-light'>{enquiry.message}</div>
               </div>
             </div>
           </div>

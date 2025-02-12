@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-import interior1 from "../../../Assets/projects/interior1.png";
-import interior2 from "../../../Assets/projects/interior2.png";
-import interior3 from "../../../Assets/projects/interior3.png";
-import interior4 from "../../../Assets/projects/interior4.png";
-import office1 from "../../../Assets/projects/office1.png";
-import office2 from "../../../Assets/projects/office2.png";
-import office3 from "../../../Assets/projects/office3.png";
-import office4 from "../../../Assets/projects/office4.png";
 import Location from "../../Components/LocateUs/Location";
 import Api from "../../../Admin/Services/Api";
 
@@ -35,12 +27,14 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     Api.get('api/project').then((response) => {
+
         if (response && response.data) {
          
           setProjects(response.data);
         } else {
          
         }
+
     })
   }, [])
 
@@ -55,6 +49,7 @@ const ProjectsPage = () => {
 
 
           {/* Filter Tabs */}
+
 <div className="flex justify-center md:justify-start items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px]">
   <iv className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
     {["All", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
@@ -72,6 +67,24 @@ const ProjectsPage = () => {
     ))}
   </iv>
 </div>
+
+          <div className="flex justify-center md:justify-start items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px]">
+            <div className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
+              {["All", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setFilter(category)}
+                  className={`px-4 py-[6px] h-[36px] flex-shrink-0 items-center rounded-[18px] transition-all ${filter === category
+                      ? "bg-[#947F41] text-white shadow-md"
+                      : "bg-white text-[#947F41] border border-[#947F41] hover:bg-[#f7e6c2]"
+                    }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+
 
 
         </div>

@@ -1,20 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../Assets/Logo.svg";
 import fbIcon from "../../../Assets/icon/fb.svg";
 import igIcon from "../../../Assets/icon/ig.svg";
 import { Link } from "react-router-dom";
+import Api from "../../../Admin/Services/Api";
 
 function Footer() {
+  const [socialLinks, setSocialLinks] = useState({
+    facebookUrl: "",
+    instagramUrl: "",
+  });
+
+  // Fetch social links from the backend
+  useEffect(() => {
+    Api.get("api/settings/1") // Assuming the settings ID is 1
+      .then((response) => {
+        if (response && response.data) {
+          const { facebookUrl, instagramUrl } = response.data;
+          setSocialLinks({
+            facebookUrl: facebookUrl || "",
+            instagramUrl: instagramUrl || "",
+          });
+        } else {
+          console.error("Invalid response", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching social links:", error);
+      });
+  }, []);
+
   return (
-    <footer className="bg-[#EFEBE1] md:h-[472px]  mt-[72px] h-[750px] w-full  ">
-      <div className="container mx-auto text-center pt-8 md:pt-[54px] ">
+    <footer className="bg-[#EFEBE1] md:h-[472px] mt-[72px] h-[750px] w-full">
+      <div className="container mx-auto text-center pt-8 md:pt-[54px]">
         {/* Logo */}
-        <div className="md:flex  justify-center items-center ">
+        <div className="md:flex justify-center items-center">
           <div className="justify-center flex mt-8 md:mt-0">
             <img
               src={logo}
               alt="Central Link Logo"
-              className=" item-center  h-[42px] w-[187px] md:pr-4"
+              className="item-center h-[42px] w-[187px] md:pr-4"
             />
           </div>
           <div className="border-l hidden md:block ml-[17px] border-black h-[40px]"></div>
@@ -22,7 +47,7 @@ function Footer() {
           {/* Social Icons */}
           <div className="flex justify-center mt-8 md:mt-0 md:ml-[31px] space-x-4">
             <a
-              href="https://facebook.com"
+              href={socialLinks.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -33,7 +58,7 @@ function Footer() {
               />
             </a>
             <a
-              href="https://www.instagram.com/centrallinkllc/?utm_source=ig_web_button_share_sheet"
+              href={socialLinks.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -47,7 +72,7 @@ function Footer() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="md:flex hidden font-nunito  justify-center space-x-6 text-[#353535] font-medium text-base mt-[56px]">
+        <nav className="md:flex hidden font-nunito justify-center space-x-6 text-[#353535] font-medium text-base mt-[56px]">
           <Link to="/" className="hover:text-[#FFC107]">
             Home
           </Link>
@@ -74,12 +99,12 @@ function Footer() {
         </nav>
 
         {/* Description */}
-        <p className="text-[#353535] px-4 md:px-0  md:text-base text-sm font-normal leading-[28px] mt-8  max-w-2xl mx-auto md:mt-[56px]">
+        <p className="text-[#353535] px-4 md:px-0 md:text-base text-sm font-normal leading-[28px] mt-8 max-w-2xl mx-auto md:mt-[56px]">
           "We are a leading interior construction company dedicated to
           transforming spaces into functional, aesthetic masterpieces. With a
           blend of innovation, craftsmanship, and attention to detail."
         </p>
-        <div className=" md:hidden px-6 md:px-0  grid items-start text-left text-[#353535] space-y-6 font-medium text-base mt-[56px]">
+        <div className="md:hidden px-6 md:px-0 grid items-start text-left text-[#353535] space-y-6 font-medium text-base mt-[56px]">
           <Link to="/" className="hover:text-[#FFC107]">
             Home
           </Link>
