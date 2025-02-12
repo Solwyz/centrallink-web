@@ -24,7 +24,7 @@ function ContactPage() {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
-    console.log("Form Submitted: ", data);
+  
 
     Api.post('api/Inquiry', {
 
@@ -42,10 +42,10 @@ function ContactPage() {
 
     .then(response => {
       if(response && response.data) {
-        console.log('Inquiry submitted', response.data);
+       
         
       } else {
-        console.error('Invalid response', response);
+       
       }
     })
 
@@ -63,10 +63,10 @@ function ContactPage() {
     Api.get('api/services')
       .then(response => {
         if (response && response.data) {
-          console.log('servicesss', response.data);
+         
           setServices(response.data);
         } else {
-          console.error('Innvalid service response', response);
+        
         }
       })
   }, [])

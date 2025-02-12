@@ -36,10 +36,10 @@ const ProjectsPage = () => {
   useEffect(() => {
     Api.get('api/project').then((response) => {
         if (response && response.data) {
-          console.log('responseProjectList', response.data)
+         
           setProjects(response.data);
         } else {
-          console.error('Error fetching projects:', response)
+         
         }
     })
   }, [])
@@ -56,7 +56,7 @@ const ProjectsPage = () => {
 
           {/* Filter Tabs */}
 <div className="flex justify-center md:justify-start items-center font-normal text-center mt-10 md:mt-0 text-base md:ml-[104px]">
-  <div className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
+  <iv className="flex overflow-x-auto whitespace-nowrap gap-4 px-4 py-2 w-full scrollbar-hide">
     {["All", "demolition", "interior", "miscellaneous", "electrical"].map((category) => (
       <button
         key={category}
@@ -70,7 +70,7 @@ const ProjectsPage = () => {
         {category}
       </button>
     ))}
-  </div>
+  </iv>
 </div>
 
 

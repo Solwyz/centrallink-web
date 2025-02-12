@@ -14,7 +14,7 @@ function ServiceDetailDynamic() {
       setIsLoading(false);
     })
     .catch((error) => {
-      console.error("Error fetching service details:", error);
+      
       setIsLoading(false);
     });
 }, [id]);

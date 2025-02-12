@@ -30,7 +30,7 @@ function AdminLogin() {
   
     try {
       const data = await loginAdmin(phoneOrEmail, password); // Using the imported `loginAdmin` function
-      console.log("API Response:", data); // Log the entire response
+     
   
       // Check for the token in the API response
       if (data && data.jwt) {
@@ -43,7 +43,7 @@ function AdminLogin() {
         setApiError("Unexpected response from the server.");
       }
     } catch (error) {
-      console.error("Login Error:", error);
+     
       setApiError(error.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);

@@ -30,12 +30,12 @@ function AdminEnquiry() {
     .then(response => {
       if(response && response.data) {
 
-        console.log('enquiryss',response);
+       
 
 
         setEnquiries(response.data);
       } else {
-        console.error('Innvalid response', response);
+       
       }
     })
     // setEnquiries(enquiriesData);

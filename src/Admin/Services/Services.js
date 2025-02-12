@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const token = localStorage.getItem("adminAuthToken")
+const token = localStorage.getItem("")
 
 
 // Create an Axios instance
@@ -19,7 +19,7 @@ const apiClient = axios.create({
 //     const response = await apiClient.post("/validate-token", { token });
 //     return response.data?.isValid ?? false; // Use optional chaining and default value
 //   } catch (error) {
-//     console.error("Token validation failed:", error.message);
+//   ;
 //     return false;
 //   }
 // };
@@ -33,7 +33,7 @@ export const loginAdmin = async (phoneOrEmail, password) => {
     });
     return response.data; // Return the data directly
   } catch (error) {
-    console.error("Error in loginAdmin:", error.message);
+   
     throw new Error(error.response?.data?.message || "Login failed.");
   }
 };
@@ -45,7 +45,7 @@ export const logoutAdmin = async (userId) => {
     const response = await apiClient.post(`/logout`, { userId });
     return response.data;
   } catch (error) {
-    console.error("Error in logoutAdmin:", error.message);
+    
     throw new Error(error.response?.data?.message || "Logout failed.");
   }
 };
@@ -58,7 +58,7 @@ export const createProject = async (projectData) => {
     const response = await apiClient.post("/projects/create", projectData);
     return response.data;
   } catch (error) {
-    console.error("Error in createProject:", error.message);
+    
     throw new Error(error.response?.data?.message || "Failed to create project.");
   }
 };
@@ -69,7 +69,7 @@ export const updateProject = async (projectId, projectData) => {
     const response = await apiClient.put(`/projects/update/${projectId}`, projectData);
     return response.data;
   } catch (error) {
-    console.error("Error in updateProject:", error.message);
+   
     throw new Error(error.response?.data?.message || "Failed to update project.");
   }
 };
@@ -80,7 +80,7 @@ export const getAllProjects = async () => {
     const response = await apiClient.get("/project", {'Authorization': `Bearer ${token}`});
     return response.data;
   } catch (error) {
-    console.error("Error in getAllProjects:", error.message);
+   
     throw new Error(error.response?.data?.message || "Failed to fetch projects.");
   }
 };
@@ -91,7 +91,7 @@ export const deleteProject = async (projectId) => {
     const response = await apiClient.delete(`/projects/delete/${projectId}`);
     return response.data;
   } catch (error) {
-    console.error("Error in deleteProject:", error.message);
+    
     throw new Error(error.response?.data?.message || "Failed to delete project.");
   }
 };
@@ -109,7 +109,7 @@ export const addImageToProject = async (projectId, imageData) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error in addImageToProject:", error.message);
+    
     throw new Error(error.response?.data?.message || "Failed to add image to project.");
   }
 };

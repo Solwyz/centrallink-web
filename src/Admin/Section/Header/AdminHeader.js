@@ -40,11 +40,10 @@ function AdminHeader() {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        console.log("Decoded Token:", decoded); // Check the full token structure
-        console.log("Extracted Username:", decoded.username); // See if "superadmin" appears
+   
         setUsername(decoded.username || "Admin");
       } catch (error) {
-        console.error("Error decoding token:", error);
+       
       }
     }
   }, []);

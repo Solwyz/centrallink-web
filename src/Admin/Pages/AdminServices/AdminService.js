@@ -37,24 +37,24 @@ function AdminService() {
   formDataToSend.append("title", formData.title);
   formDataToSend.append("shortDescription", formData.shortDescription);
   formDataToSend.append("mainDescription", formData.mainDescription);
-  console.log("FormData being sent:", formDataToSend);
+  
 
   const token = localStorage.getItem("adminAuthToken");
 
   // Fetch Services
   useEffect(() => {
-    console.log("Token being used:", token); // Log the token to check its value
+     // Log the token to check its value
 
     Api.get("api/services", {
       Authorization: `Bearer ${token}`,
     })
       .then((response) => {
         setServices(response.data);
-        console.log("Fetched Services:", response.data);
+        
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching services:", error);
+        
         setIsLoading(false);
       });
   }, [token]);
@@ -127,14 +127,14 @@ function AdminService() {
 
   const handleSave = () => {
     
-    console.log("photooo", uploadPhoto);
+   
     const formsData = new FormData();
     formsData.append("icon", uploadIcon);
     formsData.append("photo", uploadPhoto);
     formsData.append("title", formData.title);
     formsData.append("shortDescription", formData.shortDescription);
     formsData.append("mainDescription", formData.mainDescription);
-    console.log("fomdataaaaa :", formData);
+    
 
     if (currentService) {
       // PUT request for updating an existing service
@@ -149,10 +149,10 @@ function AdminService() {
         
         }
       ).then((response) => {
-        console.log("PUT response:", response);
+        
         resetSelectedService(); // Close form after updating
       }).catch(error => {
-        console.error("Error updating service:", error);
+        
       });
     } else {
       // POST request for adding a new service
@@ -166,10 +166,10 @@ function AdminService() {
        
         }
       ).then((response) => {
-        console.log("POST response:", response);
+        
         resetSelectedService(); // Close form after saving
       }).catch(error => {
-        console.error("Error saving service:", error);
+       
       });
     }
     closeSaveModal();
@@ -189,7 +189,7 @@ function AdminService() {
         closeDeleteModal();
       })
       .catch((error) => {
-        console.error("Error deleting service:", error);
+       
       });
   };
 

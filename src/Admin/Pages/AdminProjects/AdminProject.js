@@ -12,7 +12,7 @@ import {
 import Api from "../../Services/Api";
 
 const token = localStorage.getItem("adminAuthToken");
-console.log("token:", token);
+
 
 function AdminProject() {
   const [categories, setCategories] = useState([]);
@@ -63,7 +63,7 @@ function AdminProject() {
     // e.stopPropagation();
     // setCategoryToDelete(category);
     setDeleteModalOpen(true);
-    console.log("iii", id);
+ 
     setDeleteCategoryId(id)
   };
 
@@ -80,10 +80,10 @@ function AdminProject() {
     })
       .then(response => {
         if (response && response.data) {
-          console.log('detailed project :', response.data)
+          
           setDetailedProject(response.data)
         } else {
-          console.error('Error fetching detailed project:', response)
+         
         }
       })
 
@@ -98,7 +98,7 @@ function AdminProject() {
     })
       .then(response => {
         setIsDeleting(false);
-        console.log('delete category response:', response)
+        
         setDeleteCategoryId('')
         setDeleteModalOpen(false)
         setRefreshKey(prev => prev + 1)
@@ -118,12 +118,12 @@ function AdminProject() {
       .then(response => {
         setIsPhotoAdding(false);
         if (response && response.data) {
-          console.log('add image response:', response.data)
+          
           setNewImage(null)
           setImageModalOpen(false)
           setRefreshKey(prev => prev + 1)
         } else {
-          console.error('Error adding image:', response)
+          
         }
       })
   }
@@ -142,13 +142,13 @@ function AdminProject() {
       .then(response => {
         setIsAdding(false);
         if (response && response.data) {
-          console.log('add categoty response:', response)
+          
           setAddNewCategoryName('')
           setAddNewImg(null)
           setCategoryModalOpen(false)
           setRefreshKey(prev => prev + 1)
         } else {
-          console.error('Error adding category:', response)
+          
         }
       })
     // Api.post('api/project', {}, {'Authorization': `Bearer ${token}`})
@@ -159,10 +159,10 @@ function AdminProject() {
     Api.get("api/project").then((response) => {
       if (response) {
         if (response && response.data) {
-          console.log('adminresponse2222', response.data)
+          
           setCategories(response.data);
         } else {
-          console.error('Error fetching admin projectsss:', response)
+          
         }
       }
     });
