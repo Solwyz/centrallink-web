@@ -27,7 +27,21 @@ function ContactPage() {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
-    console.log("Form Submitted: ", data);
+
+
+
+    Api.post('api/Inquiry', {
+
+      "id": 0,
+
+      "name": data.name,
+      "email": data.email,
+      "serviceName": {
+        "id": data.service
+      },
+      "message": data.message
+
+
 
     Api.post("api/Inquiry", {
       id: 0,
@@ -37,6 +51,7 @@ function ContactPage() {
         id: data.service,
       },
       message: data.message,
+
     })
       .then((response) => {
         if (response && response.data) {
@@ -48,6 +63,15 @@ function ContactPage() {
       .catch((error) => {
         console.error("Error submitting inquiry:", error);
       });
+
+      .then(response => {
+        if (response && response.data) {
+
+
+        } else {
+
+        }
+      })
 
     Swal.fire({
       icon: "success",
@@ -65,10 +89,12 @@ function ContactPage() {
     Api.get("api/services")
       .then((response) => {
         if (response && response.data) {
-          console.log("Services:", response.data);
+
+
           setServices(response.data);
         } else {
-          console.error("Invalid service response", response);
+
+
         }
       })
       .catch((error) => {

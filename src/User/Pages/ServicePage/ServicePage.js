@@ -23,7 +23,7 @@ function ServicePage() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching services:", error);
+       
         setIsLoading(false);
       });
   }, []);

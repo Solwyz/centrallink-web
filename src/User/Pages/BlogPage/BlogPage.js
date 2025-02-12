@@ -10,7 +10,7 @@ const BlogPage = () => {
   useEffect(() => {
     Api.get('api/blogs')
       .then(response => {
-        console.log(response.data)
+  
         setBlogs(response.data)
       })
   }, [])

@@ -38,13 +38,19 @@ function AdminHeader() {
     const token = localStorage.getItem("adminAuthToken");
     if (token) {
       try {
+
+        const decoded = jwtDecode(token);
+   
+        setUsername(decoded.username || "Admin");
+
         const decoded = jwtDecode(token); // Decode the token
         const username = decoded.userDetails.username || "Admin"; // Extract username
         // console.log("Decoded Token:", decoded); 
         // console.log("Extracted Username:", username); 
         setUsername(username); // Set the username state
+
       } catch (error) {
-        console.error("Error decoding token:", error);
+       
       }
     }
   }, []);

@@ -7,7 +7,7 @@ import deleteWarn from "../../../Assets/Admin/projects/deleteWarning.svg";
 import Api from "../../Services/Api";
 
 const token = localStorage.getItem("adminAuthToken");
-console.log("token:", token);
+
 
 function AdminBlogs() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,7 +64,7 @@ function AdminBlogs() {
         const blob = new Blob([byteNumbers], { type: "image/png" }); // Adjust MIME type
         imageFile = new File([blob], "image.png", { type: "image/png" }); // Convert to File
       } catch (error) {
-        console.error("Error decoding Base64:", error);
+       
       }
     }
  
@@ -79,7 +79,7 @@ function AdminBlogs() {
 }, [editingBlog]);
 
   useEffect(() => {
-    console.log("kk", token);
+  
     if (token) {
       Api.get("api/blogs", {
 
@@ -87,13 +87,13 @@ function AdminBlogs() {
 
       })
         .then((response) => {
-          console.log("API Response of Blog:", response.data);
+      
           if (response.data) {
             setBlogCategories(response.data || []);
           }
         })
         .catch((error) => {
-          console.error("Error fetching blogs:", error);
+      
         });
     }
   }, [refreshKey]);
@@ -110,7 +110,7 @@ function AdminBlogs() {
     })
     .then(response => {
       if(response && response.data) {
-        console.log('blogpostttt',response)
+      
         setRefreshKey(prev => prev + 1)
       }
     })
@@ -124,13 +124,13 @@ function AdminBlogs() {
   };
 
   const handleConfirmDelete = () => {
-  console.log('ddd',deleteID)
+
    Api.delete(`api/blogs/${deleteID}`,{
     'Authorization': `Bearer ${token}`
    })
    .then(response => {
     setIsDeleteModalOpen(false)
-    console.log('hhhh',response)
+  
    })
   };
   
@@ -164,12 +164,12 @@ function AdminBlogs() {
   // };
 
   const handleDeleteBlogCategory = (id, index) => {
-    console.log('', id)
+  
     Api.delete(`api/blogs/${id}`, {
       'Authorization': `Bearer ${token}`
     })
       .then(response => {
-        console.log('vvvvvvvvv', response)
+       
         setDeleteTarget({ type: "category", id, index });
       })
 
@@ -202,7 +202,7 @@ function AdminBlogs() {
     })
     .then(response => {
       if(response && response.data) {
-        console.log('blogsubbb',response)
+        
         setRefreshKey(prev => prev + 1)
       }
     })
@@ -244,7 +244,7 @@ function AdminBlogs() {
   };
 
   const editBlog = (blog, blogIndex) => {
-    console.log('bblll',blog)
+   
     setEditingBlog(blog);
     setIsBlogFormOpen({
       name: blog.name,

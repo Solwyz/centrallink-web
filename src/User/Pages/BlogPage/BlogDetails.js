@@ -19,22 +19,22 @@ export default function BlogDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('idd', id)
+   
     Api.get(`api/blogs/${id}`
     )
       .then((response) => {
-        console.log('id response',response.data)
+       
         setBlogs(response.data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching service details:", error);
+      
         setIsLoading(false);
       });
  
       Api.get('api/blogs')  
     .then((response) =>{
-      console.log(response.data)
+    
        setMoreBlogs(response.data)
     })
     }, [id]);

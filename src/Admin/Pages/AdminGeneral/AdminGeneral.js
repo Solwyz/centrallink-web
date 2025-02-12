@@ -16,7 +16,7 @@ function AdminGeneral() {
 
   const token = localStorage.getItem("adminAuthToken");
 
-  // ✅ Fetch settings on component mount
+
   useEffect(() => {
     Api.get("api/settings/1", {
         Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ function AdminGeneral() {
         }
       })
       .catch((error) => {
-        console.error("Error fetching settings", error);
+        
       });
   }, [token]);
 
@@ -59,12 +59,17 @@ function AdminGeneral() {
         Authorization: `Bearer ${token}`,
     })
       .then((response) => {
-        console.log("Settings saved successfully:", response.data);
+
+        
+        if (response.data && response.data.id) {
+          setSettingsId(response.data.id); // Avoid reading `undefined.id`
+        }
+
         setIsModified(false);
         setShowModal(false);
       })
       .catch((error) => {
-        console.error("Error saving settings:", error.response?.data || error);
+       
       });
   };
 
