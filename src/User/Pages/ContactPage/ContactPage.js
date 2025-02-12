@@ -11,15 +11,11 @@ import teleIcon from "../../../Assets/contact/telephone.svg"
 import Swal from "sweetalert2";
 import Api from "../../../Admin/Services/Api";
 
+const token = localStorage.getItem("adminAuthToken");
 
 function ContactPage() {
+
   const [services, setServices] = useState([]);
-  const [contactDetails, setContactDetails] = useState({
-    enquiryEmail: "",
-    facebookUrl: "",
-    instagramUrl: "",
-    linkedinUrl: "",
-  });
 
   const {
     register,
@@ -29,7 +25,6 @@ function ContactPage() {
 
   const onSubmit = (data) => {
   
-
 
     Api.post('api/Inquiry', {
 
@@ -52,79 +47,31 @@ function ContactPage() {
       } else {
        
       }
-
-    Api.post("api/Inquiry", {
-      id: 0,
-      name: data.name,
-      email: data.email,
-      serviceName: {
-        id: data.service,
-      },
-      message: data.message,
-
     })
-      .then((response) => {
-        if (response && response.data) {
-          console.log("Inquiry submitted", response.data);
-        } else {
-          console.error("Invalid response", response);
-        }
-      })
-      .catch((error) => {
-        console.error("Error submitting inquiry:", error);
-      });
 
     Swal.fire({
       icon: "success",
-      title: "Submitted",
+      title: " Submitted",
       text: "Thank you for reaching out. We will get back to you soon!",
       confirmButtonColor: "#FFC107",
     });
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const token = localStorage.getItem("adminAuthToken");
 
-
-  // Fetch services
   useEffect(() => {
-    Api.get("api/services")
-      .then((response) => {
+    Api.get('api/services')
+      .then(response => {
         if (response && response.data) {
-
          
           setServices(response.data);
         } else {
         
-
         }
       })
-      .catch((error) => {
-        console.error("Error fetching services:", error);
-      });
-  }, []);
+  }, [])
 
-  // Fetch contact details
-  useEffect(() => {
-    Api.get("api/settings/1") // Assuming the settings ID is 1
-      .then((response) => {
-        if (response && response.data) {
-          const { enquiryEmail, facebookUrl, instagramUrl, linkedinUrl } =
-            response.data;
-          setContactDetails({
-            enquiryEmail: enquiryEmail || "",
-            facebookUrl: facebookUrl || "",
-            instagramUrl: instagramUrl || "",
-            linkedinUrl: linkedinUrl || "",
-          });
-        } else {
-          console.error("Invalid contact details response", response);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching contact details:", error);
-      });
-  }, []);
+
   return (
     <div className="pt-[118px]">
       <div className="bg-contactBgMob md:bg-contactBg bg-cover h-[1465px] px-4 pt-[56px]  w-full md:h-[900px] md:px-[120px] md:pt-[64px]  md:flex">
@@ -146,9 +93,9 @@ function ContactPage() {
               <img src={mailicon} alt="Mail Icon" className="w-5 h-5 mr-2" />
               <a
                 className="text-base font-semibold hover:text-[#FFC107]"
-                href={`mailto:${contactDetails.enquiryEmail}`}
+                href="mailto:hr@centralllc.com "
               >
-                {contactDetails.enquiryEmail}
+                hr@centralllc.com
               </a>
             </div>
             <div className="flex items-center mt-6">
@@ -164,7 +111,7 @@ function ContactPage() {
           </div>
           <div className="flex mt-6 md:mt-8 space-x-4">
             <a
-              href={contactDetails.facebookUrl}
+              href="https://www.facebook.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-5 h-5"
@@ -172,10 +119,10 @@ function ContactPage() {
               <img src={fbicon} alt="Facebook Icon" className="w-5 h-5" />
             </a>
             <a
-              href={contactDetails.instagramUrl}
+              href="https://www.instagram.com/centrallinkllc/?utm_source=ig_web_button_share_sheet"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-5 h-5"
+              className="w-5 h-5 "
             >
               <img src={instaIcon} alt="Instagram Icon" className="w-5 h-5" />
             </a>
